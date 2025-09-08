@@ -1,0 +1,102 @@
+/* Beatrice Font Family - Fixed Paths */
+
+@font-face {
+  font-family: 'Beatrice';
+  src: url('../Fonts/Beatrice Font/BeatriceTRIAL-Regular-BF64829e8f591fb.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Beatrice';
+  src: url('../Fonts/Beatrice Font/BeatriceTRIAL-Medium-BF64829e8f63463.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Beatrice';
+  src: url('../Fonts/Beatrice Font/BeatriceTRIAL-Semibold-BF64829e8f17d4c.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Beatrice';
+  src: url('../Fonts/Beatrice Font/BeatriceTRIAL-Bold-BF64829e8fd7dc6.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BeatriceDisplay';
+  src: url('../Fonts/Beatrice Font/BeatriceDisplayTRIAL-Regular-BF64829e90aea53.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BeatriceDisplay';
+  src: url('../Fonts/Beatrice Font/BeatriceDisplayTRIAL-Medium-BF64829e908b04d.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BeatriceDisplay';
+  src: url('../Fonts/Beatrice Font/BeatriceDisplayTRIAL-Semibold-BF64829e90a55c8.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* BeatriceHeadline fonts now mapped to regular Beatrice with different weights */
+
+/* Root styles matching TravelPerk */
+:root {
+  --tp-primary: #14140F;
+  --tp-secondary: #6E6E64;
+  --tp-accent: #BEFF50;
+  --tp-background: #F5F5EB;
+  --tp-white: #FFFFFF;
+}
+
+/* TravelPerk typography classes */
+.tp-heading {
+  font-family: 'Beatrice', sans-serif;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--tp-primary);
+}
+
+.tp-body {
+  font-family: 'Beatrice', sans-serif;
+  font-weight: 400;
+  line-height: 1.46;
+  color: var(--tp-secondary);
+}
+
+.tp-button {
+  font-family: 'Beatrice', sans-serif;
+  font-weight: 500;
+  border-radius: 26px;
+  height: 40px;
+  transition: all 0.2s ease;
+}
+
+.tp-section {
+  padding: 80px 0;
+}
+
+@media (max-width: 768px) {
+  .tp-section {
+    padding: 40px 0;
+  }
+}
