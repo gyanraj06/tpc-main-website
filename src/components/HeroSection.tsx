@@ -1,11 +1,13 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'phosphor-react';
+import defaultBg from '../assets/Default.png';
+import heroComponent from '../assets/UI Hero Component.svg';
 
 const HeroSection = () => {
   const fadeInUp = {
     initial: { opacity: 0, y: 40 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.4, ease: [0.6, -0.05, 0.01, 0.99] }
+    transition: { duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }
   };
 
   const staggerContainer = {
@@ -17,90 +19,86 @@ const HeroSection = () => {
   };
 
 
-
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 -right-20 w-96 h-96 bg-accent-green/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 -left-20 w-96 h-96 bg-accent-bright/10 rounded-full blur-3xl"></div>
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-16">
+    <section 
+      id="hero" 
+      className="relative min-h-screen pt-32 pb-4 overflow-hidden bg-[#f4f2ee]"
+    >
+      {/* PNG Overlay */}
+      <div 
+        className="absolute inset-0 opacity-100"
+        style={{
+          backgroundImage: `url(${defaultBg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      ></div>
+      
+      {/* Main Content Container */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
+          
           {/* Left Content */}
           <motion.div
             variants={staggerContainer}
             initial="initial"
             animate="animate"
-            className="text-center lg:text-left"
+            className=""
           >
-          
-
             <motion.h1
               variants={fadeInUp}
-              className="font-hero text-3xl md:text-4xl lg:text-5xl font-medium text-primary leading-tight mb-8"
+              className="font-hero text-4xl md:text-5xl lg:text-6xl font-normal text-gray-900 leading-relaxed mb-8"
             >
               Empowering Vendors.{' '}
-              <span className="relative">
-                <span className="text-blue-600">Simplifying Ticketing.</span>
-              </span>
               <br />
-              <span className="text-primary">Maximizing Revenue.</span>
+              <span className="text-blue-600">Simplifying Ticketing.</span>
+              <br />
+              <span className="text-gray-900">Maximizing Revenue!</span>
             </motion.h1>
 
             <motion.p
               variants={fadeInUp}
-              className="font-body text-lg md:text-xl text-gray-600 leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0"
+              className="font-body text-lg text-gray-600 leading-relaxed mb-8 max-w-lg"
             >
-              The all-in-one dashboard for events, treks, and experiences. Transform your business with smarter booking management.
+              The all-in-one dashboard for events, adventures, and experiences. Transform your business with smarter booking management.
             </motion.p>
 
             <motion.div
               variants={fadeInUp}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12"
+              className="flex flex-col sm:flex-row gap-4 mb-16"
             >
               <a 
                 href="https://vendor.trippechalo.in/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary group inline-flex items-center gap-2"
+                className="bg-black text-white px-6 py-3 rounded-full font-normal text-sm hover:bg-gray-800 transition-all duration-200 flex items-center gap-2 justify-center group"
               >
                 Vendor Portal
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5">
+                  <ArrowRight size={10} weight="bold" className="text-black" />
+                </div>
               </a>
-              <button className="btn-outline group inline-flex items-center gap-2">
+              <button className="border border-gray-300 text-gray-700 bg-transparent px-6 py-3 rounded-full font-normal text-sm hover:bg-gray-50 transition-all duration-200 flex items-center gap-2 justify-center">
                 Customer Portal
               </button>
             </motion.div>
           </motion.div>
 
-          {/* Right Content - Hero Image */}
+          {/* Right Content - Hero Component */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.15 }}
-            className="relative"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex justify-center items-center h-full"
           >
-            <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl relative">
-              <img 
-                src="/src/assets/gurpreet-singh-xaUQI3OnQZs-unsplash.jpg" 
-                alt="Modern business dashboard" 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-l from-blue-600/20 via-transparent to-transparent"></div>
-            </div>
-            
-            {/* Floating Badge */}
-            <div className="absolute -top-4 -right-4 bg-accent-green rounded-xl p-4 shadow-lg">
-              <div className="text-center">
-                <div className="font-ui font-bold text-gray-900 text-lg">50+</div>
-                <div className="font-ui text-xs text-gray-700">Features</div>
-              </div>
-            </div>
+            <img 
+              src={heroComponent} 
+              alt="UI Hero Component" 
+              className="w-full h-auto max-w-lg"
+            />
           </motion.div>
         </div>
-
       </div>
     </section>
   );

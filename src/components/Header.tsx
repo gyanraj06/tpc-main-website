@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import { X } from 'phosphor-react';
+import { X, ArrowRight } from 'phosphor-react';
+import logoImage from '../assets/LogoImage.jpg';
+import logoWritten from '../assets/LogoWritten.jpg';
 
 interface HeaderProps {
   onNavigateToDemo: () => void;
@@ -8,14 +10,12 @@ interface HeaderProps {
 
 const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
 
   // Navigation data - scroll to sections
   const navLinks = [
-    { id: 'hero', label: 'Home' },
+    { id: 'hero', label: 'About' },
     { id: 'products', label: 'Features' },
-    { id: 'about', label: 'How It Works' },
-    { id: 'contact', label: 'Contact' },
+    { id: 'pricing', label: 'Pricing' },
   ];
 
   const scrollToSection = (sectionId: string) => {
@@ -25,19 +25,6 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
     }
   };
 
-  // Scroll effect
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    
-    // Initial check
-    handleScroll();
-    
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -52,51 +39,53 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
     return () => document.removeEventListener('click', closeMenu);
   }, [isOpen]);
 
-  // Glass morphism - always dark
-  const glassClasses = 'bg-gradient-to-r from-black/60 to-gray-800/60 backdrop-blur-md';
+  // Solid black background
+  const glassClasses = 'bg-black';
 
   return (
     <nav
-      className={`font-nav fixed top-0 z-50 w-full transition-all duration-300 ${
-        isScrolled ? 'md:py-2 md:px-4' : 'md:py-7 md:px-4'
-      }`}
+      className="font-nav fixed top-0 z-50 w-full md:py-4 md:px-4"
     >
       {/* Desktop Header */}
       <div
-        className={`mx-auto max-w-7xl rounded-full px-6 py-4 ${glassClasses} shadow-[0_4px_25px_rgba(0,0,0,0.25)] hidden md:block`}
+        className={`mx-auto w-fit rounded-full px-6 py-3 ${glassClasses} shadow-[0_4px_25px_rgba(0,0,0,0.25)] hidden md:block`}
       >
-        <div className="flex items-center justify-between">
-          {/* Left Section - Navigation Links */}
-          <div className="flex items-center space-x-8">
+        <div className="flex items-center gap-10">
+          {/* Left Section - Logo */}
+          <button onClick={onNavigateToHome} className="flex items-center">
+            <div 
+              className="h-6 w-6 bg-contain bg-no-repeat"
+              style={{ backgroundImage: `url(${logoImage})` }}
+            ></div>
+            <div 
+              className="-ml-1 h-6 w-24 bg-contain bg-no-repeat"
+              style={{ backgroundImage: `url(${logoWritten})` }}
+            ></div>
+          </button>
+
+          {/* Center Section - Navigation Links */}
+          <div className="flex items-center gap-8">
             {navLinks.map(({ id, label }) => (
               <button
                 key={id}
                 onClick={() => scrollToSection(id)}
-                className="font-nav text-sm text-white/90 transition-colors duration-200 hover:text-white lg:text-base font-normal tracking-wide"
+                className="font-nav text-base text-white/90 transition-colors duration-200 hover:text-white font-normal focus:outline-none"
               >
                 {label}
               </button>
             ))}
           </div>
 
-          {/* Center Section - Logo */}
-          <div className="absolute left-1/2 transform -translate-x-1/2">
-            <button onClick={onNavigateToHome} className="flex items-center">
-              <div className="h-8 w-8 bg-[url('/src/assets/LogoImage.jpg')] bg-contain bg-no-repeat"></div>
-              <div className="-ml-1 h-8 w-32 bg-[url('/src/assets/LogoWritten.jpg')] bg-contain bg-no-repeat"></div>
-            </button>
-          </div>
-
           {/* Right Section - CTA Button */}
-          <div className="flex items-center space-x-4">
-            {/* Contact Us Button */}
-            <button
-              onClick={onNavigateToDemo}
-              className="font-button bg-[#1E63EF] hover:bg-[#1750CC] text-white font-medium px-4 py-1.5 text-sm rounded-full transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg"
-            >
-              Contact Us
-            </button>
-          </div>
+          <button
+            onClick={onNavigateToDemo}
+            className="font-button bg-white hover:bg-gray-100 text-black font-medium px-5 py-2 text-sm rounded-full transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg group"
+          >
+            Contact us
+            <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5">
+              <ArrowRight size={12} weight="regular" className="text-white" />
+            </div>
+          </button>
         </div>
       </div>
 
@@ -105,8 +94,14 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
         <div className="flex items-center justify-between px-4">
           {/* Mobile Logo */}
           <button onClick={onNavigateToHome} className="flex items-center">
-            <div className="h-8 w-8 bg-[url('/src/assets/LogoImage.jpg')] bg-contain bg-no-repeat"></div>
-            <div className="-ml-1 h-8 w-32 bg-[url('/src/assets/LogoWritten.jpg')] bg-contain bg-no-repeat"></div>
+            <div 
+              className="h-8 w-8 bg-contain bg-no-repeat"
+              style={{ backgroundImage: `url(${logoImage})` }}
+            ></div>
+            <div 
+              className="-ml-1 h-8 w-32 bg-contain bg-no-repeat"
+              style={{ backgroundImage: `url(${logoWritten})` }}
+            ></div>
           </button>
 
           {/* Right Side Buttons */}
@@ -152,7 +147,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                   scrollToSection(id);
                   setIsOpen(false);
                 }}
-                className="font-nav block text-lg text-white/90 transition-colors hover:text-white py-2 font-normal tracking-wide w-full text-left"
+                className="font-nav block text-lg text-white/90 transition-colors hover:text-white py-2 font-normal tracking-wide w-full text-left focus:outline-none"
               >
                 {label}
               </button>
@@ -165,9 +160,12 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
               onNavigateToDemo();
               setIsOpen(false);
             }}
-            className="font-button block w-full text-center bg-[#1E63EF] hover:bg-[#1750CC] text-white font-medium px-6 py-3 rounded-full transition-all duration-200 mb-6"
+            className="font-button flex items-center justify-center gap-2 w-full bg-white hover:bg-gray-100 text-black font-medium px-6 py-3 rounded-full transition-all duration-200 mb-6 group"
           >
-            Contact Us
+            Contact us
+            <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5">
+              <ArrowRight size={14} weight="regular" className="text-white" />
+            </div>
           </button>
         </div>
       </div>

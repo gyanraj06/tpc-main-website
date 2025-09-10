@@ -19,6 +19,10 @@ module.exports = {
         'accent-bright': '#50FF7D',
         'neutral-beige': '#F5F5EB',
         'neutral-gray': '#D2D2C8',
+        'background-primary': '#f4f2ee',
+        'gradient-blue': '#D9EFFF',
+        'gradient-peach': '#FFE5D9',
+        'gradient-lavender': '#E6E6FA',
       },
       animation: {
         'fade-in-up': 'fadeInUp 0.6s ease-out forwards',

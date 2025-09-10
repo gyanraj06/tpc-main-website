@@ -1,37 +1,34 @@
-import { useState } from 'react'
 import Header from './components/Header'
 import HeroSection from './components/HeroSection'
 import FeaturesSection from './components/FeaturesSection'
 import AboutSection from './components/AboutSection'
+import ContactSection from './components/ContactSection'
 import CTASection from './components/CTASection'
 import Footer from './components/Footer'
-import BookDemo from './components/BookDemo'
 import './App.css'
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'book-demo'>('home')
-
-  const handleNavigateToDemo = () => {
-    setCurrentPage('book-demo')
+  const handleScrollToContact = () => {
+    const contactSection = document.getElementById('contact-section');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
   const handleNavigateToHome = () => {
-    setCurrentPage('home')
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   return (
-    <div className="App bg-white min-h-screen">
-      <Header onNavigateToDemo={handleNavigateToDemo} onNavigateToHome={handleNavigateToHome} />
-      {currentPage === 'home' ? (
-        <main>
-          <HeroSection />
-          <FeaturesSection />
-          <AboutSection />
-          <CTASection />
-        </main>
-      ) : (
-        <BookDemo />
-      )}
+    <div className="App min-h-screen">
+      <Header onNavigateToDemo={handleScrollToContact} onNavigateToHome={handleNavigateToHome} />
+      <main>
+        <HeroSection />
+        <FeaturesSection />
+        <AboutSection />
+        <ContactSection />
+        <CTASection />
+      </main>
       <Footer />
     </div>
   )

@@ -2,14 +2,11 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Observer } from 'gsap/Observer';
-import { ArrowRight, Rocket, Users } from 'phosphor-react';
 
 gsap.registerPlugin(ScrollTrigger, Observer);
 
 const CTASection = () => {
   const ctaRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
 
@@ -111,64 +108,7 @@ const CTASection = () => {
     return () => ctx.revert();
   }, []);
 
-  return (
-    <section ref={ctaRef} className="py-20 md:py-32 bg-white text-gray-900 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="bg-decoration absolute top-10 -right-10 w-80 h-80 bg-accent-green/5 rounded-full blur-3xl"></div>
-        <div className="bg-decoration absolute bottom-10 -left-10 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl"></div>
-      </div>
-      
-      <div className="max-w-6xl mx-auto px-6 lg:px-8 relative">
-        <div className="text-center mb-16">
-          <h2 ref={titleRef} className="cta-title font-heading text-4xl md:text-6xl font-medium mb-8">
-            Ready to Start Your{' '}
-            <span className="text-blue-600">Trip?</span>
-          </h2>
-          
-          <p ref={subtitleRef} className="cta-subtitle font-body text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-            Book travel experiences across India, or share your local expertise with visitors.
-          </p>
-        </div>
-
-        <div ref={cardsRef} className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <div className="cta-card bg-white rounded-lg p-8 text-center border border-gray-100 shadow-lg">
-            <div className="mb-6 text-accent-green flex justify-center">
-              <Rocket size={40} weight="regular" />
-            </div>
-            <h3 className="font-heading text-2xl font-medium mb-4">
-              Start Exploring
-            </h3>
-            <p className="font-body text-gray-600 mb-8 leading-relaxed">
-              Discover hidden gems, unique workshops, and authentic adventures across India with local experts as your guide.
-            </p>
-            <button className="btn-primary group inline-flex items-center gap-2">
-              Browse Experiences
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-
-          <div className="cta-card bg-white rounded-lg p-8 text-center border border-gray-100 shadow-lg">
-            <div className="mb-6 text-blue-400 flex justify-center">
-              <Users size={40} weight="regular" />
-            </div>
-            <h3 className="font-heading text-2xl font-medium mb-4">
-              Share Your Expertise
-            </h3>
-            <p className="font-body text-gray-600 mb-8 leading-relaxed">
-              Turn your local knowledge into income by hosting travelers and sharing the authentic side of your region.
-            </p>
-            <button className="btn-outline group inline-flex items-center gap-2">
-              Become a Host
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-        </div>
-
-
-      </div>
-    </section>
-  );
+  return null;
 };
 
 export default CTASection;
