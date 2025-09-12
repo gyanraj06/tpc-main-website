@@ -37,11 +37,11 @@ const DemoModal = ({ isOpen, onClose }: DemoModalProps) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 w-screen h-screen bg-black/60 backdrop-blur-md z-[9999] flex items-center justify-center p-4"
+      className="fixed inset-0 w-screen h-screen bg-black/60 backdrop-blur-md z-[9999] flex items-center justify-center p-2 sm:p-4"
       onClick={onClose}
       style={{
         margin: 0,
-        padding: '1rem',
+        padding: '0.5rem',
         minHeight: '100vh',
         minWidth: '100vw',
         position: 'fixed',
@@ -56,10 +56,10 @@ const DemoModal = ({ isOpen, onClose }: DemoModalProps) => {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.9, y: 20 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className="bg-white rounded-3xl max-w-3xl w-full max-h-[80vh] overflow-hidden shadow-2xl"
+        className="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] sm:max-h-[85vh] lg:max-h-[80vh] overflow-y-auto shadow-2xl scrollbar-hide"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="grid lg:grid-cols-2 h-full">
+        <div className="grid lg:grid-cols-2 min-h-full">
           {/* Left Side - Background Image */}
           <div className="relative hidden lg:block">
             <div
@@ -84,9 +84,9 @@ const DemoModal = ({ isOpen, onClose }: DemoModalProps) => {
           </div>
 
           {/* Right Side - Form */}
-          <div className="p-8 lg:p-12">
+          <div className="p-4 sm:p-6 md:p-8 lg:p-12">
             {/* Close Button */}
-            <div className="flex justify-end mb-6">
+            <div className="flex justify-end mb-4 sm:mb-6">
               <button
                 onClick={onClose}
                 className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors duration-200"
@@ -95,15 +95,15 @@ const DemoModal = ({ isOpen, onClose }: DemoModalProps) => {
               </button>
             </div>
 
-            <div className="max-w-md mx-auto">
-              <h2 className="font-heading text-3xl font-normal text-gray-900 mb-2">
+            <div className="w-full max-w-md mx-auto">
+              <h2 className="font-heading text-2xl sm:text-3xl font-normal text-gray-900 mb-2">
                 Schedule a Demo
               </h2>
-              <p className="font-body text-gray-600 mb-8 leading-relaxed">
+              <p className="font-body text-gray-600 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
                 Let's explore how our platform can transform your business operations.
               </p>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 <div>
                   <label className="block font-body text-sm font-medium text-gray-700 mb-2">
                     Full Name *
@@ -115,7 +115,7 @@ const DemoModal = ({ isOpen, onClose }: DemoModalProps) => {
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="Enter your full name"
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white transition-all duration-200"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white transition-all duration-200 text-sm sm:text-base"
                   />
                 </div>
 
@@ -130,7 +130,7 @@ const DemoModal = ({ isOpen, onClose }: DemoModalProps) => {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="Enter your business email"
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white transition-all duration-200"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white transition-all duration-200 text-sm sm:text-base"
                   />
                 </div>
 
@@ -145,13 +145,13 @@ const DemoModal = ({ isOpen, onClose }: DemoModalProps) => {
                     value={formData.company}
                     onChange={handleInputChange}
                     placeholder="Enter your company name"
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white transition-all duration-200"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white transition-all duration-200 text-sm sm:text-base"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-yellow-400 text-black px-6 py-3 rounded-xl font-semibold hover:bg-yellow-300 transition-all duration-200 flex items-center justify-center gap-2"
+                  className="w-full bg-yellow-400 text-black px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold hover:bg-yellow-300 transition-all duration-200 flex items-center justify-center gap-2 text-sm sm:text-base"
                 >
                   Schedule Demo
                   <div className="w-5 h-5 bg-black rounded-full flex items-center justify-center">

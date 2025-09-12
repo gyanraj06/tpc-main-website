@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import LazyImage from './LazyImage';
 import g2BadgesImage from '../assets/g2-badges-441e57.png';
 
 const G2ReviewsSection = () => {
@@ -25,7 +26,7 @@ const G2ReviewsSection = () => {
               </h2>
             </div>
             <div className="flex-shrink-0">
-              <img
+              <LazyImage
                 src={g2BadgesImage}
                 alt="G2 Reviews and Badges"
                 className="h-24 w-auto object-contain"

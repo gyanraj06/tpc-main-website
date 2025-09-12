@@ -5,8 +5,8 @@ import {
   Users, 
   MagnifyingGlass,
   CalendarCheck,
-  ArrowRight
 } from 'phosphor-react';
+import LazyImage from './LazyImage';
 import vendorPortalImg from '../assets/Vendor Portal.png';
 import bookingDataImg from '../assets/Booking Data.png';
 import analyticsImg from '../assets/Analytics.png';
@@ -16,7 +16,6 @@ import DemoModal from './DemoModal';
 
 const FeaturesSection = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const [activeCard, setActiveCard] = useState(0);
   const [activePricingPlan, setActivePricingPlan] = useState(0);
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
   
@@ -37,24 +36,28 @@ const FeaturesSection = () => {
   const pillars = [
     {
       title: "Vendor Dashboard",
+      cardTitle: "Complete Control Center",
       description: "One place to manage events, track bookings, and control your business operations with real-time insights.",
       icon: <Compass size={16} weight="regular" />,
       image: vendorPortalImg
     },
     {
       title: "Booking Data", 
+      cardTitle: "Smart Customer Intelligence",
       description: "Real-time ticket insights, customer analytics, and performance metrics to optimize your sales strategy.",
       icon: <Users size={16} weight="regular" />,
       image: bookingDataImg
     },
     {
       title: "Analytics",
+      cardTitle: "Predictive Business Growth",
       description: "Advanced revenue tracking, customer demographics, and AI-powered predictions to grow your business.",
       icon: <MagnifyingGlass size={16} weight="regular" />,
       image: analyticsImg
     },
     {
       title: "Counter Booking",
+      cardTitle: "Omnichannel Bookings",
       description: "Seamless offline to online sync. Accept bookings anywhere with our mobile-first approach.",
       icon: <CalendarCheck size={16} weight="regular" />,
       image: counterBookingImg
@@ -65,21 +68,21 @@ const FeaturesSection = () => {
     {
       id: 0,
       name: "Starter",
-      price: "₹2,400",
+      price: "₹0",
       subtitle: "For early stage teams",
-      description: "Ideal for early stage teams who want actionable insights to move forward.",
+      description: "Ideal for early stage teams who wants to create limited events with basic functionality.",
       features: [
-        "Access to core features",
-        "Basic performance reporting", 
-        "Email support",
-        "Strategy onboarding guide",
-        "Monthly check-in summary"
+        "Access to Core Features",
+        "Minimum commission upto 2 Months", 
+        "Basic CRM",
+        "24X7 Customer Support",
+        "Limited App Functionality"
       ]
     },
     {
       id: 1,
       name: "Growth",
-      price: "₹4,800",
+      price: "₹4,999",
       subtitle: "Most popular",
       description: "Perfect for growing businesses that need advanced analytics and priority support.",
       features: [
@@ -87,24 +90,17 @@ const FeaturesSection = () => {
         "Advanced analytics dashboard",
         "Priority phone support",
         "Custom integrations",
-        "Weekly strategy sessions",
+        "Better App Functionality",
         "Multi-user access"
       ]
     },
     {
       id: 2,
       name: "Scale",
-      price: "₹8,400",
-      subtitle: "For fast-scaling startups",
-      description: "Enterprise-grade solution for businesses ready to scale operations rapidly.",
+      price: "Custom Pricing",
+      subtitle: "For your custom needs",
+      description: "Not sure which plan works best? We’re happy to create a customized, negotiable plan that suits your goals. Let’s talk!",
       features: [
-        "Everything in Growth",
-        "Dedicated account manager",
-        "White-label solutions",
-        "API access",
-        "Daily performance insights",
-        "Unlimited users",
-        "Custom reporting"
       ]
     }
   ];
@@ -114,7 +110,7 @@ const FeaturesSection = () => {
   return (
     <div className="py-2 md:py-4 space-y-12">
       {/* Products Section - Grovia Style */}
-      <section id="products" className="max-w-7xl mx-auto px-6 lg:px-8">
+      <section id="products" className="max-w-7xl mx-auto px-6 lg:px-8 pb-32">
         <motion.div
           variants={staggerContainer}
           initial="initial"
@@ -170,7 +166,7 @@ const FeaturesSection = () => {
                 transition={{ duration: 0.3 }}
                 className="rounded-2xl h-96 overflow-hidden"
               >
-                <img 
+                <LazyImage 
                   src={pillars[activeTab].image}
                   alt={pillars[activeTab].title}
                   className="w-full h-full object-cover rounded-2xl"
@@ -190,7 +186,7 @@ const FeaturesSection = () => {
                 </div>
                 
                 <h3 className="font-heading text-3xl lg:text-4xl font-normal text-gray-900 leading-tight">
-                  {pillars[activeTab].title}
+                  {pillars[activeTab].cardTitle}
                 </h3>
                 
                 <p className="font-heading text-lg text-gray-600 leading-relaxed">
@@ -202,111 +198,97 @@ const FeaturesSection = () => {
         </div>
       </section>
 
-      {/* Settlement & Payout Transparency Section */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-8 mt-32">
+      {/* Settlement & Payout Transparency */}
+      <section className="max-w-6xl mx-auto px-6 lg:px-8 mt-48">
+        {/* Header */}
         <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, amount: 0.3 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <motion.h2 
-            variants={fadeInUp}
-            className="font-heading text-3xl md:text-5xl font-normal text-primary mb-6"
-          >
-            Settlement & Payout <span className="text-blue-600">Transparency</span>
-          </motion.h2>
+          <h2 className="font-heading text-4xl md:text-5xl font-normal text-gray-900 mb-6">
+            Settlement & Payout Transparency
+          </h2>
         </motion.div>
 
-        {/* Expanding Card Gallery */}
-        <div className="flex gap-4 h-80">
-          {[
-            {
-              step: "01",
-              title: "Booking Confirmed",
-              description: "Customer completes payment and booking is instantly confirmed in the system.",
-              expandedContent: "Instant confirmation with real-time notifications to both customer and vendor.",
-              subtitle: "Instant"
-            },
-            {
-              step: "02", 
-              title: "Funds in Wallet",
-              description: "Money is secured in your vendor wallet within 24 hours of confirmed booking.",
-              expandedContent: "Secure escrow system ensures funds are protected until service completion.",
-              subtitle: "24 hours"
-            },
-            {
-              step: "03",
-              title: "Bank Transfer",
-              description: "Direct deposit to your bank account happens within 48 hours automatically.",
-              expandedContent: "Automated bank transfers with full transparency and tracking capabilities.",
-              subtitle: "48 hours"
-            }
-          ].map((card, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`relative bg-white rounded-2xl border border-gray-200 transition-all duration-500 cursor-pointer overflow-hidden ${
-                activeCard === index 
-                  ? 'flex-[2] shadow-xl' 
-                  : 'flex-1 hover:shadow-lg'
-              }`}
-              onClick={() => setActiveCard(index)}
-              onMouseEnter={() => setActiveCard(index)}
-            >
-              {/* Compressed State */}
-              <div className={`p-6 h-full transition-opacity duration-300 ${
-                activeCard === index ? 'opacity-0' : 'opacity-100'
-              }`}>
-                <div className="text-4xl font-heading font-light text-gray-300 mb-4">
-                  {card.step}
-                </div>
-                <div className="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full font-heading text-xs font-medium mb-4">
-                  {card.subtitle}
-                </div>
-                <h3 className="font-heading text-xl font-bold text-gray-900 mb-3">
-                  {card.title}
-                </h3>
-                <p className="font-heading text-gray-600 text-sm leading-relaxed">
-                  {card.description}
-                </p>
-              </div>
-
-              {/* Expanded State */}
-              <motion.div 
-                className={`absolute inset-0 transition-opacity duration-300 ${
-                  activeCard === index ? 'opacity-100' : 'opacity-0 pointer-events-none'
-                }`}
-                initial={false}
-                animate={{ 
-                  opacity: activeCard === index ? 1 : 0 
+        {/* Testimonials Layout - Horizontal Single Row */}
+        <div className="relative z-10">
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
+            {[
+              {
+                quote: "Customer completes payment and booking is instantly confirmed in the system.",
+                author: "Booking Confirmed",
+                position: "Instant",
+                avatar: flexibleImg
+              },
+              {
+                quote: "Money is secured in your vendor wallet within 24 hours of confirmed booking.",
+                author: "Funds in Wallet", 
+                position: "24 Hours",
+                avatar: flexibleImg
+              },
+              {
+                quote: "Direct deposit to your bank account happens within 48 hours automatically.",
+                author: "Bank Transfer",
+                position: "48 hours", 
+                avatar: flexibleImg
+              }
+            ].map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ 
+                  opacity: 0, 
+                  x: index === 0 ? -100 : index === 2 ? 100 : 0,
+                  y: index === 1 ? 100 : 0
                 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0 }}
+                className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 border border-gray-200/50 shadow-lg h-full"
               >
-                {/* Gradient Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-orange-400"></div>
-                
-                {/* Content */}
-                <div className="relative z-10 p-8 h-full flex flex-col">
-                  <div className="text-5xl font-heading font-light text-white/30 mb-4">
-                    {card.step}
+                {/* Author Info - Name/Title and Avatar at top */}
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <div className="font-heading font-semibold text-gray-900 text-base mb-1">
+                      {testimonial.author}
+                    </div>
+                    <div className="font-heading text-gray-600 text-sm">
+                      {testimonial.position}
+                    </div>
                   </div>
-                  <div className="inline-block px-3 py-1 bg-white/20 text-white rounded-full font-heading text-sm font-medium mb-4 w-fit">
-                    {card.subtitle}
+                  <div className="relative">
+                    <div 
+                      className={`w-16 h-16 rounded-2xl flex-shrink-0 ${
+                        index === 0 ? 'bg-gradient-to-br from-pink-400 via-yellow-400 to-cyan-400' :
+                        index === 1 ? 'bg-gradient-to-br from-green-400 via-blue-400 to-purple-400' :
+                        'bg-gradient-to-br from-orange-400 via-red-400 to-pink-400'
+                      }`}
+                      style={{
+                        backgroundImage: `url(${testimonial.avatar})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center'
+                      }}
+                    ></div>
+                    {/* Step Number Overlay - Centered */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg border border-gray-200">
+                        <span className="font-heading text-sm font-bold text-gray-900">
+                          {index + 1}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="font-heading text-2xl font-bold text-white mb-4">
-                    {card.title}
-                  </h3>
-                  <p className="font-heading text-white/90 text-base leading-relaxed">
-                    {card.description}
-                  </p>
                 </div>
+                
+                {/* Quote Text */}
+                <blockquote className="text-gray-700 text-lg leading-relaxed font-heading">
+                  {testimonial.quote}
+                </blockquote>
               </motion.div>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
@@ -366,10 +348,6 @@ const FeaturesSection = () => {
                     ))}
                   </div>
 
-                  <p className="text-white/70 text-sm mt-8 leading-relaxed text-center">
-                    Not satisfied with our plans? We offer curated and negotiable pricing. 
-                    <span className="text-white underline cursor-pointer hover:text-yellow-400 transition-colors">Contact us</span>
-                  </p>
                 </div>
 
                 {/* Right Side - Detailed Pricing Card - More Glassy & Narrower */}
@@ -425,64 +403,6 @@ const FeaturesSection = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Vendor Success Toolkit Section */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex justify-center">
-            {/* Left Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="font-heading text-4xl md:text-5xl font-normal text-gray-900 mb-6">
-                Vendor Success Toolkit
-              </h2>
-              <p className="font-heading text-lg text-gray-600 leading-relaxed mb-8">
-                Complete guide with templates, checklists, and strategies to maximize your revenue.  
-              </p>
-              
-              {/* Get Started Button */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-black text-white px-6 py-3 rounded-full font-heading font-medium text-sm hover:bg-gray-800 transition-all duration-200 flex items-center gap-2 group"
-              >
-                Get notified
-                <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5">
-                  <ArrowRight size={12} weight="bold" className="text-black" />
-                </div>
-              </motion.button>
-              
-              
-              {/* Steps List */}
-              <div className="mt-12 space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center font-heading text-sm font-bold">
-                    01
-                  </div>
-                  <span className="font-heading text-gray-700">Explore revenue stratagies</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center font-heading text-sm font-bold">
-                    02
-                  </div>
-                  <span className="font-heading text-gray-700">Understand better techniques</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center font-heading text-sm font-bold">
-                    03
-                  </div>
-                  <span className="font-heading text-gray-700">Sync your current operations</span>
-                </div>
-              </div>
-            </motion.div>
-
           </div>
         </div>
       </section>

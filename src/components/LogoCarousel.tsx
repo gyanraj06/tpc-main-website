@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import LazyImage from './LazyImage';
 
 // Import logo images
 import lushLogo from '../assets/logos/lush-logo-28dab4.png';
@@ -65,7 +66,7 @@ const LogoCarousel = () => {
               key={index}
               className="flex-shrink-0 w-[150px] h-[60px] flex items-center justify-center px-2"
             >
-              <img
+              <LazyImage
                 src={logo.src}
                 alt={logo.alt}
                 className="max-w-full max-h-full object-contain opacity-70 hover:opacity-100 transition-opacity"

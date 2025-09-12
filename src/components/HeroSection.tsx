@@ -1,9 +1,16 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'phosphor-react';
+import { useEffect } from 'react';
 import defaultBg from '../assets/Default.png';
 import heroComponent from '../assets/UI Hero Component.svg';
 
 const HeroSection = () => {
+  // Preload critical background image
+  useEffect(() => {
+    const img = new Image();
+    img.src = defaultBg;
+  }, []);
+
   const fadeInUp = {
     initial: { opacity: 0, y: 40 },
     animate: { opacity: 1, y: 0 },
@@ -37,7 +44,7 @@ const HeroSection = () => {
       
       {/* Main Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 items-center">
           
           {/* Left Content */}
           <motion.div
@@ -50,18 +57,22 @@ const HeroSection = () => {
               variants={fadeInUp}
               className="font-hero text-4xl md:text-5xl lg:text-6xl font-normal text-gray-900 leading-relaxed mb-8"
             >
-              Empowering Vendors.{' '}
+              Empowering Businesses.{' '}
               <br />
-              <span className="text-blue-600">Simplifying Ticketing.</span>
+              <span className="text-blue-600">Simplifying</span>
               <br />
-              <span className="text-gray-900">Maximizing Revenue!</span>
+              <span className="text-gray-900"> Ticketing.</span>
+              <br />
+              <span className="text-blue-600"> Maximizing</span>
+              <br />
+              <span className="text-gray-900"> Revenue!</span>
             </motion.h1>
 
             <motion.p
               variants={fadeInUp}
               className="font-body text-lg text-gray-600 leading-relaxed mb-8 max-w-lg"
             >
-              The all-in-one dashboard for events, adventures, and experiences. Transform your business with smarter booking management.
+              From local events to large-scale experiences, manage smarter bookings, streamline operations, and grow your events and adventure business with ease.
             </motion.p>
 
             <motion.div
@@ -95,7 +106,7 @@ const HeroSection = () => {
             <img 
               src={heroComponent} 
               alt="UI Hero Component" 
-              className="w-full h-auto max-w-lg"
+              className="w-full h-auto max-w-2xl"
             />
           </motion.div>
         </div>
