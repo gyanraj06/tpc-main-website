@@ -38,7 +38,7 @@ const AboutSection = () => {
         </motion.h2>
       </motion.div>
 
-      {/* Expanding Card Gallery */}
+      {/* Dont know how its working - DND */}
       <div className="flex gap-4 h-80">
         {[
           {
@@ -77,7 +77,6 @@ const AboutSection = () => {
             onClick={() => setActiveCard(index)}
             onMouseEnter={() => setActiveCard(index)}
           >
-            {/* Compressed State */}
             <div className={`p-6 h-full transition-opacity duration-300 flex flex-col ${
               activeCard === index ? 'opacity-0' : 'opacity-100'
             }`}>
@@ -95,7 +94,6 @@ const AboutSection = () => {
               </div>
             </div>
 
-            {/* Expanded State */}
             <div 
               className={`absolute inset-0 transition-opacity duration-300 ${
                 activeCard === index ? 'opacity-100' : 'opacity-0 pointer-events-none'

@@ -39,8 +39,8 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
     return () => document.removeEventListener('click', closeMenu);
   }, [isOpen]);
 
-  // Solid black background
-  const glassClasses = 'bg-black';
+  // Subtle diagonal gradient from black to light gray
+  const glassClasses = 'bg-gradient-to-br from-black via-gray-900 to-gray-800';
 
   return (
     <nav
