@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { X, ArrowRight } from 'phosphor-react';
 import logoImage from '../assets/LogoImage.jpg';
 import logoWritten from '../assets/LogoWritten.jpg';
 
@@ -25,7 +24,6 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
     }
   };
 
-
   useEffect(() => {
     if (!isOpen) return;
 
@@ -44,11 +42,11 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
 
   return (
     <nav
-      className="font-nav fixed top-0 z-50 w-full md:py-4 md:px-4"
+      className="font-nav fixed top-0 z-50 w-full lg:py-4 lg:px-4"
     >
       {/* Desktop Header */}
       <div
-        className={`mx-auto w-fit rounded-full px-6 py-3 ${glassClasses} shadow-[0_4px_25px_rgba(0,0,0,0.25)] hidden md:block`}
+        className={`mx-auto w-fit rounded-full px-6 py-3 ${glassClasses} shadow-[0_4px_25px_rgba(0,0,0,0.25)] hidden lg:block`}
       >
         <div className="flex items-center gap-10">
           {/* Left Section - Logo */}
@@ -83,45 +81,44 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
           >
             Contact us
             <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5">
-              <ArrowRight size={12} weight="regular" className="text-white" />
+              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
             </div>
           </button>
         </div>
       </div>
 
       {/* Mobile Header */}
-      <div className={`${glassClasses} py-3 md:hidden w-full`}>
-        <div className="flex items-center justify-between px-4">
-          {/* Mobile Logo */}
+      <div className={`${glassClasses} py-4 lg:hidden w-full`}>
+        <div className="flex items-center justify-between px-4 sm:px-6">
+          {/* Mobile Logo - Better sizing */}
           <button onClick={onNavigateToHome} className="flex items-center">
             <div 
-              className="h-8 w-8 bg-contain bg-no-repeat"
+              className="h-6 w-6 sm:h-7 sm:w-7 bg-contain bg-no-repeat"
               style={{ backgroundImage: `url(${logoImage})` }}
             ></div>
             <div 
-              className="-ml-1 h-8 w-32 bg-contain bg-no-repeat"
+              className="-ml-1 h-6 w-24 sm:h-7 sm:w-28 bg-contain bg-no-repeat"
               style={{ backgroundImage: `url(${logoWritten})` }}
             ></div>
           </button>
 
-          {/* Right Side Buttons */}
-          <div className="flex items-center space-x-1">
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="font-ui bg-[#1E63EF] hover:bg-[#1750CC] text-white font-medium px-3.5 py-0.5 text-2xl rounded-full transition-all duration-200 transform hover:scale-105"
-              aria-label="Toggle menu"
-              aria-expanded={isOpen}
-            >
-              {isOpen ? '✕' : '+'}
-            </button>
-          </div>
+          {/* Mobile Menu Button - Better sizing */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="font-nav bg-white hover:bg-gray-100 text-black font-medium px-3 py-2 sm:px-4 sm:py-2 text-base sm:text-lg rounded-full transition-all duration-200 transform hover:scale-105 border border-gray-200"
+            aria-label="Toggle menu"
+            aria-expanded={isOpen}
+          >
+            {isOpen ? '✕' : '☰'}
+          </button>
         </div>
       </div>
 
       {/* Mobile Menu - Slide from Right */}
       <div
-        className={`fixed top-0 right-0 h-full w-80 max-w-[80vw] md:hidden ${glassClasses} transform shadow-xl transition-all duration-300 z-50 ${
+        className={`fixed top-0 right-0 h-full w-full lg:hidden ${glassClasses} transform shadow-xl transition-all duration-300 z-[60] ${
           isOpen
             ? 'translate-x-0'
             : 'translate-x-full'
@@ -132,9 +129,11 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
           <div className="flex justify-end mb-8">
             <button
               onClick={() => setIsOpen(false)}
-              className="p-2 text-white hover:text-gray-300 transition-colors"
+              className="p-2 text-white hover:text-gray-300 transition-colors font-nav"
             >
-              <X size={24} weight="regular" />
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
           </div>
 
@@ -147,7 +146,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                   scrollToSection(id);
                   setIsOpen(false);
                 }}
-                className="font-nav block text-lg text-white/90 transition-colors hover:text-white py-2 font-normal tracking-wide w-full text-left focus:outline-none"
+                className="font-nav block text-lg text-white/90 transition-colors hover:text-white py-3 font-normal tracking-wide w-full text-left focus:outline-none"
               >
                 {label}
               </button>
@@ -164,7 +163,9 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
           >
             Contact us
             <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5">
-              <ArrowRight size={14} weight="regular" className="text-white" />
+              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
             </div>
           </button>
         </div>
@@ -173,7 +174,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
       {/* Mobile Menu Backdrop */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/50 md:hidden z-40"
+          className="fixed inset-0 bg-black/50 lg:hidden z-[50]"
           onClick={() => setIsOpen(false)}
         />
       )}

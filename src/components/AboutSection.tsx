@@ -22,24 +22,86 @@ const AboutSection = () => {
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-6 lg:px-8 mt-32 mb-32">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 sm:mt-24 md:mt-32 mb-16 sm:mb-24 md:mb-32">
       <motion.div
         variants={staggerContainer}
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, amount: 0.3 }}
-        className="text-center mb-16"
+        className="text-center mb-12 sm:mb-16"
       >
         <motion.h2 
           variants={fadeInUp}
-          className="font-heading text-3xl md:text-5xl font-normal text-primary mb-6"
+          className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal text-primary mb-6"
         >
           Get Started In <span className="text-blue-600">3 Simple Steps</span>
         </motion.h2>
       </motion.div>
 
-      {/* Dont know how its working - DND */}
-      <div className="flex gap-4 h-80">
+      {/* Mobile & iPad: Vertical Stack, Desktop: Horizontal Cards */}
+      <div className="block xl:hidden space-y-6">
+        {/* Mobile & iPad Layout - Vertical Cards */}
+        {[
+          {
+            step: "01",
+            title: "Get Verified",
+            description: "Create your account and complete quick verification within 24 hours.",
+            expandedContent: "Create your vendor account with basic business information. Complete verification in under 24 hours with our streamlined process.",
+            image: getVerifiedImg
+          },
+          {
+            step: "02", 
+            title: "List Your Experiences",
+            description: "Add photos, pricing, and descriptions to showcase your offerings.",
+            expandedContent: "Upload high-quality photos, set competitive pricing, and create compelling descriptions that attract customers to your unique offerings.",
+            image: submitListingsImg
+          },
+          {
+            step: "03",
+            title: "Receive Bookings",
+            description: "Start getting customers, manage bookings, and track earnings via the dashboard.",
+            expandedContent: "Go live instantly after approval. Manage bookings, track earnings, and grow your business with our dashboard.",
+            image: receiveBookingsImg
+          }
+        ].map((card, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden"
+          >
+            <div className="p-6 sm:p-8">
+              <div className="flex items-start gap-4 sm:gap-6">
+                <div className="flex-shrink-0">
+                  <div className="text-3xl sm:text-4xl font-heading font-light text-gray-300 mb-2">
+                    {card.step}
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-heading text-lg sm:text-xl font-bold text-gray-900 mb-3">
+                    {card.title}
+                  </h3>
+                  <p className="font-heading text-gray-600 text-sm sm:text-base leading-relaxed mb-4">
+                    {card.expandedContent}
+                  </p>
+                </div>
+                <div className="flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24">
+                  <img 
+                    src={card.image} 
+                    alt={card.title} 
+                    className="w-full h-full object-cover rounded-xl border-2 border-gray-100" 
+                  />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Desktop Layout - Horizontal Interactive Cards */}
+      <div className="hidden xl:flex gap-4 h-80">
         {[
           {
             step: "01",

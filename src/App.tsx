@@ -4,7 +4,6 @@ import FeaturesSection from './components/FeaturesSection'
 import AboutSection from './components/AboutSection'
 import FAQSection from './components/FAQSection'
 import ContactSection from './components/ContactSection'
-import CTASection from './components/CTASection'
 import Footer from './components/Footer'
 import './App.css'
 
@@ -29,7 +28,6 @@ function App() {
         <AboutSection />
         <FAQSection />
         <ContactSection />
-        <CTASection />
       </main>
       <Footer />
     </div>
