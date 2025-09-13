@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { X } from 'phosphor-react';
 import flexibleBg from '../assets/flexible-2.png';
 
 interface DemoModalProps {
@@ -91,7 +90,9 @@ const DemoModal = ({ isOpen, onClose }: DemoModalProps) => {
                 onClick={onClose}
                 className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors duration-200"
               >
-                <X size={20} className="text-gray-600" />
+                <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
               </button>
             </div>
 

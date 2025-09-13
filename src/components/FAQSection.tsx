@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Plus, X } from 'phosphor-react';
 
 const FAQSection = () => {
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
@@ -29,48 +28,48 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="py-24">
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+    <section className="py-16 sm:py-20 md:py-24">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 items-start">
           {/* Left Side - Header */}
           <div>
-            <div className="inline-block px-4 py-2 bg-black rounded-full mb-8">
+            <div className="inline-block px-4 py-2 bg-black rounded-full mb-6 sm:mb-8">
               <span className="text-white text-sm font-medium">FAQ</span>
             </div>
             
-            <h2 className="font-heading text-4xl md:text-5xl font-normal text-gray-900 mb-6 leading-tight">
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal text-gray-900 mb-4 sm:mb-6 leading-tight">
               Got questions?<br />
               We've got answers.
             </h2>
             
-            <p className="text-gray-600 text-lg leading-relaxed mb-8">
+            <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
               Find answers to common questions about TripPeChalo and its capabilities.
             </p>
             
-            <div className="mt-8">
-              <h3 className="text-gray-900 font-semibold text-xl mb-2">
+            <div className="mt-6 sm:mt-8">
+              <h3 className="text-gray-900 font-semibold text-lg sm:text-xl mb-2">
                 Still have a question?
               </h3>
-              <p className="text-gray-600 text-base">
+              <p className="text-gray-600 text-sm sm:text-base">
                 Contact us! We'll be happy to help you.
               </p>
             </div>
           </div>
 
           {/* Right Side - FAQ Items */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="border border-gray-300 rounded-2xl overflow-hidden"
+                className="border border-gray-300 rounded-xl sm:rounded-2xl overflow-hidden"
               >
                 <button
                   onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
-                  className={`w-full px-6 py-5 text-left flex items-center justify-between transition-colors duration-200 ${
+                  className={`w-full px-4 sm:px-6 py-4 sm:py-5 text-left flex items-center justify-between transition-colors duration-200 ${
                     openFAQ === index ? 'bg-white' : 'hover:bg-white'
                   }`}
                 >
-                  <span className="text-gray-900 font-medium text-lg pr-4">
+                  <span className="text-gray-900 font-medium text-base sm:text-lg pr-4">
                     {faq.question}
                   </span>
                   <div className="flex-shrink-0">
@@ -80,9 +79,13 @@ const FAQSection = () => {
                       transition={{ duration: 0.3, ease: 'easeInOut' }}
                     >
                       {openFAQ === index ? (
-                        <X size={24} className="text-gray-900" />
+                        <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
                       ) : (
-                        <Plus size={24} className="text-gray-900" />
+                        <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
                       )}
                     </motion.div>
                   </div>
@@ -97,8 +100,8 @@ const FAQSection = () => {
                   transition={{ duration: 0.3, ease: 'easeInOut' }}
                   className="overflow-hidden"
                 >
-                  <div className="px-6 pb-5 bg-white">
-                    <p className="text-gray-600 leading-relaxed">
+                  <div className="px-4 sm:px-6 pb-4 sm:pb-5 bg-white">
+                    <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                       {faq.answer}
                     </p>
                   </div>

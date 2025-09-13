@@ -10,10 +10,10 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#F4F2EE] py-16 px-6 lg:px-8">
+    <footer className="bg-[#F4F2EE] py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         {/* Main Footer Content */}
-        <div className="grid lg:grid-cols-2 gap-16 items-start mb-16">
+        <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 items-start mb-12 sm:mb-16">
           
           {/* Left Side - Newsletter */}
           <motion.div
@@ -22,66 +22,26 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h4 className="font-heading text-2xl font-normal text-gray-900 mb-8">
+            <h4 className="font-heading text-xl sm:text-2xl font-normal text-gray-900 mb-6 sm:mb-8">
               Sign up for our newsletter
             </h4>
             
-            <form onSubmit={handleSubscribe} className="flex gap-4">
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@email.com"
-                className="flex-1 px-4 py-3 bg-white/50 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:bg-white/80 transition-all duration-200 font-body"
+                className="flex-1 px-4 py-3 bg-white/50 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:bg-white/80 transition-all duration-200 font-body text-sm sm:text-base"
               />
               <button
                 type="submit"
-                className="bg-black text-white px-8 py-3 rounded-full font-medium hover:bg-gray-800 transition-all duration-200 font-body"
+                className="bg-black text-white px-6 sm:px-8 py-3 rounded-full font-medium hover:bg-gray-800 transition-all duration-200 font-body text-sm sm:text-base"
               >
                 Subscribe
               </button>
             </form>
           </motion.div>
-
-          {/* Right Side - Pages */}
-          {/* <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="lg:text-right"
-          >
-            <h6 className="font-heading text-sm font-medium text-gray-600 mb-6 uppercase tracking-wide">
-              Pages
-            </h6>
-            
-            <nav className="space-y-3">
-              <a 
-                href="/"
-                className="block font-body text-gray-900 hover:text-blue-600 transition-colors duration-200"
-              >
-                Home
-              </a>
-              <a 
-                href="/about"
-                className="block font-body text-gray-900 hover:text-blue-600 transition-colors duration-200"
-              >
-                About
-              </a>
-              <a 
-                href="#pricing"
-                className="block font-body text-gray-900 hover:text-blue-600 transition-colors duration-200"
-              >
-                Pricing
-              </a>
-              <a 
-                href="/case-studies"
-                className="block font-body text-gray-900 hover:text-blue-600 transition-colors duration-200"
-              >
-                Case Studies
-              </a>
-            </nav>
-          </motion.div> */}
         </div>
 
         {/* Bottom Section */}
@@ -90,14 +50,14 @@ const Footer = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="border-t border-gray-200 pt-8"
+          className="border-t border-gray-200 pt-6 sm:pt-8"
         >
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 sm:gap-8">
             
             {/* Left - Social & Email */}
-            <div>
+            <div className="w-full lg:w-auto">
               {/* Social Icons */}
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-4 mb-4 sm:mb-6">
                 <a 
                   href="https://x.com" 
                   target="_blank" 
@@ -130,8 +90,8 @@ const Footer = () => {
                 </a>
               </div>
 
-              {/* Large Email */}
-              <h1 className="font-heading text-4xl lg:text-5xl font-normal text-gray-900">
+              {/* Large Email - Responsive sizing */}
+              <h1 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal text-gray-900 break-all">
                 <a 
                   href="mailto:contact.trippechalo.in@gmail.com"
                   className="hover:text-blue-600 transition-colors duration-200"
@@ -141,7 +101,7 @@ const Footer = () => {
               </h1>
             </div>
 
-            {/* Right - Copyright */}
+            {/* Right - Copyright (can be added later if needed) */}
             <div className="lg:text-right">
             </div>
           </div>
