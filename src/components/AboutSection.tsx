@@ -73,7 +73,7 @@ const AboutSection = () => {
             className="bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden"
           >
             <div className="p-6 sm:p-8">
-              <div className="flex items-start gap-4 sm:gap-6">
+              <div className="flex items-start gap-4 sm:gap-6 mb-6">
                 <div className="flex-shrink-0">
                   <div className="text-3xl sm:text-4xl font-heading font-light text-gray-300 mb-2">
                     {card.step}
@@ -83,15 +83,17 @@ const AboutSection = () => {
                   <h3 className="font-heading text-lg sm:text-xl font-bold text-gray-900 mb-3">
                     {card.title}
                   </h3>
-                  <p className="font-heading text-gray-600 text-sm sm:text-base leading-relaxed mb-4">
+                  <p className="font-heading text-gray-600 text-sm sm:text-base leading-relaxed">
                     {card.expandedContent}
                   </p>
                 </div>
-                <div className="flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24">
-                  <img 
-                    src={card.image} 
-                    alt={card.title} 
-                    className="w-full h-full object-cover rounded-xl border-2 border-gray-100" 
+              </div>
+              <div className="flex justify-center">
+                <div className="w-30 h-30 sm:w-32 sm:h-32">
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    className="w-full h-full object-cover rounded-xl border-2 border-gray-100"
                   />
                 </div>
               </div>

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { Desktop, ChartBar, TrendUp, CreditCard } from '@phosphor-icons/react';
 import LazyImage from './LazyImage';
 import vendorPortalImg from '../assets/Vendor Portal.png';
 import bookingDataImg from '../assets/Booking Data.png';
@@ -32,46 +33,28 @@ const FeaturesSection = () => {
       title: "Vendor Dashboard",
       cardTitle: "Complete Control Center",
       description: "One place to manage events, track bookings, and control your business operations with real-time insights.",
-      icon: (
-        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-        </svg>
-      ),
+      icon: <Desktop className="w-4 h-4" />,
       image: vendorPortalImg
     },
     {
-      title: "Booking Data", 
+      title: "Booking Data",
       cardTitle: "Smart Customer Intelligence",
       description: "Real-time ticket insights, customer analytics, and performance metrics to optimize your sales strategy.",
-      icon: (
-        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-          <circle cx="9" cy="7" r="4"/>
-          <path d="m22 21-3-3m0 0a5 5 0 1 0-7-7 5 5 0 0 0 7 7z"/>
-        </svg>
-      ),
+      icon: <ChartBar className="w-4 h-4" />,
       image: bookingDataImg
     },
     {
       title: "Analytics",
       cardTitle: "Predictive Business Growth",
       description: "Advanced revenue tracking, customer demographics, and AI-powered predictions to grow your business.",
-      icon: (
-        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-        </svg>
-      ),
+      icon: <TrendUp className="w-4 h-4" />,
       image: analyticsImg
     },
     {
       title: "Counter Booking",
       cardTitle: "Omnichannel Bookings",
       description: "Seamless offline to online sync. Accept bookings anywhere with our mobile-first approach.",
-      icon: (
-        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-        </svg>
-      ),
+      icon: <CreditCard className="w-4 h-4" />,
       image: counterBookingImg
     }
   ];
