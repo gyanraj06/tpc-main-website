@@ -81,16 +81,16 @@ const HeroSection = () => {
                 href="https://vendor.trippechalo.in/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-black text-white px-4 py-2 rounded-full font-normal text-xs hover:bg-gray-800 transition-all duration-200 flex items-center gap-1.5 justify-center group flex-1 sm:flex-none"
+                className="bg-black text-white px-6 py-3 rounded-full font-normal text-xs hover:bg-gray-800 transition-all duration-200 flex items-center gap-1.5 justify-center group flex-1 sm:flex-none"
               >
                 Vendor Portal
-                <div className="w-3 h-3 bg-white rounded-full flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5">
-                  <svg className="w-2 h-2 text-black" fill="currentColor" viewBox="0 0 20 20">
+                <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5">
+                  <svg className="w-2.5 h-2.5 text-black" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
                 </div>
               </a>
-              <button className="border border-gray-300 text-gray-700 bg-transparent px-4 py-2 rounded-full font-normal text-xs hover:bg-gray-50 transition-all duration-200 flex items-center gap-1.5 justify-center flex-1 sm:flex-none">
+              <button className="border border-gray-300 text-gray-700 bg-transparent px-6 py-3 rounded-full font-normal text-xs hover:bg-gray-50 transition-all duration-200 flex items-center gap-1.5 justify-center flex-1 sm:flex-none">
                 Customer Portal
               </button>
             </motion.div>

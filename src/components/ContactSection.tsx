@@ -35,7 +35,7 @@ const ContactSection = () => {
         <div className="absolute inset-0 bg-black/60 rounded-2xl sm:rounded-3xl"></div>
       </div>
       
-      <div className="relative z-10 max-w-6xl mx-auto px-8 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-6xl mx-auto px-8 sm:px-6 lg:px-12 xl:px-8">
         <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 items-center">
           
           {/* Left Content */}
