@@ -26,7 +26,6 @@ function App() {
   // Main homepage component
   const HomePage = () => (
     <>
-      <Header onNavigateToDemo={handleScrollToContact} onNavigateToHome={handleNavigateToHome} />
       <main>
         <HeroSection />
         <FeaturesSection />
@@ -34,18 +33,19 @@ function App() {
         <FAQSection />
         <ContactSection />
       </main>
-      <Footer />
     </>
   )
-
+  
   return (
     <div className="App min-h-screen">
+      <Header onNavigateToDemo={handleScrollToContact} onNavigateToHome={handleNavigateToHome} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/legal-notice" element={<LegalNotice />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
       </Routes>
+      <Footer />
     </div>
   )
 }
