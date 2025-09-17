@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import flexibleBg from '../assets/flexible-2.png';
 
+
 const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -18,10 +19,34 @@ const ContactSection = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  try {
+const response = await fetch("/api/sendMail", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(formData),
+});
+
+    if (response.ok) {
+      alert("Message sent successfully!");
+      setFormData({ name: "", email: "", message: "" }); // clear form
+    } else {
+      const errorData = await response.json();
+      console.error("Email send failed:", errorData);
+      alert("Failed to send message. Please try again.");
+    }
+  } catch (err) {
+    console.error("Request error:", err);
+    alert("Something went wrong. Please try again later.");
+  }
+};
+
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   console.log('Form submitted:', formData);
+  // };
 
   return (
     <section id="contact-section" className="py-16 relative">
