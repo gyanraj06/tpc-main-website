@@ -150,7 +150,7 @@ const Footer = () => {
               {/* Copyright */}
               <div className="text-center sm:text-right">
                 <p className="text-sm text-gray-600 font-body">
-                  © {new Date().getFullYear()} Mounterra. All rights reserved.
+                 Founded by Mayank Ramani. © {new Date().getFullYear()} Mounterra. All rights reserved.
                 </p>
               </div>
             </div>

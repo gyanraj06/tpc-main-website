@@ -1,27 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { X } from 'lucide-react';
 
 const LegalNotice: React.FC = () => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  const handleBackToHome = () => {
+    navigate('/');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Back Button */}
-      <div className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-4 py-4">
+      {/* Back Button - Below Header */}
+      <div className="pt-24 lg:pt-28 pb-6">
+        <div className="max-w-4xl mx-auto px-4">
           <button
-            onClick={() => navigate(-1)}
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors"
+            onClick={handleBackToHome}
+            className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-all duration-200 shadow-sm"
+            aria-label="Close"
           >
-            <ArrowLeft size={20} />
-            <span>Back</span>
+            <X size={20} />
           </button>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="max-w-4xl mx-auto px-4 pb-12">
         <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-gray-100">
 
           {/* Header */}
