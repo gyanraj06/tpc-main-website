@@ -275,7 +275,7 @@ const TermsAndConditions: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-semibold text-black mb-2">TrippeChalo's Limited Role in Refunds</h3>
                   <p className="text-gray-700 leading-relaxed">
-                    TrippeChalo's role in the refund process is that of a facilitator. Once a refund is approved by the Vendor in accordance with their policy, TrippeChalo will process the refund to the User's original mode of payment within 7-14 business days after the funds have been successfully received by us from the Vendor.
+                    TrippeChalo's role in the refund process is that of a facilitator. Once a refund is approved by the Vendor in accordance with their policy, TrippeChalo will credit the refund to the User's original mode of payment within 7-14 business days after the funds have been successfully received by us from the Vendor.
                   </p>
                 </div>
               </div>
