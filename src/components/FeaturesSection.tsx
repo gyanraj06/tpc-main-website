@@ -63,7 +63,7 @@ const FeaturesSection = () => {
     {
       id: 0,
       name: "Starter",
-      price: "INR 0",
+      price: "Free",
       subtitle: "For early stage teams",
       description: "Ideal for early stage teams who wants to create limited events with basic functionality.",
       features: [
