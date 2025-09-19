@@ -63,7 +63,7 @@ const FeaturesSection = () => {
     {
       id: 0,
       name: "Starter",
-      price: "₹0",
+      price: "INR 0",
       subtitle: "For early stage teams",
       description: "Ideal for early stage teams who wants to create limited events with basic functionality.",
       features: [
@@ -77,7 +77,7 @@ const FeaturesSection = () => {
     {
       id: 1,
       name: "Growth",
-      price: "₹4,999",
+      price: "INR 4,999",
       subtitle: "Most popular",
       description: "Perfect for growing businesses that need advanced analytics and priority support.",
       features: [
