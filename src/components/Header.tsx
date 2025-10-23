@@ -23,7 +23,13 @@ import {
   UsersThree,
   Briefcase,
   CurrencyDollar,
-  UsersFour
+  UsersFour,
+  Confetti,
+  MapPin,
+  MusicNotes,
+  Bank,
+  Airplane,
+  Megaphone
 } from '@phosphor-icons/react';
 
 interface HeaderProps {
@@ -49,32 +55,32 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
     {
       category: 'Core Experience and Ops',
       items: [
-        { label: 'Easy Experience Setup', icon: CalendarCheck, onClick: () => scrollToSection('products') },
-        { label: 'Recurring Events', icon: ArrowsClockwise, onClick: () => scrollToSection('products') },
-        { label: 'Vendor Dashboard Panel', icon: SquaresFour, onClick: () => scrollToSection('products') },
-        { label: 'Attendee Tracking and Insights', icon: Users, onClick: () => scrollToSection('products') },
-        { label: 'Custom Registration Form', icon: Article, onClick: () => scrollToSection('products') },
+        { label: 'Easy Experience Setup', description: 'Quick Event Builder', icon: CalendarCheck, onClick: () => scrollToSection('products') },
+        { label: 'Recurring Events', description: 'Automated Event Series', icon: ArrowsClockwise, onClick: () => scrollToSection('products') },
+        { label: 'Vendor Dashboard Panel', description: 'Central Vendor Hub', icon: SquaresFour, onClick: () => scrollToSection('products') },
+        { label: 'Attendee Tracking and Insights', description: 'Live Attendee Data', icon: Users, onClick: () => scrollToSection('products') },
+        { label: 'Custom Registration Form', description: 'Build Custom Forms', icon: Article, onClick: () => scrollToSection('products') },
       ]
     },
     {
       category: 'Operations and Management',
       items: [
-        { label: 'Smart Ticketing and Payments', icon: Ticket, onClick: () => scrollToSection('products') },
-        { label: 'Reporting and Analytics', icon: ChartBar, onClick: () => scrollToSection('products') },
-        { label: 'Auto Communication System', icon: ChatCircleDots, onClick: () => scrollToSection('products') },
+        { label: 'Smart Ticketing and Payments', description: 'Easy Ticket Sales', icon: Ticket, onClick: () => scrollToSection('products') },
+        { label: 'Reporting and Analytics', description: 'Simple Event Reports', icon: ChartBar, onClick: () => scrollToSection('products') },
+        { label: 'Auto Communication System', description: 'Automatic Email Alerts', icon: ChatCircleDots, onClick: () => scrollToSection('products') },
       ]
     },
     {
       category: 'Marketing and Growth',
       items: [
-        { label: 'Social Media Management', icon: ShareNetwork, onClick: () => scrollToSection('products') },
-        { label: 'Website Builders and Microsites', icon: Globe, onClick: () => scrollToSection('products') },
+        { label: 'Social Media Management', description: 'Schedule Social Posts', icon: ShareNetwork, onClick: () => scrollToSection('products') },
+        { label: 'Website Builders and Microsites', description: 'Create Event Websites', icon: Globe, onClick: () => scrollToSection('products') },
       ]
     },
     {
       category: 'Vendor and Brand',
       items: [
-        { label: 'Sponsor and Brand Management', icon: Handshake, onClick: () => scrollToSection('products') },
+        { label: 'Sponsor and Brand Management', description: 'Manage Event Sponsors', icon: Handshake, onClick: () => scrollToSection('products') },
       ]
     }
   ];
@@ -84,28 +90,74 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
     {
       category: 'Learn and Grow',
       items: [
-        { label: 'Case Studies', icon: BookOpen, onClick: () => scrollToSection('resources') },
-        { label: 'Blogs', icon: Newspaper, onClick: () => scrollToSection('resources') },
-        { label: 'Comparison', icon: ChartLineUp, onClick: () => scrollToSection('resources') },
+        { label: 'Case Studies', description: 'See customer success stories', icon: BookOpen, onClick: () => scrollToSection('resources') },
+        { label: 'Blogs', description: 'Read tips and insights', icon: Newspaper, onClick: () => scrollToSection('resources') },
+        { label: 'Comparison', description: 'See how we stack up', icon: ChartLineUp, onClick: () => scrollToSection('resources') },
       ]
     },
     {
       category: 'Support and Community',
       items: [
-        { label: 'Support', icon: Headset, onClick: () => scrollToSection('resources') },
-        { label: 'FAQs', icon: Question, onClick: () => scrollToSection('resources') },
-        { label: 'Changelogs', icon: GitCommit, onClick: () => scrollToSection('resources') },
+        { label: 'Support', description: 'Get help from our team', icon: Headset, onClick: () => scrollToSection('resources') },
+        { label: 'FAQs', description: 'Find answers fast', icon: Question, onClick: () => scrollToSection('resources') },
+        { label: 'Changelogs', description: 'See what\'s new', icon: GitCommit, onClick: () => scrollToSection('resources') },
       ]
     }
   ];
 
   // Company dropdown menu data
   const companyMenuData = [
-    { label: 'About Us', icon: Info, onClick: () => scrollToSection('company') },
-    { label: 'Our Team', icon: UsersThree, onClick: () => scrollToSection('company') },
-    { label: 'Career', icon: Briefcase, onClick: () => scrollToSection('company') },
-    { label: 'Pricing', icon: CurrencyDollar, onClick: () => scrollToSection('company') },
-    { label: 'Partner with Us', icon: UsersFour, onClick: () => scrollToSection('company') },
+    { label: 'About Us', description: 'Learn our mission', icon: Info, onClick: () => scrollToSection('company') },
+    { label: 'Career', description: 'Join our growing team', icon: Briefcase, onClick: () => scrollToSection('company') },
+    { label: 'Partner with Us', description: 'Grow your business with us', icon: UsersFour, onClick: () => scrollToSection('company') },
+    { label: 'Our Team', description: 'Meet the people behind it', icon: UsersThree, onClick: () => scrollToSection('company') },
+    { label: 'Pricing', description: 'Find the right plan', icon: CurrencyDollar, onClick: () => scrollToSection('company') },
+  ];
+
+  // Solutions dropdown menu data
+  const solutionsMenuData = [
+    {
+      label: 'Event & Experience Organisers',
+      description: 'Create. Manage. Grow easily.',
+      icon: Confetti,
+      onClick: () => scrollToSection('solutions')
+    },
+    {
+      label: 'Tour & Activity Providers',
+      description: 'Automate bookings. Reach more.',
+      icon: MapPin,
+      onClick: () => scrollToSection('solutions')
+    },
+    {
+      label: 'Venues & Experience Spaces',
+      description: 'Showcase and manage smartly.',
+      icon: SquaresFour,
+      onClick: () => scrollToSection('solutions')
+    },
+    {
+      label: 'Entertainment & Cultural Hosts',
+      description: 'Launch shows. Track impact.',
+      icon: MusicNotes,
+      onClick: () => scrollToSection('solutions')
+    },
+    {
+      label: 'Institutions & Cultural Houses',
+      description: 'Digitize programs. Engage audiences.',
+      icon: Bank,
+      onClick: () => scrollToSection('solutions')
+    },
+    {
+      label: 'Travel Agencies & Production Houses',
+      description: 'Collaborate. Streamline trips.',
+      icon: Airplane,
+      onClick: () => scrollToSection('solutions')
+    },
+    {
+      label: 'Brands & Sponsorship Partners',
+      description: 'Connect. Promote. Measure impact.',
+      icon: Megaphone,
+      onClick: () => scrollToSection('solutions')
+    },
   ];
 
   const scrollToSection = (sectionId: string) => {
@@ -211,15 +263,15 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
           >
             <div className={`${glassClasses} rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-300 ease-out`}>
             {activeDropdown === 'products' ? (
-              <div className="p-6">
-                <div className="flex gap-x-8">
-                  <div className="flex-1 space-y-6">
+              <div className="p-5">
+                <div className="flex gap-x-6">
+                  <div className="flex-1 space-y-4">
                     {/* Core Experience and Ops */}
                     <div>
-                      <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-3">
+                      <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
                         {productMenuData[0].category}
                       </h3>
-                      <div className="space-y-1">
+                      <div className="space-y-0.5">
                         {productMenuData[0].items.map((item, itemIndex) => {
                           const Icon = item.icon;
                           return (
@@ -229,14 +281,17 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                                 item.onClick();
                                 setActiveDropdown(null);
                               }}
-                              className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
+                              className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
                             >
-                              <div className="flex-shrink-0 w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                                <Icon className="w-5 h-5 text-white/90" weight="regular" />
+                              <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
+                                <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200">
+                                <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
                                   {item.label}
+                                </p>
+                                <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
+                                  {item.description}
                                 </p>
                               </div>
                             </button>
@@ -247,10 +302,10 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
 
                     {/* Marketing and Growth */}
                     <div>
-                      <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-3">
+                      <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
                         {productMenuData[2].category}
                       </h3>
-                      <div className="space-y-1">
+                      <div className="space-y-0.5">
                         {productMenuData[2].items.map((item, itemIndex) => {
                           const Icon = item.icon;
                           return (
@@ -260,14 +315,17 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                                 item.onClick();
                                 setActiveDropdown(null);
                               }}
-                              className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
+                              className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
                             >
-                              <div className="flex-shrink-0 w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                                <Icon className="w-5 h-5 text-white/90" weight="regular" />
+                              <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
+                                <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200">
+                                <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
                                   {item.label}
+                                </p>
+                                <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
+                                  {item.description}
                                 </p>
                               </div>
                             </button>
@@ -277,13 +335,13 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                     </div>
                   </div>
 
-                  <div className="flex-1 space-y-6">
+                  <div className="flex-1 space-y-4">
                     {/* Operations and Management */}
                     <div>
-                      <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-3">
+                      <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
                         {productMenuData[1].category}
                       </h3>
-                      <div className="space-y-1">
+                      <div className="space-y-0.5">
                         {productMenuData[1].items.map((item, itemIndex) => {
                           const Icon = item.icon;
                           return (
@@ -293,14 +351,17 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                                 item.onClick();
                                 setActiveDropdown(null);
                               }}
-                              className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
+                              className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
                             >
-                              <div className="flex-shrink-0 w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                                <Icon className="w-5 h-5 text-white/90" weight="regular" />
+                              <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
+                                <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200">
+                                <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
                                   {item.label}
+                                </p>
+                                <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
+                                  {item.description}
                                 </p>
                               </div>
                             </button>
@@ -311,10 +372,10 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
 
                     {/* Vendor and Brand */}
                     <div>
-                      <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-3">
+                      <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
                         {productMenuData[3].category}
                       </h3>
-                      <div className="space-y-1">
+                      <div className="space-y-0.5">
                         {productMenuData[3].items.map((item, itemIndex) => {
                           const Icon = item.icon;
                           return (
@@ -324,14 +385,17 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                                 item.onClick();
                                 setActiveDropdown(null);
                               }}
-                              className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
+                              className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
                             >
-                              <div className="flex-shrink-0 w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                                <Icon className="w-5 h-5 text-white/90" weight="regular" />
+                              <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
+                                <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200">
+                                <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
                                   {item.label}
+                                </p>
+                                <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
+                                  {item.description}
                                 </p>
                               </div>
                             </button>
@@ -343,15 +407,15 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                 </div>
               </div>
             ) : activeDropdown === 'resources' ? (
-              <div className="p-6">
-                <div className="flex gap-x-8">
+              <div className="p-5">
+                <div className="flex gap-x-6">
                   <div className="flex-1">
                     {/* Learn and Grow */}
                     <div>
-                      <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-3">
+                      <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
                         {resourcesMenuData[0].category}
                       </h3>
-                      <div className="space-y-1">
+                      <div className="space-y-0.5">
                         {resourcesMenuData[0].items.map((item, itemIndex) => {
                           const Icon = item.icon;
                           return (
@@ -361,14 +425,17 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                                 item.onClick();
                                 setActiveDropdown(null);
                               }}
-                              className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
+                              className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
                             >
-                              <div className="flex-shrink-0 w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                                <Icon className="w-5 h-5 text-white/90" weight="regular" />
+                              <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
+                                <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200">
+                                <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
                                   {item.label}
+                                </p>
+                                <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
+                                  {item.description}
                                 </p>
                               </div>
                             </button>
@@ -381,10 +448,10 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                   <div className="flex-1">
                     {/* Support and Community */}
                     <div>
-                      <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-3">
+                      <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
                         {resourcesMenuData[1].category}
                       </h3>
-                      <div className="space-y-1">
+                      <div className="space-y-0.5">
                         {resourcesMenuData[1].items.map((item, itemIndex) => {
                           const Icon = item.icon;
                           return (
@@ -394,14 +461,17 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                                 item.onClick();
                                 setActiveDropdown(null);
                               }}
-                              className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
+                              className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
                             >
-                              <div className="flex-shrink-0 w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                                <Icon className="w-5 h-5 text-white/90" weight="regular" />
+                              <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
+                                <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200">
+                                <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
                                   {item.label}
+                                </p>
+                                <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
+                                  {item.description}
                                 </p>
                               </div>
                             </button>
@@ -413,11 +483,11 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                 </div>
               </div>
             ) : activeDropdown === 'company' ? (
-              <div className="p-6">
-                <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-3 text-center">
+              <div className="p-5">
+                <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
                   Company
                 </h3>
-                <div className="grid grid-cols-2 gap-x-8 gap-y-2 max-w-2xl mx-auto">
+                <div className="grid grid-cols-2 gap-x-6 gap-y-0.5 max-w-2xl">
                   {companyMenuData.map((item, itemIndex) => {
                     const Icon = item.icon;
                     return (
@@ -427,14 +497,50 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                           item.onClick();
                           setActiveDropdown(null);
                         }}
-                        className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
+                        className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
                       >
-                        <div className="flex-shrink-0 w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                          <Icon className="w-5 h-5 text-white/90" weight="regular" />
+                        <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
+                          <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200">
+                          <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
                             {item.label}
+                          </p>
+                          <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
+                            {item.description}
+                          </p>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : activeDropdown === 'solutions' ? (
+              <div className="p-5">
+                <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
+                  Solutions
+                </h3>
+                <div className="grid grid-cols-2 gap-x-6 gap-y-0.5 max-w-3xl">
+                  {solutionsMenuData.map((item, itemIndex) => {
+                    const Icon = item.icon;
+                    return (
+                      <button
+                        key={itemIndex}
+                        onClick={() => {
+                          item.onClick();
+                          setActiveDropdown(null);
+                        }}
+                        className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
+                      >
+                        <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
+                          <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
+                            {item.label}
+                          </p>
+                          <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
+                            {item.description}
                           </p>
                         </div>
                       </button>
