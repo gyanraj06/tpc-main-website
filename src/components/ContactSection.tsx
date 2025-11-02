@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import flexibleBg from '../assets/flexible-2.png';
 
 const ContactSection = () => {
@@ -9,6 +10,8 @@ const ContactSection = () => {
     email: '',
     message: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -18,9 +21,39 @@ const ContactSection = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setIsLoading(true);
+    setSubmitStatus('idle');
+
+    try {
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message
+      };
+
+      await emailjs.send(
+        'service_vdyohab',
+        'template_y875dyu',
+        templateParams,
+        'Qomz2R7msZcdKQP1b'
+      );
+
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+
+      // Clear success message after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      setSubmitStatus('error');
+
+      // Clear error message after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -114,15 +147,39 @@ const ContactSection = () => {
 
               <button
                 type="submit"
-                className="w-full bg-yellow-400 text-black px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold hover:bg-yellow-300 transition-all duration-200 flex items-center justify-center gap-2 text-sm sm:text-base"
+                disabled={isLoading}
+                className="w-full bg-yellow-400 text-black px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold hover:bg-yellow-300 transition-all duration-200 flex items-center justify-center gap-2 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Submit
-                <div className="w-5 h-5 bg-black rounded-full flex items-center justify-center">
-                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </div>
+                {isLoading ? 'Sending...' : 'Submit'}
+                {!isLoading && (
+                  <div className="w-5 h-5 bg-black rounded-full flex items-center justify-center">
+                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                )}
               </button>
+
+              {/* Success/Error Messages */}
+              {submitStatus === 'success' && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-3 bg-green-500/20 border border-green-500/50 rounded-xl text-green-400 text-sm text-center"
+                >
+                  Message sent successfully! We'll get back to you soon.
+                </motion.div>
+              )}
+
+              {submitStatus === 'error' && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-3 bg-red-500/20 border border-red-500/50 rounded-xl text-red-400 text-sm text-center"
+                >
+                  Failed to send message. Please try again.
+                </motion.div>
+              )}
             </form>
           </motion.div>
         </div>

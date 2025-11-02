@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@phosphor-icons/react": "^2.1.10",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.544.0",

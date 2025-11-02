@@ -6,7 +6,8 @@
       "Bash(npm run typecheck:*)",
       "Bash(npm run dev:*)",
       "Bash(copy \"C:\\Users\\ASUS\\Desktop\\mock.png\" \"c:\\Users\\ASUS\\Desktop\\Codes\\tpc-main-site\\src\\assets\\mock.png\")",
-      "Bash(copy \"C:\\Users\\ASUS\\Downloads\\4 - PC.png\" \"c:\\Users\\ASUS\\Desktop\\Codes\\tpc-main-site\\src\\assets\\4-PC.png\")"
+      "Bash(copy \"C:\\Users\\ASUS\\Downloads\\4 - PC.png\" \"c:\\Users\\ASUS\\Desktop\\Codes\\tpc-main-site\\src\\assets\\4-PC.png\")",
+      "Bash(npm install:*)"
     ],
     "deny": [],
     "ask": []
