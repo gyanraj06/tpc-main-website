@@ -5,6 +5,7 @@ import FeaturesSection from './components/FeaturesSection'
 import AboutSection from './components/AboutSection'
 import FAQSection from './components/FAQSection'
 import ContactSection from './components/ContactSection'
+import NewAppSection from './components/NewAppSection'
 import Footer from './components/Footer'
 import LegalNotice from './pages/LegalNotice'
 import PrivacyPolicy from './pages/PrivacyPolicy'
@@ -30,6 +31,7 @@ function App() {
         <HeroSection />
         <FeaturesSection />
         <AboutSection />
+        <NewAppSection />
         <FAQSection />
         <ContactSection />
       </main>
