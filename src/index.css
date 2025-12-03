@@ -84,6 +84,7 @@ body {
   min-height: 100vh;
   font-family: var(--font-ui);
   background-color: #f4f2ee;
+  overflow-x: hidden;
 }
 
 /* Custom font classes */
@@ -290,4 +291,30 @@ p {
     transparent 2px,
     transparent 160px
   );
+}
+
+/* Pixelated Page Transition */
+.transition-overlay {
+  z-index: 9999;
+  background-color: transparent;
+  display: grid;
+  width: 100%;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none; /* Allow clicks to pass through when transparent */
+}
+
+/* When active (grid visible), block clicks */
+.transition-overlay[style*="display: grid"] {
+  pointer-events: all;
+}
+
+.transition-block {
+  width: 100%;
+  height: 100%;
+  background-color: #0055FF; /* Brand Blue */
 }

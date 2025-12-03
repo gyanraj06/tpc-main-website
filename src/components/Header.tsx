@@ -31,6 +31,7 @@ import {
   Airplane,
   Megaphone
 } from '@phosphor-icons/react';
+import StaggerText from './StaggerText';
 
 interface HeaderProps {
   onNavigateToDemo: () => void;
@@ -220,8 +221,8 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                   className="relative"
                   onMouseEnter={() => setActiveDropdown(id)}
                 >
-                  <button className="font-nav text-base text-white/90 transition-colors duration-200 hover:text-white font-normal focus:outline-none py-2">
-                    {label}
+                  <button className="font-nav text-base text-white/90 transition-colors duration-200 hover:text-white font-normal focus:outline-none py-2 group">
+                    <StaggerText text={label} />
                   </button>
                 </div>
               ))}
@@ -232,7 +233,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
               onClick={onNavigateToDemo}
               className="font-button bg-white hover:bg-gray-100 text-black font-medium px-5 py-2 text-sm rounded-full transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg group"
             >
-              Contact us
+              <StaggerText text="Contact us" />
               <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5">
                 <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path
@@ -617,9 +618,9 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                     scrollToSection(id);
                     setIsOpen(false);
                   }}
-                  className="font-nav block text-base text-white/90 transition-colors hover:text-white py-2 font-normal tracking-wide w-full text-center focus:outline-none"
+                  className="font-nav block text-base text-white/90 transition-colors hover:text-white py-2 font-normal tracking-wide w-full text-center focus:outline-none group"
                 >
-                  {label}
+                  <StaggerText text={label} />
                 </button>
               ))}
             </nav>
@@ -632,7 +633,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
               }}
               className="font-button flex items-center justify-center gap-2 w-full bg-white hover:bg-gray-100 text-black font-medium px-6 py-3 rounded-full transition-all duration-200 group"
             >
-              Contact us
+              <StaggerText text="Contact us" />
               <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5">
                 <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path

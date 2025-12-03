@@ -1,10 +1,8 @@
 import { motion, useAnimation, useMotionValue } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import StaggerButton from './StaggerButton';
-import MaskedTextReveal from './MaskedTextReveal';
-import VideoContainer from './VideoContainer';
 
-const HeroSection = () => {
+const NewHeroSection = () => {
   const marqueeItems = [
     { id: 1, title: 'Event Builder', subtitle: 'Drag & Drop', image: 'https://picsum.photos/seed/event/600/400' },
     { id: 2, title: 'Analytics', subtitle: 'Real-time Data', image: 'https://picsum.photos/seed/analytics/600/400' },
@@ -41,26 +39,26 @@ const HeroSection = () => {
 
   return (
     <section
-      className="relative min-h-screen flex flex-col justify-center items-center bg-transparent pt-32 pb-5 md:pb-8 z-20 overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center items-center bg-transparent pt-32 pb-20 z-20 overflow-hidden"
     >
 
       {/* Main Text Content */}
-      <div className="container-custom mx-auto text-center z-10 mb-12 md:mb-24 px-4">
+      <div className="container-custom mx-auto text-center z-10 mb-24 px-4">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="font-heading text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-medium text-primary tracking-tight mb-4 md:mb-6 leading-[1.1]"
+          className="font-heading text-5xl md:text-7xl lg:text-8xl font-medium text-primary tracking-tight mb-6 leading-[1.1]"
         >
           India's AI-Powered <br className="hidden md:block" />
-          <StaggerButton text="Experience OS" className="text-gray-800 glass-button" />
+          <StaggerButton text="Experience OS " className="text-gray-800" />
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="font-body text-base md:text-xl text-gray-800 max-w-2xl mx-auto leading-relaxed"
+          className="font-body text-lg md:text-xl text-gray-800 max-w-2xl mx-auto leading-relaxed"
         >
           Smart discovery for travelers, Intelligence growth tool for organizers
         </motion.p>
@@ -68,7 +66,7 @@ const HeroSection = () => {
 
       {/* Arch Carousel Container */}
       <div
-        className="w-full relative z-10 h-[400px] md:h-[600px] overflow-hidden"
+        className="w-full relative z-10 h-[600px] overflow-hidden"
         style={{ maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)' }}
       >
         {/* Removed side gradients to prevent overlapping/cutting of cards */}
@@ -79,7 +77,7 @@ const HeroSection = () => {
           'x' animates the track to the left, moving items through the center.
         */}
         <motion.div
-          className="absolute left-1/2 top-4 md:top-10 -ml-[150px]" // Shift left by half card width (300/2)
+          className="absolute left-1/2 top-10 -ml-[150px]" // Shift left by half card width (300/2)
           style={{ x }}
           animate={controls}
         >
@@ -94,17 +92,6 @@ const HeroSection = () => {
           ))}
         </motion.div>
       </div>
-
-      {/* Description Text Below Carousel */}
-      <div className="container-custom mx-auto text-center z-10 mt-8 md:mt-12 px-4 pb-5 md:pb-8 relative">
-        <MaskedTextReveal
-          content="TripPeChalo is the infrastructure layer powering India’s growing experience economy. We make real-world adventures instantly discoverable and bookable for travelers, while giving organisers intelligent, AI-driven tools to operate smoothly and grow revenue with confidence."
-          className="font-body text-lg md:text-2xl lg:text-3xl text-gray-800 max-w-5xl mx-auto leading-tight"
-        />
-      </div>
-
-      {/* Video Container */}
-      <VideoContainer />
     </section>
   );
 };
@@ -160,4 +147,4 @@ const ArchItem = ({ item, index, x, cardWidth }: any) => {
   );
 };
 
-export default HeroSection;
+export default NewHeroSection;

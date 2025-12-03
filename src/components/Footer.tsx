@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -11,17 +10,12 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#F4F2EE] py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+    <footer className="bg-[#F4F2EE] py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative z-50">
       <div className="max-w-6xl mx-auto">
         {/* Main Footer Content */}
         <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 items-start mb-12 sm:mb-16">
           {/* Left Side - Newsletter */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <div className="w-full">
             <h4 className="font-heading text-xl sm:text-2xl font-normal text-gray-900 mb-6 sm:mb-8">
               Sign up for our newsletter
             </h4>
@@ -44,15 +38,11 @@ const Footer = () => {
                 Subscribe
               </button>
             </form>
-          </motion.div>
+          </div>
         </div>
 
         {/* Bottom Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+        <div
           className="border-t border-gray-300 pt-6 sm:pt-8"
         >
           <div className="flex flex-col lg:flex-row mb-12 justify-between items-start lg:items-center gap-6 sm:gap-8">
@@ -155,7 +145,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );

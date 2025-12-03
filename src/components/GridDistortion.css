@@ -1,0 +1,12 @@
+.distortion-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.distortion-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: inherit;
+}
