@@ -79,9 +79,9 @@ const LegalNotice: React.FC = () => {
               <h2 className="text-2xl font-bold text-black mb-4">3. Contact Information</h2>
               <div className="bg-gray-50 rounded-xl p-6">
                 <div className="space-y-3 text-gray-700">
-                  <p><strong>Email:</strong> contact.trippechalo.in@gmail.com</p>
+                  <p><strong>Email:</strong> contact.Trippechalo.in@gmail.com</p>
                   <p><strong>Phone:</strong> +91 9685609494 / +91 9669614697</p>
-                  <p><strong>Customer Support:</strong> contact.trippechalo.in@gmail.com</p>
+                  <p><strong>Customer Support:</strong> contact.Trippechalo.in@gmail.com</p>
                   <p><strong>Business Hours:</strong> Monday to Friday, 9:00 AM to 6:00 PM (IST)</p>
                 </div>
               </div>
@@ -230,7 +230,7 @@ const LegalNotice: React.FC = () => {
                 For any legal inquiries, notices, or concerns regarding this Legal Notice, please contact us:
               </p>
               <div className="bg-gray-50 rounded-xl p-6 mt-4">
-                <p className="text-gray-700"><strong>Legal Department:</strong> contact.trippechalo.in@gmail.com</p>
+                <p className="text-gray-700"><strong>Legal Department:</strong> contact.Trippechalo.in@gmail.com</p>
                 <p className="text-gray-700"><strong>Address:</strong> Spring Valley, Katara Hills, Bhopal</p>
                 <p className="text-gray-700"><strong>Phone:</strong> 9685609494</p>
               </div>

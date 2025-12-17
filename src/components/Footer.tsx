@@ -66,7 +66,7 @@ const Footer = () => {
                   </svg>
                 </a>
                 <a
-                  href="https://www.instagram.com/trippechalo.in/?utm_source=qr#"
+                  href="https://www.instagram.com/Trippechalo.in/?utm_source=qr#"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 flex items-center justify-center text-gray-900 hover:text-blue-600 transition-colors duration-200"
@@ -100,10 +100,10 @@ const Footer = () => {
               {/* Large Email - Responsive sizing */}
               <h1 className="font-heading text-lg sm:text-3xl md:text-4xl lg:text-5xl font-normal text-gray-900 break-all">
                 <a
-                  href="mailto:contact.trippechalo.in@gmail.com"
+                  href="mailto:contact.Trippechalo.in@gmail.com"
                   className="hover:text-blue-600 transition-colors duration-200"
                 >
-                  contact.trippechalo.in@gmail.com
+                  contact.Trippechalo.in@gmail.com
                 </a>
               </h1>
             </div>
@@ -111,7 +111,7 @@ const Footer = () => {
             {/* Right - Copyright (can be added later if needed) */}
             <div className="lg:text-right"></div>
           </div>
-          
+
           {/* Legal */}
           <div className="border-t border-black/20 pt-8">
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6">
@@ -136,11 +136,11 @@ const Footer = () => {
                   Terms & Conditions
                 </Link>
               </div>
-              
+
               {/* Copyright */}
               <div className="text-center sm:text-right">
                 <p className="text-sm text-gray-600 font-body">
-                 © {new Date().getFullYear()} Mounterra. All rights reserved.
+                  © {new Date().getFullYear()} Mounterra. All rights reserved.
                 </p>
               </div>
             </div>

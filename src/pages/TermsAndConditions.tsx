@@ -58,7 +58,7 @@ const TermsAndConditions: React.FC = () => {
             <section>
               <h2 className="text-2xl font-bold text-black mb-4">1. Introduction and Acceptance of Terms</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                Welcome to TrippeChalo. These Terms and Conditions ("Terms") constitute a legally binding agreement governing your access to and use of the TrippeChalo website, our mobile, tablet, and other smart device applications, and all associated services (collectively, the "Platform"). The Platform is owned and operated by Mounterra Innovations LLP, a company incorporated under the laws of India (hereinafter referred to as "TrippeChalo," "the Company," "We," "Us," or "Our").
+                Welcome to Trippechalo. These Terms and Conditions ("Terms") constitute a legally binding agreement governing your access to and use of the Trippechalo website, our mobile, tablet, and other smart device applications, and all associated services (collectively, the "Platform"). The Platform is owned and operated by Mounterra Innovations LLP, a company incorporated under the laws of India (hereinafter referred to as "Trippechalo," "the Company," "We," "Us," or "Our").
               </p>
               <p className="text-gray-700 leading-relaxed mb-4">
                 This document applies to all persons who access or use the Platform, including individuals who discover, browse, or book services ("Users"), and the individuals, businesses, or entities who list, offer, and provide those services ("Vendors"). Users and Vendors are collectively referred to as "You" or "Your."
@@ -68,12 +68,12 @@ const TermsAndConditions: React.FC = () => {
               </p>
 
               <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-6">
-                <h3 className="text-xl font-semibold text-black mb-2">TrippeChalo's Role as a Discovery-First Meta-Search Platform and Intermediary</h3>
+                <h3 className="text-xl font-semibold text-black mb-2">Trippechalo's Role as a Discovery-First Meta-Search Platform and Intermediary</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
-                  It is imperative to understand the fundamental role of TrippeChalo. The Platform is a technology-driven, discovery-first meta-search and aggregation service. Our primary function is to act as a neutral facilitator, connecting Users with a diverse range of third-party Vendors who are the independent providers of treks, adventure activities, hyperlocal events, eco-friendly travel experiences, and other related services ("Services").
+                  It is imperative to understand the fundamental role of Trippechalo. The Platform is a technology-driven, discovery-first meta-search and aggregation service. Our primary function is to act as a neutral facilitator, connecting Users with a diverse range of third-party Vendors who are the independent providers of treks, adventure activities, hyperlocal events, eco-friendly travel experiences, and other related services ("Services").
                 </p>
                 <p className="text-gray-700 leading-relaxed">
-                  TrippeChalo is an "intermediary" as defined under India's Information Technology Act, 2000, and its associated rules. Our role is strictly limited to:
+                  Trippechalo is an "intermediary" as defined under India's Information Technology Act, 2000, and its associated rules. Our role is strictly limited to:
                 </p>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4 mt-3">
                   <li>Providing a digital marketplace for Vendors to list and promote their Services.</li>
@@ -83,11 +83,11 @@ const TermsAndConditions: React.FC = () => {
               </div>
             </section>
 
-            {/* Scope of TrippeChalo Services */}
+            {/* Scope of Trippechalo Services */}
             <section>
-              <h2 className="text-2xl font-bold text-black mb-4">2. Scope of TrippeChalo Services</h2>
+              <h2 className="text-2xl font-bold text-black mb-4">2. Scope of Trippechalo Services</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                The services provided by TrippeChalo through the Platform are limited to making available a curated online marketplace and technology platform. Our scope of services includes:
+                The services provided by Trippechalo through the Platform are limited to making available a curated online marketplace and technology platform. Our scope of services includes:
               </p>
               <ul className="list-disc list-inside space-y-3 text-gray-700 ml-4 mb-6">
                 <li><strong>Discovery and Curation:</strong> We provide a platform where Vendors can showcase their curated experiences, and Users can discover unique and hyperlocal travel opportunities.</li>
@@ -98,12 +98,12 @@ const TermsAndConditions: React.FC = () => {
               <div className="bg-red-50 border-l-4 border-red-400 p-4 my-6">
                 <h3 className="text-xl font-semibold text-black mb-2">Explicit Disclaimers on Scope of Services</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
-                  To avoid any ambiguity, you explicitly acknowledge and agree that TrippeChalo:
+                  To avoid any ambiguity, you explicitly acknowledge and agree that Trippechalo:
                 </p>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-                  <li><strong>Does Not Provide Travel Services:</strong> TrippeChalo does not own, create, sell, resell, provide, control, manage, offer, deliver, or supply any of the Services listed on the Platform.</li>
-                  <li><strong>Is Not an Agent:</strong> TrippeChalo is not and does not act as an agent in any capacity for any User or Vendor, except for the limited and specified purpose of acting as a payment collection agent.</li>
-                  <li><strong>Does Not Guarantee Vendor Offerings:</strong> TrippeChalo has no control over and does not guarantee the existence, quality, safety, suitability, legality, or appropriateness of any Vendor's listing or Service.</li>
+                  <li><strong>Does Not Provide Travel Services:</strong> Trippechalo does not own, create, sell, resell, provide, control, manage, offer, deliver, or supply any of the Services listed on the Platform.</li>
+                  <li><strong>Is Not an Agent:</strong> Trippechalo is not and does not act as an agent in any capacity for any User or Vendor, except for the limited and specified purpose of acting as a payment collection agent.</li>
+                  <li><strong>Does Not Guarantee Vendor Offerings:</strong> Trippechalo has no control over and does not guarantee the existence, quality, safety, suitability, legality, or appropriateness of any Vendor's listing or Service.</li>
                 </ul>
               </div>
             </section>
@@ -116,7 +116,7 @@ const TermsAndConditions: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-semibold text-black mb-2">Eligibility to Use</h3>
                   <p className="text-gray-700 leading-relaxed">
-                    Use of the TrippeChalo Platform is restricted to individuals and entities who are legally competent to enter into binding contracts under the Indian Contract Act, 1872. To access and use the Platform or register a TrippeChalo account, you must be an individual who is at least 18 years of age or a duly organized, validly existing business, organization, or other legal entity in good standing under the laws of the country you are established in.
+                    Use of the Trippechalo Platform is restricted to individuals and entities who are legally competent to enter into binding contracts under the Indian Contract Act, 1872. To access and use the Platform or register a Trippechalo account, you must be an individual who is at least 18 years of age or a duly organized, validly existing business, organization, or other legal entity in good standing under the laws of the country you are established in.
                   </p>
                 </div>
 
@@ -140,7 +140,7 @@ const TermsAndConditions: React.FC = () => {
             <div className="bg-blue-50 rounded-xl p-6 mb-8 mt-12">
               <h2 className="text-3xl font-bold text-blue-800 mb-2">PART II: OBLIGATIONS OF PLATFORM PARTICIPANTS</h2>
               <p className="text-blue-700">
-                To ensure a transparent, safe, and efficient marketplace, the responsibilities of each party—the User, the Vendor, and TrippeChalo—are clearly defined.
+                To ensure a transparent, safe, and efficient marketplace, the responsibilities of each party—the User, the Vendor, and Trippechalo—are clearly defined.
               </p>
             </div>
 
@@ -153,7 +153,7 @@ const TermsAndConditions: React.FC = () => {
                     <tr className="bg-gray-50">
                       <th className="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-900">The User (Consumer)</th>
                       <th className="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-900">The Vendor (Service Provider)</th>
-                      <th className="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-900">TrippeChalo (The Platform)</th>
+                      <th className="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-900">Trippechalo (The Platform)</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -191,7 +191,7 @@ const TermsAndConditions: React.FC = () => {
             <section>
               <h2 className="text-2xl font-bold text-black mb-4">4. User Responsibilities</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                As a User of the TrippeChalo Platform, you agree to adhere to the following responsibilities:
+                As a User of the Trippechalo Platform, you agree to adhere to the following responsibilities:
               </p>
               <ul className="list-disc list-inside space-y-3 text-gray-700 ml-4">
                 <li><strong>Accuracy of Information:</strong> You are solely responsible for providing accurate, complete, and current information for yourself and all other participants included in a booking.</li>
@@ -206,7 +206,7 @@ const TermsAndConditions: React.FC = () => {
             <section>
               <h2 className="text-2xl font-bold text-black mb-4">5. Vendor Responsibilities</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                As a Vendor listing your Services on the TrippeChalo Platform, you agree to the following responsibilities:
+                As a Vendor listing your Services on the Trippechalo Platform, you agree to the following responsibilities:
               </p>
               <ul className="list-disc list-inside space-y-3 text-gray-700 ml-4">
                 <li><strong>Authenticity and Accuracy of Listings:</strong> You represent and warrant that all information you provide in your listings is accurate, complete, current, and not misleading in any way.</li>
@@ -220,7 +220,7 @@ const TermsAndConditions: React.FC = () => {
             <section>
               <h2 className="text-2xl font-bold text-black mb-4">6. Prohibited Activities</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                All Users and Vendors are strictly prohibited from using the TrippeChalo Platform to engage in any of the following activities:
+                All Users and Vendors are strictly prohibited from using the Trippechalo Platform to engage in any of the following activities:
               </p>
               <div className="space-y-4">
                 <div>
@@ -250,7 +250,7 @@ const TermsAndConditions: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-semibold text-black mb-2">The Booking Process</h3>
                   <p className="text-gray-700 leading-relaxed">
-                    When a User completes the checkout process for a Service on the Platform, it constitutes an offer to purchase that Service from the Vendor. A booking is considered confirmed only when the User receives a booking confirmation email, voucher, or similar notification from TrippeChalo on behalf of the Vendor.
+                    When a User completes the checkout process for a Service on the Platform, it constitutes an offer to purchase that Service from the Vendor. A booking is considered confirmed only when the User receives a booking confirmation email, voucher, or similar notification from Trippechalo on behalf of the Vendor.
                   </p>
                 </div>
                 <div>
@@ -273,9 +273,9 @@ const TermsAndConditions: React.FC = () => {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-black mb-2">TrippeChalo's Limited Role in Refunds</h3>
+                  <h3 className="text-xl font-semibold text-black mb-2">Trippechalo's Limited Role in Refunds</h3>
                   <p className="text-gray-700 leading-relaxed">
-                    TrippeChalo's role in the refund process is that of a facilitator. Once a refund is approved by the Vendor in accordance with their policy, TrippeChalo will credit the refund to the User's original mode of payment within 7-14 business days after the funds have been successfully received by us from the Vendor.
+                    Trippechalo's role in the refund process is that of a facilitator. Once a refund is approved by the Vendor in accordance with their policy, Trippechalo will credit the refund to the User's original mode of payment within 7-14 business days after the funds have been successfully received by us from the Vendor.
                   </p>
                 </div>
               </div>
@@ -288,13 +288,13 @@ const TermsAndConditions: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-semibold text-black mb-2">Platform Provided "As Is"</h3>
                   <p className="text-gray-700 leading-relaxed">
-                    You expressly agree that your use of the TrippeChalo Platform is at your sole risk. The Platform and all services, content, and information made available through it are provided on an "as is" and "as available" basis, without warranties of any kind, either express or implied.
+                    You expressly agree that your use of the Trippechalo Platform is at your sole risk. The Platform and all services, content, and information made available through it are provided on an "as is" and "as available" basis, without warranties of any kind, either express or implied.
                   </p>
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-black mb-2">Exclusion of Liability</h3>
                   <p className="text-gray-700 leading-relaxed">
-                    To the fullest extent permissible under applicable law, TrippeChalo, including its affiliates, officers, directors, employees, and agents, shall not be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising out of or in connection with personal injury, property damage, vendor acts or omissions, service disruptions, platform use, or user/vendor disputes.
+                    To the fullest extent permissible under applicable law, Trippechalo, including its affiliates, officers, directors, employees, and agents, shall not be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising out of or in connection with personal injury, property damage, vendor acts or omissions, service disruptions, platform use, or user/vendor disputes.
                   </p>
                 </div>
               </div>
@@ -329,7 +329,7 @@ const TermsAndConditions: React.FC = () => {
                     For general inquiries, customer support, or assistance with bookings, please contact us at:
                   </p>
                   <div className="bg-gray-50 rounded-xl p-6">
-                    <p className="text-gray-700"><strong>Email:</strong> contact.trippechalo.in@gmail.com</p>
+                    <p className="text-gray-700"><strong>Email:</strong> contact.Trippechalo.in@gmail.com</p>
                     <p className="text-gray-700"><strong>Phone:</strong> +91 9685609494 / +91 9669614697</p>
                     <p className="text-gray-700"><strong>Address:</strong> Spring Valley, Katara Hills, Bhopal</p>
                   </div>
@@ -341,7 +341,7 @@ const TermsAndConditions: React.FC = () => {
                     In compliance with the Information Technology Act, 2000, and the Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021, we have appointed a Grievance Officer to address any grievances or complaints from users regarding a breach of these Terms, the Privacy Policy, or any other matter related to the use of the Platform.
                   </p>
                   <div className="bg-gray-50 rounded-xl p-6">
-                    <p className="text-gray-700"><strong>Email:</strong> contact.trippechalo.in@gmail.com</p>
+                    <p className="text-gray-700"><strong>Email:</strong> contact.Trippechalo.in@gmail.com</p>
                     <p className="text-gray-700"><strong>Address:</strong> Spring Valley, Katara Hills, Bhopal</p>
                     <p className="text-gray-700"><strong>Phone:</strong> 9685609494</p>
                   </div>

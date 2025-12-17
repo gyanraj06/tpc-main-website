@@ -3,9 +3,9 @@ import Header from './components/Header'
 import LegacyHeroSection from './components/LegacyHeroSection'
 import HeroSection from './components/HeroSection'
 import FeaturesSection from './components/FeaturesSection'
-import AboutSection from './components/AboutSection'
+
 import FAQSection from './components/FAQSection'
-import ContactSection from './components/ContactSection'
+
 import NewAppSection from './components/NewAppSection'
 import Footer from './components/Footer'
 import LegalNotice from './pages/LegalNotice'
@@ -45,8 +45,6 @@ function App() {
         <FAQSection />
         <FeaturesSection />
         <NewAppSection />
-        <AboutSection />
-        <ContactSection />
       </main>
     </>
   )

@@ -25,12 +25,12 @@ const LegacyHeroSection = () => {
   };
 
   return (
-    <section 
-      id="hero" 
-      className="relative pt-12 sm:pt-28 md:pt-32 pb-4 sm:pb-8 md:pb-4 lg:pb-16 overflow-hidden bg-transparent"
+    <section
+      id="hero"
+      className="relative pt-12 sm:pt-28 md:pt-32 pb-4 sm:pb-8 md:pb-4 lg:pb-8 overflow-hidden bg-transparent"
     >
       {/* PNG Overlay - Fixed Position for Seamless Background */}
-      <div 
+      <div
         className="fixed inset-0 opacity-100 -z-10"
         style={{
           backgroundImage: `url(${defaultBg})`,
@@ -39,11 +39,11 @@ const LegacyHeroSection = () => {
           backgroundRepeat: 'no-repeat'
         }}
       ></div>
-      
+
       {/* Main Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 items-center gap-8 lg:gap-12">
-          
+
           {/* Left Content */}
           <motion.div
             variants={staggerContainer}
@@ -70,7 +70,7 @@ const LegacyHeroSection = () => {
               className="flex flex-row gap-3 sm:gap-4 mb-12 sm:mb-16"
             >
               <a
-                href="https://vendor.trippechalo.in/"
+                href="https://vendor.Trippechalo.in/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-black text-white px-6 py-3 rounded-full font-normal text-xs hover:bg-gray-800 transition-all duration-200 flex items-center gap-1.5 justify-center group flex-1 sm:flex-none"
@@ -95,9 +95,9 @@ const LegacyHeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex justify-center items-center h-full order-1 lg:order-2"
           >
-            <img 
-              src={heroComponent} 
-              alt="UI Hero Component" 
+            <img
+              src={heroComponent}
+              alt="UI Hero Component"
               className="w-full h-auto max-w-lg sm:max-w-xl lg:max-w-2xl"
             />
           </motion.div>

@@ -8,6 +8,10 @@ import analyticsImg from '../assets/Analytics.png';
 import counterBookingImg from '../assets/Counter Booking.png';
 import flexibleImg from '../assets/flexible.png';
 import DemoModal from './DemoModal';
+import WhyChooseUs from './WhyChooseUs';
+import BusyworkGrid from './BusyworkGrid';
+import { TextGenerateEffect } from './TextGenerateEffect';
+import WhoWeBuiltFor from './WhoWeBuiltFor';
 
 const FeaturesSection = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -103,7 +107,7 @@ const FeaturesSection = () => {
     <div className="py-0 md:py-2 space-y-12">
       {/* Products Section - Grovia Style */}
       {/* Settlement & Payout Transparency */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 sm:mt-32 md:mt-48">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-12 md:mt-16">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -150,9 +154,10 @@ const FeaturesSection = () => {
                   y: 50
                 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -8 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
-                className="bg-white/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-gray-200/50 shadow-lg h-full"
+                className="bg-white/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-gray-200/50 shadow-lg hover:shadow-2xl hover:bg-white hover:border-blue-100 transition-all duration-300 h-full cursor-default"
               >
                 {/* Author Info - Name/Title and Avatar at top */}
                 <div className="flex items-center justify-between mb-6">
@@ -197,7 +202,7 @@ const FeaturesSection = () => {
         </div>
       </section>
 
-      <section id="products" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 md:pt-16 pb-16 sm:pb-24 md:pb-32">
+      <section id="products" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 md:pt-16 pb-8 sm:pb-12 md:pb-16">
         <motion.div
           variants={staggerContainer}
           initial="initial"
@@ -284,117 +289,135 @@ const FeaturesSection = () => {
         </div>
       </section>
 
+      {/* Why Choose Us Section */}
+      <WhyChooseUs />
+
       {/* Flexible Pricing Section */}
-      <section id="pricing" className="py-12 sm:py-16 md:py-24">
-        <div className="mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            className="relative bg-cover bg-center bg-no-repeat rounded-2xl sm:rounded-3xl overflow-hidden"
-            style={{
-              backgroundImage: `url(${flexibleImg})`
-            }}
-          >
-            {/* Dark overlay to ensure text readability */}
-            <div className="absolute inset-0 bg-black/50"></div>
+      {false && (
+        <section id="pricing" className="py-8 sm:py-12 md:py-16">
+          <div className="mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+              className="relative bg-cover bg-center bg-no-repeat rounded-2xl sm:rounded-3xl overflow-hidden"
+              style={{
+                backgroundImage: `url(${flexibleImg})`
+              }}
+            >
+              {/* Dark overlay to ensure text readability */}
+              <div className="absolute inset-0 bg-black/50"></div>
 
-            <div className="relative z-10 px-6 sm:px-8 py-12 sm:py-16 lg:px-16 max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-5 gap-8 sm:gap-12 lg:gap-16 items-start">
-                {/* Left Side - Pricing Plans */}
-                <div className="lg:col-span-2">
-                  <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal text-white mb-8 sm:mb-12">
-                    Flexible pricing
-                  </h2>
-
-                  <div className="space-y-3">
-                    {pricingPlans.map((plan, index) => (
-                      <div
-                        key={plan.id}
-                        onClick={() => setActivePricingPlan(index)}
-                        className={`backdrop-blur-sm rounded-xl p-4 sm:p-5 cursor-pointer transition-all duration-200 ${activePricingPlan === index
-                          ? 'bg-white/20'
-                          : 'bg-white/5 hover:bg-white/10'
-                          }`}
-                      >
-                        <div className="flex justify-between items-center">
-                          <div>
-                            <h3 className="font-heading text-base sm:text-lg font-medium text-white mb-1">
-                              {plan.name}
-                            </h3>
-                            <p className={`font-heading text-xs sm:text-sm ${activePricingPlan === index ? 'text-white/80' : 'text-white/60'
-                              }`}>
-                              {plan.subtitle}
-                            </p>
-                          </div>
-                          <div className={`w-5 h-5 border-2 rounded-full flex items-center justify-center ${activePricingPlan === index
-                            ? 'border-white'
-                            : 'border-white/30'
-                            }`}>
-                            {activePricingPlan === index && (
-                              <div className="w-2 h-2 bg-white rounded-full"></div>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                </div>
-
-                {/* Right Side - Detailed Pricing Card - More Responsive */}
-                <div className="lg:col-span-3">
-                  <motion.div
-                    key={activePricingPlan}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="bg-white/10 backdrop-blur-md rounded-2xl p-6 sm:p-8 shadow-xl max-w-md mx-auto lg:mx-0"
-                  >
-                    <div className="flex items-center gap-2 mb-6">
-                      <div className="w-4 h-4 bg-yellow-400 rounded-sm"></div>
-                      <span className="text-white font-heading text-base sm:text-lg font-medium">
-                        {pricingPlans[activePricingPlan].name}
-                      </span>
-                    </div>
-
-                    <div className="mb-2">
-                      <span className="text-3xl sm:text-4xl font-heading font-bold text-white">
-                        {pricingPlans[activePricingPlan].price}
-                      </span>
-                      <span className="text-white/60 font-heading text-base sm:text-lg">/mo</span>
-                    </div>
-
-                    <p className="text-white/70 text-sm leading-relaxed mb-6 sm:mb-8">
-                      {pricingPlans[activePricingPlan].description}
-                    </p>
-
-                    <button
-                      onClick={() => setIsDemoModalOpen(true)}
-                      className="w-full bg-yellow-400 text-black px-6 py-3 rounded-xl font-semibold hover:bg-yellow-300 transition-all duration-200 mb-6 sm:mb-8 flex items-center justify-center gap-2"
-                    >
-                      Schedule a demo
-                      <div className="w-5 h-5 bg-black rounded-full flex items-center justify-center">
-                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                    </button>
+              <div className="relative z-10 px-6 sm:px-8 py-12 sm:py-16 lg:px-16 max-w-6xl mx-auto">
+                <div className="grid lg:grid-cols-5 gap-8 sm:gap-12 lg:gap-16 items-start">
+                  {/* Left Side - Pricing Plans */}
+                  <div className="lg:col-span-2">
+                    <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal text-white mb-8 sm:mb-12">
+                      Flexible pricing
+                    </h2>
 
                     <div className="space-y-3">
-                      {pricingPlans[activePricingPlan].features.map((feature, index) => (
-                        <div key={index} className="flex items-center gap-3">
-                          <svg className="w-4 h-4 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                          </svg>
-                          <span className="text-white/90 font-heading text-xs sm:text-sm">{feature}</span>
+                      {pricingPlans.map((plan, index) => (
+                        <div
+                          key={plan.id}
+                          onClick={() => setActivePricingPlan(index)}
+                          className={`backdrop-blur-sm rounded-xl p-4 sm:p-5 cursor-pointer transition-all duration-200 ${activePricingPlan === index
+                            ? 'bg-white/20'
+                            : 'bg-white/5 hover:bg-white/10'
+                            }`}
+                        >
+                          <div className="flex justify-between items-center">
+                            <div>
+                              <h3 className="font-heading text-base sm:text-lg font-medium text-white mb-1">
+                                {plan.name}
+                              </h3>
+                              <p className={`font-heading text-xs sm:text-sm ${activePricingPlan === index ? 'text-white/80' : 'text-white/60'
+                                }`}>
+                                {plan.subtitle}
+                              </p>
+                            </div>
+                            <div className={`w-5 h-5 border-2 rounded-full flex items-center justify-center ${activePricingPlan === index
+                              ? 'border-white'
+                              : 'border-white/30'
+                              }`}>
+                              {activePricingPlan === index && (
+                                <div className="w-2 h-2 bg-white rounded-full"></div>
+                              )}
+                            </div>
+                          </div>
                         </div>
                       ))}
                     </div>
-                  </motion.div>
+
+                  </div>
+
+                  {/* Right Side - Detailed Pricing Card - More Responsive */}
+                  <div className="lg:col-span-3">
+                    <motion.div
+                      key={activePricingPlan}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="bg-white/10 backdrop-blur-md rounded-2xl p-6 sm:p-8 shadow-xl max-w-md mx-auto lg:mx-0"
+                    >
+                      <div className="flex items-center gap-2 mb-6">
+                        <div className="w-4 h-4 bg-yellow-400 rounded-sm"></div>
+                        <span className="text-white font-heading text-base sm:text-lg font-medium">
+                          {pricingPlans[activePricingPlan].name}
+                        </span>
+                      </div>
+
+                      <div className="mb-2">
+                        <span className="text-3xl sm:text-4xl font-heading font-bold text-white">
+                          {pricingPlans[activePricingPlan].price}
+                        </span>
+                        <span className="text-white/60 font-heading text-base sm:text-lg">/mo</span>
+                      </div>
+
+                      <p className="text-white/70 text-sm leading-relaxed mb-6 sm:mb-8">
+                        {pricingPlans[activePricingPlan].description}
+                      </p>
+
+                      <button
+                        onClick={() => setIsDemoModalOpen(true)}
+                        className="w-full bg-yellow-400 text-black px-6 py-3 rounded-xl font-semibold hover:bg-yellow-300 transition-all duration-200 mb-6 sm:mb-8 flex items-center justify-center gap-2"
+                      >
+                        Schedule a demo
+                        <div className="w-5 h-5 bg-black rounded-full flex items-center justify-center">
+                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                      </button>
+
+                      <div className="space-y-3">
+                        {pricingPlans[activePricingPlan].features.map((feature, index) => (
+                          <div key={index} className="flex items-center gap-3">
+                            <svg className="w-4 h-4 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                            <span className="text-white/90 font-heading text-xs sm:text-sm">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </section>
+      )}
+
+      {/* Busywork Grid Section */}
+      <BusyworkGrid />
+
+      {/* Text Generate Effect Section */}
+      <section className="py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <TextGenerateEffect words="Trippechalo removes 80% of the manual work so you can focus 100% on creating unforgettable experiences." />
         </div>
       </section>
+
+      {/* Who We Built For Section */}
+      <WhoWeBuiltFor />
 
       {/* Demo Modal */}
       <DemoModal

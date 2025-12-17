@@ -67,10 +67,10 @@ const ContactSection = () => {
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/60 rounded-2xl sm:rounded-3xl"></div>
       </div>
-      
+
       <div className="relative z-10 max-w-6xl mx-auto px-8 sm:px-6 lg:px-12 xl:px-8">
         <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 items-center">
-          
+
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -82,14 +82,14 @@ const ContactSection = () => {
             <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal text-white mb-4 sm:mb-6">
               Start your journey
             </h2>
-            
+
             <p className="font-body text-base sm:text-lg text-white/80 leading-relaxed mb-8 sm:mb-12">
               Let's start building something great together.
             </p>
 
             {/* Contact Info */}
             <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-              <p className="text-white/90 text-base sm:text-lg break-words">contact.trippechalo.in@gmail.com</p>
+              <p className="text-white/90 text-base sm:text-lg break-words">contact.Trippechalo.in@gmail.com</p>
             </div>
 
           </motion.div>

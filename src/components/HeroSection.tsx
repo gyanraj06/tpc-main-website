@@ -98,7 +98,7 @@ const HeroSection = () => {
       {/* Description Text Below Carousel */}
       <div className="container-custom mx-auto text-center z-10 mt-8 md:mt-12 px-4 pb-5 md:pb-8 relative">
         <MaskedTextReveal
-          content="TripPeChalo is the infrastructure layer powering India’s growing experience economy. We make real-world adventures instantly discoverable and bookable for travelers, while giving organisers intelligent, AI-driven tools to operate smoothly and grow revenue with confidence."
+          content="Trippechalo is the infrastructure layer powering India’s growing experience economy. We make real-world adventures instantly discoverable and bookable for travelers, while giving organisers intelligent, AI-driven tools to operate smoothly and grow revenue with confidence."
           className="font-body text-lg md:text-2xl lg:text-3xl text-gray-800 max-w-5xl mx-auto leading-tight"
         />
       </div>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://company.trippechalo.in/sitemap.xml
+Sitemap: https://company.Trippechalo.in/sitemap.xml
