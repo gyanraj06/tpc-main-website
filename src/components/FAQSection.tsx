@@ -70,7 +70,7 @@ const FAQSection = () => {
                 Vendor & Brand Ecosystem
               </h3>
               <p className="font-body text-gray-200 text-sm sm:text-base leading-relaxed font-medium">
-                Discover partners instantly, manage collaborations, and unlock sponsorships with AI-driven matchmaking that connects you to the right brands and vendors—without the manual chase.
+                Discover partners instantly, manage collaborations, and unlock sponsorships with AI-driven matchmaking that connects you to the right brands and vendors-without the manual chase.
               </p>
             </div>
           </div>

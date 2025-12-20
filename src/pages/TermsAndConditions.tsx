@@ -140,7 +140,7 @@ const TermsAndConditions: React.FC = () => {
             <div className="bg-blue-50 rounded-xl p-6 mb-8 mt-12">
               <h2 className="text-3xl font-bold text-blue-800 mb-2">PART II: OBLIGATIONS OF PLATFORM PARTICIPANTS</h2>
               <p className="text-blue-700">
-                To ensure a transparent, safe, and efficient marketplace, the responsibilities of each party—the User, the Vendor, and Trippechalo—are clearly defined.
+                To ensure a transparent, safe, and efficient marketplace, the responsibilities of each party-the User, the Vendor, and Trippechalo-are clearly defined.
               </p>
             </div>
 
@@ -329,7 +329,7 @@ const TermsAndConditions: React.FC = () => {
                     For general inquiries, customer support, or assistance with bookings, please contact us at:
                   </p>
                   <div className="bg-gray-50 rounded-xl p-6">
-                    <p className="text-gray-700"><strong>Email:</strong> contact.Trippechalo.in@gmail.com</p>
+                    <p className="text-gray-700"><strong>Email:</strong> contact@trippechalo.in</p>
                     <p className="text-gray-700"><strong>Phone:</strong> +91 9685609494 / +91 9669614697</p>
                     <p className="text-gray-700"><strong>Address:</strong> Spring Valley, Katara Hills, Bhopal</p>
                   </div>
@@ -341,7 +341,7 @@ const TermsAndConditions: React.FC = () => {
                     In compliance with the Information Technology Act, 2000, and the Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021, we have appointed a Grievance Officer to address any grievances or complaints from users regarding a breach of these Terms, the Privacy Policy, or any other matter related to the use of the Platform.
                   </p>
                   <div className="bg-gray-50 rounded-xl p-6">
-                    <p className="text-gray-700"><strong>Email:</strong> contact.Trippechalo.in@gmail.com</p>
+                    <p className="text-gray-700"><strong>Email:</strong> contact@trippechalo.in</p>
                     <p className="text-gray-700"><strong>Address:</strong> Spring Valley, Katara Hills, Bhopal</p>
                     <p className="text-gray-700"><strong>Phone:</strong> 9685609494</p>
                   </div>

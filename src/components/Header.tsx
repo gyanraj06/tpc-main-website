@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import logoImage from '../assets/LogoImage.jpg';
 import logoWritten from '../assets/LogoWritten.jpg';
 import {
@@ -42,6 +43,8 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const navbarRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // Navigation data
   const navLinks = [
@@ -56,32 +59,32 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
     {
       category: 'Core Experience and Ops',
       items: [
-        { label: 'Easy Experience Setup', description: 'Quick Event Builder', icon: CalendarCheck, onClick: () => scrollToSection('products') },
-        { label: 'Recurring Events', description: 'Automated Event Series', icon: ArrowsClockwise, onClick: () => scrollToSection('products') },
-        { label: 'Vendor Dashboard Panel', description: 'Central Vendor Hub', icon: SquaresFour, onClick: () => scrollToSection('products') },
-        { label: 'Attendee Tracking and Insights', description: 'Live Attendee Data', icon: Users, onClick: () => scrollToSection('products') },
-        { label: 'Custom Registration Form', description: 'Build Custom Forms', icon: Article, onClick: () => scrollToSection('products') },
+        { label: 'Easy Experience Setup', description: 'Quick Event Builder', icon: CalendarCheck, onClick: () => scrollToSection('core-ops') },
+        { label: 'Recurring Events', description: 'Automated Event Series', icon: ArrowsClockwise, onClick: () => scrollToSection('core-ops') },
+        { label: 'Vendor Dashboard Panel', description: 'Central Vendor Hub', icon: SquaresFour, onClick: () => scrollToSection('core-ops') },
+        { label: 'Attendee Tracking and Insights', description: 'Live Attendee Data', icon: Users, onClick: () => scrollToSection('core-ops') },
+        { label: 'Custom Registration Form', description: 'Build Custom Forms', icon: Article, onClick: () => scrollToSection('core-ops') },
       ]
     },
     {
       category: 'Operations and Management',
       items: [
-        { label: 'Smart Ticketing and Payments', description: 'Easy Ticket Sales', icon: Ticket, onClick: () => scrollToSection('products') },
-        { label: 'Reporting and Analytics', description: 'Simple Event Reports', icon: ChartBar, onClick: () => scrollToSection('products') },
-        { label: 'Auto Communication System', description: 'Automatic Email Alerts', icon: ChatCircleDots, onClick: () => scrollToSection('products') },
+        { label: 'Smart Ticketing and Payments', description: 'Easy Ticket Sales', icon: Ticket, onClick: () => scrollToSection('operations-analytics') },
+        { label: 'Reporting and Analytics', description: 'Simple Event Reports', icon: ChartBar, onClick: () => scrollToSection('operations-analytics') },
+        { label: 'Auto Communication System', description: 'Automatic Email Alerts', icon: ChatCircleDots, onClick: () => scrollToSection('operations-analytics') },
       ]
     },
     {
       category: 'Marketing and Growth',
       items: [
-        { label: 'Social Media Management', description: 'Schedule Social Posts', icon: ShareNetwork, onClick: () => scrollToSection('products') },
-        { label: 'Website Builders and Microsites', description: 'Create Event Websites', icon: Globe, onClick: () => scrollToSection('products') },
+        { label: 'Social Media Management', description: 'Schedule Social Posts', icon: ShareNetwork, onClick: () => scrollToSection('marketing-growth') },
+        { label: 'Website Builders and Microsites', description: 'Create Event Websites', icon: Globe, onClick: () => scrollToSection('marketing-growth') },
       ]
     },
     {
       category: 'Vendor and Brand',
       items: [
-        { label: 'Sponsor and Brand Management', description: 'Manage Event Sponsors', icon: Handshake, onClick: () => scrollToSection('products') },
+        { label: 'Sponsor and Brand Management', description: 'Manage Event Sponsors', icon: Handshake, onClick: () => scrollToSection('vendor-brand') },
       ]
     }
   ];
@@ -162,9 +165,38 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
   ];
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    const productSections = ['core-ops', 'recurring-events', 'smart-dashboard', 'registration', 'products', 'operations-analytics', 'marketing-growth', 'vendor-brand']; // Added 'products' as a valid ID for top-level nav
+    const isProductSection = productSections.includes(sectionId);
+
+    const performScroll = () => {
+      if (sectionId === 'products') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    if (isProductSection) {
+      if (location.pathname !== '/products') {
+        if (sectionId === 'products') {
+          navigate('/products');
+        } else {
+          navigate('/products', { state: { scrollTo: sectionId } });
+        }
+      } else {
+        performScroll();
+      }
+    } else {
+      // Assuming other sections are on Home (/)
+      if (location.pathname !== '/') {
+        navigate('/');
+        setTimeout(performScroll, 500);
+      } else {
+        performScroll();
+      }
     }
   };
 
@@ -200,51 +232,54 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
         className={`mx-auto w-fit rounded-full px-8 py-3 ${glassClasses} shadow-[0_4px_25px_rgba(0,0,0,0.25)] hidden lg:block relative z-50`}
         onMouseLeave={() => setActiveDropdown(null)}
       >
-          <div className="flex items-center gap-12">
-            {/* Left Section - Logo */}
-            <button onClick={onNavigateToHome} className="flex items-center">
-              <div
-                className="h-6 w-6 bg-contain bg-no-repeat"
-                style={{ backgroundImage: `url(${logoImage})` }}
-              ></div>
-              <div
-                className="-ml-1 h-6 w-24 bg-contain bg-no-repeat"
-                style={{ backgroundImage: `url(${logoWritten})` }}
-              ></div>
-            </button>
+        <div className="flex items-center gap-12">
+          {/* Left Section - Logo */}
+          <button onClick={onNavigateToHome} className="flex items-center">
+            <div
+              className="h-6 w-6 bg-contain bg-no-repeat"
+              style={{ backgroundImage: `url(${logoImage})` }}
+            ></div>
+            <div
+              className="-ml-1 h-6 w-24 bg-contain bg-no-repeat"
+              style={{ backgroundImage: `url(${logoWritten})` }}
+            ></div>
+          </button>
 
-            {/* Center Section - Navigation Links with Dropdowns */}
-            <div className="flex items-center gap-8">
-              {navLinks.map(({ id, label }) => (
-                <div
-                  key={id}
-                  className="relative"
-                  onMouseEnter={() => setActiveDropdown(id)}
+          {/* Center Section - Navigation Links with Dropdowns */}
+          <div className="flex items-center gap-8">
+            {navLinks.map(({ id, label }) => (
+              <div
+                key={id}
+                className="relative"
+                onMouseEnter={() => setActiveDropdown(id)}
+              >
+                <button
+                  onClick={() => scrollToSection(id)}
+                  className="font-nav text-base text-white/90 transition-colors duration-200 hover:text-white font-normal focus:outline-none py-2 group"
                 >
-                  <button className="font-nav text-base text-white/90 transition-colors duration-200 hover:text-white font-normal focus:outline-none py-2 group">
-                    <StaggerText text={label} />
-                  </button>
-                </div>
-              ))}
-            </div>
-
-            {/* Right Section - CTA Button */}
-            <button
-              onClick={onNavigateToDemo}
-              className="font-button bg-white hover:bg-gray-100 text-black font-medium px-5 py-2 text-sm rounded-full transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg group"
-            >
-              <StaggerText text="Contact us" />
-              <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5">
-                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                  <StaggerText text={label} />
+                </button>
               </div>
-            </button>
+            ))}
           </div>
+
+          {/* Right Section - CTA Button */}
+          <button
+            onClick={onNavigateToDemo}
+            className="font-button bg-white hover:bg-gray-100 text-black font-medium px-5 py-2 text-sm rounded-full transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg group"
+          >
+            <StaggerText text="Contact us" />
+            <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5">
+              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fillRule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
+          </button>
+        </div>
 
         {/* Invisible bridge between navbar and dropdown */}
         {activeDropdown && (
@@ -254,308 +289,307 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
         {/* Dropdown Container - Full Width of Navbar */}
         {activeDropdown && (
           <div
-            className={`absolute top-full left-0 right-0 pt-6 z-50 ${
-              activeDropdown
-                ? 'opacity-100 translate-y-0 visible'
-                : 'opacity-0 -translate-y-2 invisible pointer-events-none'
-            }`}
+            className={`absolute top-full left-0 right-0 pt-6 z-50 ${activeDropdown
+              ? 'opacity-100 translate-y-0 visible'
+              : 'opacity-0 -translate-y-2 invisible pointer-events-none'
+              }`}
             onMouseEnter={() => setActiveDropdown(activeDropdown)}
             onMouseLeave={() => setActiveDropdown(null)}
           >
             <div className={`${glassClasses} rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-300 ease-out`}>
-            {activeDropdown === 'products' ? (
-              <div className="p-5">
-                <div className="flex gap-x-6">
-                  <div className="flex-1 space-y-4">
-                    {/* Core Experience and Ops */}
-                    <div>
-                      <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
-                        {productMenuData[0].category}
-                      </h3>
-                      <div className="space-y-0.5">
-                        {productMenuData[0].items.map((item, itemIndex) => {
-                          const Icon = item.icon;
-                          return (
-                            <button
-                              key={itemIndex}
-                              onClick={() => {
-                                item.onClick();
-                                setActiveDropdown(null);
-                              }}
-                              className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
-                            >
-                              <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                                <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
-                                  {item.label}
-                                </p>
-                                <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
-                                  {item.description}
-                                </p>
-                              </div>
-                            </button>
-                          );
-                        })}
+              {activeDropdown === 'products' ? (
+                <div className="p-5">
+                  <div className="flex gap-x-6">
+                    <div className="flex-1 space-y-4">
+                      {/* Core Experience and Ops */}
+                      <div>
+                        <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
+                          {productMenuData[0].category}
+                        </h3>
+                        <div className="space-y-0.5">
+                          {productMenuData[0].items.map((item, itemIndex) => {
+                            const Icon = item.icon;
+                            return (
+                              <button
+                                key={itemIndex}
+                                onClick={() => {
+                                  item.onClick();
+                                  setActiveDropdown(null);
+                                }}
+                                className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
+                              >
+                                <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
+                                  <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
+                                    {item.label}
+                                  </p>
+                                  <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
+                                    {item.description}
+                                  </p>
+                                </div>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Marketing and Growth */}
+                      <div>
+                        <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
+                          {productMenuData[2].category}
+                        </h3>
+                        <div className="space-y-0.5">
+                          {productMenuData[2].items.map((item, itemIndex) => {
+                            const Icon = item.icon;
+                            return (
+                              <button
+                                key={itemIndex}
+                                onClick={() => {
+                                  item.onClick();
+                                  setActiveDropdown(null);
+                                }}
+                                className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
+                              >
+                                <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
+                                  <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
+                                    {item.label}
+                                  </p>
+                                  <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
+                                    {item.description}
+                                  </p>
+                                </div>
+                              </button>
+                            );
+                          })}
+                        </div>
                       </div>
                     </div>
 
-                    {/* Marketing and Growth */}
-                    <div>
-                      <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
-                        {productMenuData[2].category}
-                      </h3>
-                      <div className="space-y-0.5">
-                        {productMenuData[2].items.map((item, itemIndex) => {
-                          const Icon = item.icon;
-                          return (
-                            <button
-                              key={itemIndex}
-                              onClick={() => {
-                                item.onClick();
-                                setActiveDropdown(null);
-                              }}
-                              className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
-                            >
-                              <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                                <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
-                                  {item.label}
-                                </p>
-                                <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
-                                  {item.description}
-                                </p>
-                              </div>
-                            </button>
-                          );
-                        })}
+                    <div className="flex-1 space-y-4">
+                      {/* Operations and Management */}
+                      <div>
+                        <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
+                          {productMenuData[1].category}
+                        </h3>
+                        <div className="space-y-0.5">
+                          {productMenuData[1].items.map((item, itemIndex) => {
+                            const Icon = item.icon;
+                            return (
+                              <button
+                                key={itemIndex}
+                                onClick={() => {
+                                  item.onClick();
+                                  setActiveDropdown(null);
+                                }}
+                                className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
+                              >
+                                <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
+                                  <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
+                                    {item.label}
+                                  </p>
+                                  <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
+                                    {item.description}
+                                  </p>
+                                </div>
+                              </button>
+                            );
+                          })}
+                        </div>
                       </div>
-                    </div>
-                  </div>
 
-                  <div className="flex-1 space-y-4">
-                    {/* Operations and Management */}
-                    <div>
-                      <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
-                        {productMenuData[1].category}
-                      </h3>
-                      <div className="space-y-0.5">
-                        {productMenuData[1].items.map((item, itemIndex) => {
-                          const Icon = item.icon;
-                          return (
-                            <button
-                              key={itemIndex}
-                              onClick={() => {
-                                item.onClick();
-                                setActiveDropdown(null);
-                              }}
-                              className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
-                            >
-                              <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                                <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
-                                  {item.label}
-                                </p>
-                                <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
-                                  {item.description}
-                                </p>
-                              </div>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    {/* Vendor and Brand */}
-                    <div>
-                      <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
-                        {productMenuData[3].category}
-                      </h3>
-                      <div className="space-y-0.5">
-                        {productMenuData[3].items.map((item, itemIndex) => {
-                          const Icon = item.icon;
-                          return (
-                            <button
-                              key={itemIndex}
-                              onClick={() => {
-                                item.onClick();
-                                setActiveDropdown(null);
-                              }}
-                              className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
-                            >
-                              <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                                <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
-                                  {item.label}
-                                </p>
-                                <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
-                                  {item.description}
-                                </p>
-                              </div>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : activeDropdown === 'resources' ? (
-              <div className="p-5">
-                <div className="flex gap-x-6">
-                  <div className="flex-1">
-                    {/* Learn and Grow */}
-                    <div>
-                      <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
-                        {resourcesMenuData[0].category}
-                      </h3>
-                      <div className="space-y-0.5">
-                        {resourcesMenuData[0].items.map((item, itemIndex) => {
-                          const Icon = item.icon;
-                          return (
-                            <button
-                              key={itemIndex}
-                              onClick={() => {
-                                item.onClick();
-                                setActiveDropdown(null);
-                              }}
-                              className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
-                            >
-                              <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                                <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
-                                  {item.label}
-                                </p>
-                                <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
-                                  {item.description}
-                                </p>
-                              </div>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex-1">
-                    {/* Support and Community */}
-                    <div>
-                      <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
-                        {resourcesMenuData[1].category}
-                      </h3>
-                      <div className="space-y-0.5">
-                        {resourcesMenuData[1].items.map((item, itemIndex) => {
-                          const Icon = item.icon;
-                          return (
-                            <button
-                              key={itemIndex}
-                              onClick={() => {
-                                item.onClick();
-                                setActiveDropdown(null);
-                              }}
-                              className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
-                            >
-                              <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                                <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
-                                  {item.label}
-                                </p>
-                                <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
-                                  {item.description}
-                                </p>
-                              </div>
-                            </button>
-                          );
-                        })}
+                      {/* Vendor and Brand */}
+                      <div>
+                        <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
+                          {productMenuData[3].category}
+                        </h3>
+                        <div className="space-y-0.5">
+                          {productMenuData[3].items.map((item, itemIndex) => {
+                            const Icon = item.icon;
+                            return (
+                              <button
+                                key={itemIndex}
+                                onClick={() => {
+                                  item.onClick();
+                                  setActiveDropdown(null);
+                                }}
+                                className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
+                              >
+                                <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
+                                  <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
+                                    {item.label}
+                                  </p>
+                                  <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
+                                    {item.description}
+                                  </p>
+                                </div>
+                              </button>
+                            );
+                          })}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ) : activeDropdown === 'company' ? (
-              <div className="p-5">
-                <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
-                  Company
-                </h3>
-                <div className="grid grid-cols-2 gap-x-6 gap-y-0.5 max-w-2xl">
-                  {companyMenuData.map((item, itemIndex) => {
-                    const Icon = item.icon;
-                    return (
-                      <button
-                        key={itemIndex}
-                        onClick={() => {
-                          item.onClick();
-                          setActiveDropdown(null);
-                        }}
-                        className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
-                      >
-                        <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                          <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
+              ) : activeDropdown === 'resources' ? (
+                <div className="p-5">
+                  <div className="flex gap-x-6">
+                    <div className="flex-1">
+                      {/* Learn and Grow */}
+                      <div>
+                        <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
+                          {resourcesMenuData[0].category}
+                        </h3>
+                        <div className="space-y-0.5">
+                          {resourcesMenuData[0].items.map((item, itemIndex) => {
+                            const Icon = item.icon;
+                            return (
+                              <button
+                                key={itemIndex}
+                                onClick={() => {
+                                  item.onClick();
+                                  setActiveDropdown(null);
+                                }}
+                                className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
+                              >
+                                <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
+                                  <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
+                                    {item.label}
+                                  </p>
+                                  <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
+                                    {item.description}
+                                  </p>
+                                </div>
+                              </button>
+                            );
+                          })}
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
-                            {item.label}
-                          </p>
-                          <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
-                            {item.description}
-                          </p>
+                      </div>
+                    </div>
+
+                    <div className="flex-1">
+                      {/* Support and Community */}
+                      <div>
+                        <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
+                          {resourcesMenuData[1].category}
+                        </h3>
+                        <div className="space-y-0.5">
+                          {resourcesMenuData[1].items.map((item, itemIndex) => {
+                            const Icon = item.icon;
+                            return (
+                              <button
+                                key={itemIndex}
+                                onClick={() => {
+                                  item.onClick();
+                                  setActiveDropdown(null);
+                                }}
+                                className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
+                              >
+                                <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
+                                  <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
+                                    {item.label}
+                                  </p>
+                                  <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
+                                    {item.description}
+                                  </p>
+                                </div>
+                              </button>
+                            );
+                          })}
                         </div>
-                      </button>
-                    );
-                  })}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ) : activeDropdown === 'solutions' ? (
-              <div className="p-5">
-                <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
-                  Solutions
-                </h3>
-                <div className="grid grid-cols-2 gap-x-6 gap-y-0.5 max-w-3xl">
-                  {solutionsMenuData.map((item, itemIndex) => {
-                    const Icon = item.icon;
-                    return (
-                      <button
-                        key={itemIndex}
-                        onClick={() => {
-                          item.onClick();
-                          setActiveDropdown(null);
-                        }}
-                        className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
-                      >
-                        <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                          <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
-                            {item.label}
-                          </p>
-                          <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
-                            {item.description}
-                          </p>
-                        </div>
-                      </button>
-                    );
-                  })}
+              ) : activeDropdown === 'company' ? (
+                <div className="p-5">
+                  <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
+                    Company
+                  </h3>
+                  <div className="grid grid-cols-2 gap-x-6 gap-y-0.5 max-w-2xl">
+                    {companyMenuData.map((item, itemIndex) => {
+                      const Icon = item.icon;
+                      return (
+                        <button
+                          key={itemIndex}
+                          onClick={() => {
+                            item.onClick();
+                            setActiveDropdown(null);
+                          }}
+                          className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
+                        >
+                          <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
+                            <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
+                              {item.label}
+                            </p>
+                            <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
+                              {item.description}
+                            </p>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div className="p-6">
-                <p className="text-white/70 text-sm text-center">
-                  Content for {navLinks.find(link => link.id === activeDropdown)?.label}
-                </p>
-              </div>
-            )}
+              ) : activeDropdown === 'solutions' ? (
+                <div className="p-5">
+                  <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
+                    Solutions
+                  </h3>
+                  <div className="grid grid-cols-2 gap-x-6 gap-y-0.5 max-w-3xl">
+                    {solutionsMenuData.map((item, itemIndex) => {
+                      const Icon = item.icon;
+                      return (
+                        <button
+                          key={itemIndex}
+                          onClick={() => {
+                            item.onClick();
+                            setActiveDropdown(null);
+                          }}
+                          className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
+                        >
+                          <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
+                            <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
+                              {item.label}
+                            </p>
+                            <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
+                              {item.description}
+                            </p>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : (
+                <div className="p-6">
+                  <p className="text-white/70 text-sm text-center">
+                    Content for {navLinks.find(link => link.id === activeDropdown)?.label}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -602,11 +636,10 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
       {/* Mobile Menu - Dropdown */}
       <div className="lg:hidden relative">
         <div
-          className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-96 max-w-[calc(100vw-1rem)] ${glassClasses} rounded-2xl shadow-xl transition-all duration-500 ease-out z-[60] ${
-            isOpen
-              ? 'opacity-100 translate-y-2 visible scale-100'
-              : 'opacity-0 -translate-y-6 invisible scale-95'
-          }`}
+          className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-96 max-w-[calc(100vw-1rem)] ${glassClasses} rounded-2xl shadow-xl transition-all duration-500 ease-out z-[60] ${isOpen
+            ? 'opacity-100 translate-y-2 visible scale-100'
+            : 'opacity-0 -translate-y-6 invisible scale-95'
+            }`}
         >
           <div className="p-6">
             {/* Navigation Links */}
@@ -650,9 +683,8 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
         {/* Mobile Menu Backdrop */}
         {isOpen && (
           <div
-            className={`fixed inset-0 bg-black/30 z-[50] transition-opacity duration-300 ${
-              isOpen ? 'opacity-100' : 'opacity-0'
-            }`}
+            className={`fixed inset-0 bg-black/30 z-[50] transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'
+              }`}
             onClick={() => setIsOpen(false)}
           />
         )}

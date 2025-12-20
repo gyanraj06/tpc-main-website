@@ -89,7 +89,7 @@ const ContactSection = () => {
 
             {/* Contact Info */}
             <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-              <p className="text-white/90 text-base sm:text-lg break-words">contact.Trippechalo.in@gmail.com</p>
+              <p className="text-white/90 text-base sm:text-lg break-words">contact@trippechalo.in</p>
             </div>
 
           </motion.div>

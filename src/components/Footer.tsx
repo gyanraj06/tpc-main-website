@@ -100,10 +100,10 @@ const Footer = () => {
               {/* Large Email - Responsive sizing */}
               <h1 className="font-heading text-lg sm:text-3xl md:text-4xl lg:text-5xl font-normal text-gray-900 break-all">
                 <a
-                  href="mailto:contact.Trippechalo.in@gmail.com"
+                  href="mailto:contact@trippechalo.in"
                   className="hover:text-blue-600 transition-colors duration-200"
                 >
-                  contact.Trippechalo.in@gmail.com
+                  contact@trippechalo.in
                 </a>
               </h1>
             </div>

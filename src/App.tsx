@@ -16,6 +16,7 @@ import Watermark from './components/Watermark'
 import BookDemo from './pages/BookDemo'
 import PageTransition from './components/PageTransition'
 import CustomCursor from './components/CustomCursor'
+import ProductPage from './pages/ProductPage'
 
 function App() {
   const navigate = useNavigate();
@@ -61,6 +62,7 @@ function App() {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
         <Route path="/book-demo" element={<BookDemo />} />
+        <Route path="/products" element={<ProductPage />} />
       </Routes>
       <Footer />
     </div>
