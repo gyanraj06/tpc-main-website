@@ -5,7 +5,7 @@ const VendorBrand = () => {
         <section className="container-custom py-24" id="vendor-brand">
 
             {/* Unified Tag */}
-            <div className="flex justify-center mb-16">
+            <div className="flex justify-start lg:justify-center mb-16">
                 <span className="px-5 py-2 rounded-full border border-gray-200 bg-white/80 backdrop-blur-sm text-[#5050FF] font-heading font-medium text-sm tracking-widest uppercase shadow-sm">
                     Vendor and Brand
                 </span>

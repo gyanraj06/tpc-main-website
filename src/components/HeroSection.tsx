@@ -18,7 +18,16 @@ const HeroSection = () => {
   // We need enough items so that when one set leaves, another is arriving
   const items = [...marqueeItems, ...marqueeItems, ...marqueeItems];
 
-  const CARD_WIDTH = 300; // Increased width significantly
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const CARD_WIDTH = isMobile ? 240 : 300; // Medium width for mobile
   const TOTAL_WIDTH = items.length * CARD_WIDTH;
 
   // Start from the second set of items (index 6) so we have items on the left
@@ -45,7 +54,7 @@ const HeroSection = () => {
     >
 
       {/* Main Text Content */}
-      <div className="container-custom mx-auto text-center z-10 mb-12 md:mb-24 px-4">
+      <div className="container-custom mx-auto text-center z-10 mb-36 md:mb-24 px-4">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -68,7 +77,7 @@ const HeroSection = () => {
 
       {/* Arch Carousel Container */}
       <div
-        className="w-full relative z-10 h-[400px] md:h-[600px] overflow-hidden"
+        className="w-full relative z-10 h-[260px] md:h-[600px] overflow-hidden mt-10 md:mt-0"
         style={{ maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)' }}
       >
         {/* Removed side gradients to prevent overlapping/cutting of cards */}
@@ -79,8 +88,11 @@ const HeroSection = () => {
           'x' animates the track to the left, moving items through the center.
         */}
         <motion.div
-          className="absolute left-1/2 top-4 md:top-10 -ml-[150px]" // Shift left by half card width (300/2)
-          style={{ x }}
+          className="absolute left-1/2 top-6 md:top-10"
+          style={{
+            x,
+            marginLeft: isMobile ? -120 : -150 // manual offset based on half card width
+          }}
           animate={controls}
         >
           {items.map((item, index) => (
@@ -130,7 +142,7 @@ const ArchItem = ({ item, index, x, cardWidth }: any) => {
 
   return (
     <motion.div
-      className="flex-shrink-0 w-72 h-56 rounded-md overflow-hidden shadow-2xl absolute bg-[#050505] border border-white/10 p-1" // Reduced padding to p-1
+      className="flex-shrink-0 w-56 h-40 md:w-72 md:h-56 rounded-md overflow-hidden shadow-2xl absolute bg-[#050505] border border-white/10 p-1" // Medium size for mobile
       style={{
         left: index * cardWidth, // Initial position
         y: style.y,
@@ -151,7 +163,7 @@ const ArchItem = ({ item, index, x, cardWidth }: any) => {
 
         {/* Footer Section (Bottom 25%) */}
         <div className="h-[25%] w-full bg-[#0a0a0a] flex flex-col justify-center items-start px-3 border-t border-white/5 text-left">
-          <span className="font-heading text-sm font-medium text-gray-200 truncate tracking-wide">
+          <span className="font-heading text-xs md:text-sm font-medium text-gray-200 truncate tracking-wide">
             {item.title}
           </span>
         </div>

@@ -36,7 +36,7 @@ const OperationsAnalytics = () => {
 
     return (
         <section className="container-custom py-24 bg-gray-50/50">
-            <div className="text-center max-w-4xl mx-auto mb-16">
+            <div className="text-left lg:text-center max-w-4xl mx-auto mb-16">
                 <h2 className="font-heading text-4xl lg:text-5xl font-normal text-[#14140F] mb-6 leading-tight">
                     See your entire experience business
                 </h2>
@@ -52,7 +52,7 @@ const OperationsAnalytics = () => {
             </div>
 
             <div className="max-w-6xl mx-auto">
-                <h3 className="font-heading text-3xl font-normal text-center mb-12">Why We're Different</h3>
+                <h3 className="font-heading text-3xl font-normal text-left lg:text-center mb-12">Why We're Different</h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {features.map((feature, i) => (
                         <div key={i} className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">

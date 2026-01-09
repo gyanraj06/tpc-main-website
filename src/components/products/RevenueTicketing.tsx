@@ -44,7 +44,7 @@ const RevenueTicketing = () => {
             </div>
 
             <div className="max-w-6xl mx-auto">
-                <h3 className="font-heading text-3xl font-normal text-center mb-12">Why We're Different</h3>
+                <h3 className="font-heading text-3xl font-normal text-left lg:text-center mb-12">Why We're Different</h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
                     {features.map((feature, i) => (
                         <div key={i} className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">

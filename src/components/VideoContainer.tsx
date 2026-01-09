@@ -27,10 +27,10 @@ const VideoContainer = () => {
   };
 
   return (
-    <div ref={containerRef} className="w-full px-4 md:px-8 lg:px-12 py-2 md:py-6 flex justify-center">
+    <div ref={containerRef} className="w-full px-4 md:px-8 lg:px-12 pt-16 pb-6 md:py-12 flex justify-center">
       <motion.div
         style={{ scale, opacity }}
-        className="relative w-full max-w-[700px] aspect-video rounded-[2rem] overflow-hidden shadow-2xl bg-black group cursor-pointer"
+        className="relative w-[85%] sm:w-[90%] md:w-full max-w-[700px] aspect-video rounded-[2rem] overflow-hidden shadow-2xl bg-black group cursor-pointer"
         onClick={togglePlay}
       >
         {/* YouTube Iframe */}

@@ -3,7 +3,7 @@ import { ChatCircleText, PhoneCall, EnvelopeSimple, Users } from '@phosphor-icon
 const AutoCommunication = () => {
     return (
         <section className="container-custom py-24">
-            <div className="text-center max-w-4xl mx-auto mb-16">
+            <div className="text-left lg:text-center max-w-4xl mx-auto mb-16">
                 <h2 className="font-heading text-4xl lg:text-5xl font-normal text-[#14140F] mb-6 leading-tight">
                     Auto Communication System
                 </h2>

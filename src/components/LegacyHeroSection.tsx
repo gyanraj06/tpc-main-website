@@ -49,7 +49,7 @@ const LegacyHeroSection = () => {
             variants={staggerContainer}
             initial="initial"
             animate="animate"
-            className="order-2 lg:order-1 lg:text-left text-center"
+            className="order-1 lg:text-left text-center"
           >
             <motion.h1
               variants={fadeInUp}
@@ -93,7 +93,7 @@ const LegacyHeroSection = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex justify-center items-center h-full order-1 lg:order-2"
+            className="flex justify-center items-center h-full order-2"
           >
             <img
               src={heroComponent}

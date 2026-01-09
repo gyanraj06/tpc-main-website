@@ -32,7 +32,7 @@ const RecurringEvents = () => {
     return (
         <section className="container-custom">
 
-            <div className="flex justify-center mb-16">
+            <div className="flex justify-start lg:justify-center mb-16">
                 <span className="px-5 py-2 rounded-full border border-gray-200 bg-white/80 backdrop-blur-sm text-[#5050FF] font-heading font-medium text-sm tracking-widest uppercase shadow-sm">
                     Core Experience
                 </span>
@@ -60,7 +60,7 @@ const RecurringEvents = () => {
             </div>
 
             <div className="max-w-6xl mx-auto">
-                <h3 className="font-heading text-3xl font-normal text-center mb-12">Why We're Different</h3>
+                <h3 className="font-heading text-3xl font-normal text-left lg:text-center mb-12">Why We're Different</h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {features.map((feature, i) => (
                         <div key={i} className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">

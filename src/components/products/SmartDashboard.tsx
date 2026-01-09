@@ -26,14 +26,6 @@ const SmartDashboard = () => {
 
     return (
         <section className="container-custom">
-            <div className="text-center max-w-4xl mx-auto mb-16">
-                <h2 className="font-heading text-4xl lg:text-5xl font-normal text-[#14140F] mb-6 leading-tight">
-                    Your Entire Experience Business, Managed From One Smart Dashboard
-                </h2>
-                <p className="font-body text-lg text-[#14140F]/80">
-                    Trippechalo gives organisers a unified command centre to run everything-listings, bookings, payments, marketing, audience data-all in one clean, intelligent interface. No more juggling apps, spreadsheets, or WhatsApp chaos. Just total control, total clarity.
-                </p>
-            </div>
 
             {/* Large Dashboard Image Placeholder */}
             <div className="w-full bg-black rounded-3xl overflow-hidden aspect-video relative mb-24 border border-white/10 shadow-2xl group">
@@ -42,7 +34,7 @@ const SmartDashboard = () => {
             </div>
 
             <div className="max-w-6xl mx-auto">
-                <h3 className="font-heading text-3xl font-normal text-center mb-12">Why We're Different</h3>
+                <h3 className="font-heading text-3xl font-normal text-left lg:text-center mb-12">Why We're Different</h3>
                 <div className="grid md:grid-cols-2 gap-6">
                     {features.map((feature, i) => (
                         <div key={i} className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
@@ -55,7 +47,7 @@ const SmartDashboard = () => {
                     ))}
                 </div>
             </div>
-        </section>
+        </section >
     );
 };
 
