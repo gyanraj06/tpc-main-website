@@ -10,6 +10,7 @@ import OperationsAnalytics from '../components/products/OperationsAnalytics';
 import AutoCommunication from '../components/products/AutoCommunication';
 import MarketingGrowth from '../components/products/MarketingGrowth';
 import VendorBrand from '../components/products/VendorBrand';
+import MobileAccordionSection from '../components/ui/MobileAccordionSection';
 
 const ProductPage = () => {
     const location = useLocation();
@@ -25,7 +26,7 @@ const ProductPage = () => {
                 if (element) {
                     element.scrollIntoView({ behavior: 'smooth' });
                 }
-            }, 300);
+            }, 500);
         } else {
             // Default to top if no specific section requested
             window.scrollTo(0, 0);
@@ -40,42 +41,70 @@ const ProductPage = () => {
             In App.tsx, Header is outside Routes, so it persists. Good. 
         */}
 
-            <main className="pt-24 lg:pt-32 pb-20 space-y-20 lg:space-y-32 overflow-hidden">
-                <div id="core-ops" className="scroll-mt-32 lg:scroll-mt-40">
-                    <ProductHero />
-                </div>
+            <main className="pt-24 lg:pt-32 pb-20 space-y-4 lg:space-y-32 overflow-hidden">
+                {/* Core Experience Group */}
+                <MobileAccordionSection
+                    title="Core Experience"
+                    id="core-group"
+                    childIds={['core-ops', 'recurring-events', 'smart-dashboard', 'registration']}
+                >
+                    <div id="core-ops" className="scroll-mt-32 lg:scroll-mt-40">
+                        <ProductHero />
+                    </div>
 
-                <div id="recurring-events" className="scroll-mt-32 lg:scroll-mt-40">
-                    <RecurringEvents />
-                </div>
+                    <div id="recurring-events" className="scroll-mt-32 lg:scroll-mt-40">
+                        <RecurringEvents />
+                    </div>
 
-                <div id="smart-dashboard" className="scroll-mt-32 lg:scroll-mt-40">
-                    <SmartDashboard />
-                </div>
+                    <div id="smart-dashboard" className="scroll-mt-32 lg:scroll-mt-40">
+                        <SmartDashboard />
+                    </div>
 
-                <div id="registration" className="scroll-mt-32 lg:scroll-mt-40">
-                    <RegistrationFeatures />
-                </div>
+                    <div id="registration" className="scroll-mt-32 lg:scroll-mt-40">
+                        <RegistrationFeatures />
+                    </div>
+                </MobileAccordionSection>
 
-                <div id="revenue-ticketing" className="scroll-mt-32 lg:scroll-mt-40">
-                    <RevenueTicketing />
-                </div>
+                {/* Operations Group */}
+                <MobileAccordionSection
+                    title="Operations and Management"
+                    id="operations-group"
+                    childIds={['revenue-ticketing', 'operations-analytics', 'auto-communication']}
+                >
+                    <div id="revenue-ticketing" className="scroll-mt-32 lg:scroll-mt-40">
+                        <RevenueTicketing />
+                    </div>
 
-                <div id="operations-analytics" className="scroll-mt-32 lg:scroll-mt-40">
-                    <OperationsAnalytics />
-                </div>
+                    <div id="operations-analytics" className="scroll-mt-32 lg:scroll-mt-40">
+                        <OperationsAnalytics />
+                    </div>
 
-                <div id="auto-communication" className="scroll-mt-32 lg:scroll-mt-40">
-                    <AutoCommunication />
-                </div>
+                    <div id="auto-communication" className="scroll-mt-32 lg:scroll-mt-40">
+                        <AutoCommunication />
+                    </div>
+                </MobileAccordionSection>
 
-                <div id="marketing-growth" className="scroll-mt-32 lg:scroll-mt-40">
-                    <MarketingGrowth />
-                </div>
+                {/* Marketing Group */}
+                <MobileAccordionSection
+                    title="Marketing and Growth"
+                    id="marketing-group"
+                    childIds={['marketing-growth']}
+                >
+                    <div id="marketing-growth" className="scroll-mt-32 lg:scroll-mt-40">
+                        <MarketingGrowth />
+                    </div>
+                </MobileAccordionSection>
 
-                <div id="vendor-brand" className="scroll-mt-32 lg:scroll-mt-40">
-                    <VendorBrand />
-                </div>
+                {/* Vendor Group */}
+                <MobileAccordionSection
+                    title="Vendor and Brand"
+                    id="vendor-group"
+                    childIds={['vendor-brand']}
+                >
+                    <div id="vendor-brand" className="scroll-mt-32 lg:scroll-mt-40">
+                        <VendorBrand />
+                    </div>
+                </MobileAccordionSection>
                 {/* CTA handled by Footer or can be added here explicitly if needed */}
             </main>
         </div>

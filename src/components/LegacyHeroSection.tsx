@@ -53,7 +53,7 @@ const LegacyHeroSection = () => {
           >
             <motion.h1
               variants={fadeInUp}
-              className="font-hero text-4xl lg:text-5xl xl:text-6xl font-normal text-gray-900 leading-tight sm:leading-relaxed mb-6 sm:mb-8"
+              className="font-hero text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-normal text-gray-900 leading-tight sm:leading-relaxed mb-6 sm:mb-8"
             >
               Launch Your Experience in <span className="text-blue-600">Minutes, Not Days</span>
             </motion.h1>

@@ -14,7 +14,6 @@ import TermsAndConditions from './pages/TermsAndConditions'
 import './App.css'
 import Watermark from './components/Watermark'
 import BookDemo from './pages/BookDemo'
-import PageTransition from './components/PageTransition'
 import CustomCursor from './components/CustomCursor'
 import ProductPage from './pages/ProductPage'
 
@@ -22,10 +21,7 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const handleScrollToContact = () => {
-    const contactSection = document.getElementById('contact-section');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    navigate('/book-demo');
   }
 
   const handleNavigateToHome = () => {
@@ -53,7 +49,6 @@ function App() {
   return (
     <div className="App min-h-screen">
       <CustomCursor />
-      <PageTransition />
       <Header onNavigateToDemo={handleScrollToContact} onNavigateToHome={handleNavigateToHome} />
       <Watermark />
       <Routes>

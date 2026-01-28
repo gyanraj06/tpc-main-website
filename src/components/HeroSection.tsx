@@ -18,11 +18,15 @@ const HeroSection = () => {
   // We need enough items so that when one set leaves, another is arriving
   const items = [...marqueeItems, ...marqueeItems, ...marqueeItems];
 
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768;
+    }
+    return false;
+  });
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
@@ -50,16 +54,16 @@ const HeroSection = () => {
 
   return (
     <section
-      className="relative min-h-screen flex flex-col justify-center items-center bg-transparent pt-32 pb-5 md:pb-8 z-20 overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center items-center bg-transparent pt-28 md:pt-32 pb-5 md:pb-8 z-20 overflow-hidden"
     >
 
       {/* Main Text Content */}
-      <div className="container-custom mx-auto text-center z-10 mb-36 md:mb-24 px-4">
+      <div className="container-custom mx-auto text-center z-10 mb-16 md:mb-24 px-4">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="font-heading text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-medium text-primary tracking-tight mb-4 md:mb-6 leading-[1.1]"
+          className="font-heading text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-medium text-primary tracking-tight mb-4 md:mb-6 leading-[1.1] sm:leading-[1.1] break-words"
         >
           India's AI-Powered <br className="hidden md:block" />
           <StaggerButton text="Experience OS" className="text-gray-800 glass-button" />

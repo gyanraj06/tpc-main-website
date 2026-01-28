@@ -38,28 +38,27 @@ const CustomDropdown = ({ options, value, onChange, placeholder, required }: Cus
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full px-5 py-4 bg-transparent border rounded-xl text-base text-left flex items-center justify-between transition-all duration-200 group ${
-          isOpen 
-            ? 'border-gray-400 ring-1 ring-gray-400' 
+        className={`w-full px-5 py-4 bg-transparent border rounded-xl text-base text-left flex items-center justify-between transition-all duration-200 group ${isOpen
+            ? 'border-gray-400 ring-1 ring-gray-400'
             : 'border-[#dcdad5] hover:border-gray-400'
-        }`}
+          }`}
       >
         <span className={`truncate mr-2 ${value ? 'text-gray-900' : 'text-gray-500'}`}>
           {selectedOption ? selectedOption.label : placeholder}
         </span>
-        <CaretDown 
+        <CaretDown
           weight="bold"
-          className={`w-5 h-5 text-gray-500 transition-transform duration-300 flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`} 
+          className={`w-5 h-5 text-gray-500 transition-transform duration-300 flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
 
       {/* Hidden input for HTML5 form validation if needed, though we handle it manually mostly */}
-      <input 
-        type="text" 
-        className="sr-only" 
-        value={value} 
-        onChange={() => {}} 
-        required={required} 
+      <input
+        type="text"
+        className="sr-only"
+        value={value}
+        onChange={() => { }}
+        required={required}
         tabIndex={-1}
       />
 
@@ -100,6 +99,10 @@ const CustomDropdown = ({ options, value, onChange, placeholder, required }: Cus
 };
 
 const BookDemo = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [formData, setFormData] = useState({
     email: '',
     firstName: '',
@@ -183,7 +186,7 @@ const BookDemo = () => {
 
   return (
     <div className="min-h-screen bg-[#f4f2ee] pt-32 pb-20 px-4 flex justify-center items-center">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}

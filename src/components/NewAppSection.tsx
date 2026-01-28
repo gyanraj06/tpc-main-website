@@ -150,9 +150,10 @@ const NewAppSection = () => {
             <img
               src={mockupImage}
               alt="TPC Ops App Mockup"
-              className="object-contain"
+              className="object-contain max-w-[90vw]"
               style={{
-                height: '650px',
+                height: 'auto',
+                maxHeight: '650px',
                 width: 'auto'
               }}
             />
