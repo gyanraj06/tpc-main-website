@@ -49,9 +49,9 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
   // Navigation data
   const navLinks = [
     { id: 'products', label: 'Product' },
-    { id: 'solutions', label: 'Solutions' },
     { id: 'resources', label: 'Resources' },
     { id: 'company', label: 'Company' },
+    { id: 'solutions', label: 'Solutions' },
   ];
 
   // Product dropdown menu data
@@ -165,7 +165,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
   ];
 
   const scrollToSection = (sectionId: string) => {
-    const productSections = ['core-ops', 'recurring-events', 'smart-dashboard', 'registration', 'products', 'operations-analytics', 'marketing-growth', 'vendor-brand'];
+    const productSections = ['core-ops', 'recurring-events', 'smart-dashboard', 'registration', 'products', 'operations-analytics', 'marketing-growth', 'vendor-brand']; // Added 'products' as a valid ID for top-level nav
     const isProductSection = productSections.includes(sectionId);
 
     const performScroll = () => {
@@ -190,6 +190,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
         performScroll();
       }
     } else {
+      // Assuming other sections are on Home (/)
       if (location.pathname !== '/') {
         navigate('/');
         setTimeout(performScroll, 500);
@@ -212,10 +213,12 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
     return () => document.removeEventListener('click', closeMenu);
   }, [isOpen]);
 
+  // Subtle diagonal gradient from black to light gray
   const glassClasses = 'bg-gradient-to-br from-black via-gray-900 to-gray-800';
 
   return (
     <nav className="font-nav fixed top-0 z-50 w-full lg:py-4 lg:px-4">
+      {/* Backdrop Blur - Desktop */}
       {activeDropdown && (
         <div
           className="fixed inset-0 bg-white/30 backdrop-blur-sm transition-all duration-300 z-40"
@@ -223,12 +226,14 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
         />
       )}
 
+      {/* Desktop Header */}
       <div
         ref={navbarRef}
         className={`mx-auto w-fit rounded-full px-8 py-3 ${glassClasses} shadow-[0_4px_25px_rgba(0,0,0,0.25)] hidden lg:block relative z-50`}
         onMouseLeave={() => setActiveDropdown(null)}
       >
         <div className="flex items-center gap-12">
+          {/* Left Section - Logo */}
           <button onClick={onNavigateToHome} className="flex items-center">
             <div
               className="h-6 w-6 bg-contain bg-no-repeat"
@@ -240,6 +245,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
             ></div>
           </button>
 
+          {/* Center Section - Navigation Links with Dropdowns */}
           <div className="flex items-center gap-8">
             {navLinks.map(({ id, label }) => (
               <div
@@ -257,6 +263,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
             ))}
           </div>
 
+          {/* Right Section - CTA Button */}
           <button
             onClick={onNavigateToDemo}
             className="font-button bg-white hover:bg-gray-100 text-black font-medium px-5 py-2 text-sm rounded-full transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg group"
@@ -274,10 +281,12 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
           </button>
         </div>
 
+        {/* Invisible bridge between navbar and dropdown */}
         {activeDropdown && (
           <div className="absolute top-full left-0 right-0 h-6 z-50" />
         )}
 
+        {/* Dropdown Container - Full Width of Navbar */}
         {activeDropdown && (
           <div
             className={`absolute top-full left-0 right-0 pt-6 z-50 ${activeDropdown
@@ -292,6 +301,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                 <div className="p-5">
                   <div className="flex gap-x-6">
                     <div className="flex-1 space-y-4">
+                      {/* Core Experience and Ops */}
                       <div>
                         <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
                           {productMenuData[0].category}
@@ -325,6 +335,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                         </div>
                       </div>
 
+                      {/* Marketing and Growth */}
                       <div>
                         <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
                           {productMenuData[2].category}
@@ -360,6 +371,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                     </div>
 
                     <div className="flex-1 space-y-4">
+                      {/* Operations and Management */}
                       <div>
                         <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
                           {productMenuData[1].category}
@@ -393,6 +405,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                         </div>
                       </div>
 
+                      {/* Vendor and Brand */}
                       <div>
                         <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
                           {productMenuData[3].category}
@@ -432,6 +445,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                 <div className="p-5">
                   <div className="flex gap-x-6">
                     <div className="flex-1">
+                      {/* Learn and Grow */}
                       <div>
                         <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
                           {resourcesMenuData[0].category}
@@ -467,6 +481,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                     </div>
 
                     <div className="flex-1">
+                      {/* Support and Community */}
                       <div>
                         <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
                           {resourcesMenuData[1].category}
@@ -568,15 +583,23 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
                     })}
                   </div>
                 </div>
-              ) : null}
+              ) : (
+                <div className="p-6">
+                  <p className="text-white/70 text-sm text-center">
+                    Content for {navLinks.find(link => link.id === activeDropdown)?.label}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         )}
       </div>
 
+      {/* Mobile Header */}
       <div className="lg:hidden py-4 px-4 flex justify-center">
         <div className={`${glassClasses} rounded-full px-6 py-3 shadow-[0_4px_25px_rgba(0,0,0,0.25)] w-fit`}>
           <div className="flex items-center gap-10">
+            {/* Mobile Logo */}
             <button onClick={onNavigateToHome} className="flex items-center">
               <div
                 className="h-6 w-6 bg-contain bg-no-repeat"
@@ -588,6 +611,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
               ></div>
             </button>
 
+            {/* Mobile Menu Button - Styled like PC contact button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="font-button bg-white hover:bg-gray-100 text-black font-medium px-5 py-2 text-sm rounded-full transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg group"
@@ -609,6 +633,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
         </div>
       </div>
 
+      {/* Mobile Menu - Dropdown */}
       <div className="lg:hidden relative">
         <div
           className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-96 max-w-[calc(100vw-1rem)] ${glassClasses} rounded-2xl shadow-xl transition-all duration-500 ease-out z-[60] ${isOpen
@@ -617,6 +642,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
             }`}
         >
           <div className="p-6">
+            {/* Navigation Links */}
             <nav className="space-y-4 mb-6">
               {navLinks.map(({ id, label }) => (
                 <button
@@ -632,6 +658,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
               ))}
             </nav>
 
+            {/* Contact Us Button */}
             <button
               onClick={() => {
                 onNavigateToDemo();
@@ -653,6 +680,7 @@ const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
           </div>
         </div>
 
+        {/* Mobile Menu Backdrop */}
         {isOpen && (
           <div
             className={`fixed inset-0 bg-black/30 z-[50] transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'
