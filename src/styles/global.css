@@ -1,0 +1,414 @@
+@import 'lenis/dist/lenis.css';
+
+/* ------------------------------------------------------------------ tokens */
+:root {
+  --ink: #0b0d24;
+  --ink-2: #1b1e3d;
+  --paper: #f1f0ec;
+  --paper-2: #e6e5df;
+  --white: #ffffff;
+  --cobalt: #2a3fe0;
+  --cobalt-deep: #18248f;
+  --cobalt-soft: #dfe3ff;
+  --marigold: #ffc21a;
+  --muted: #5d5f73;
+  --muted-on-ink: #a9abc4;
+  --line: rgba(11, 13, 36, 0.14);
+  --line-on-ink: rgba(255, 255, 255, 0.16);
+
+  --font: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-deva: 'Anek Devanagari', 'Archivo', sans-serif;
+
+  /* type scale — display sizes are fluid, text sizes are fixed steps */
+  --fs-mega: clamp(3.4rem, 12.4vw, 13rem);
+  --fs-h1: clamp(2.7rem, 6.6vw, 6.5rem);
+  --fs-h2: clamp(2.2rem, 4.8vw, 4.6rem);
+  --fs-h3: clamp(1.4rem, 2.1vw, 1.9rem);
+  --fs-lead: clamp(1.15rem, 1.55vw, 1.45rem);
+  --fs-body: 1.0625rem;
+  --fs-small: 0.875rem;
+  --fs-micro: 0.78rem;
+
+  --gutter: clamp(16px, 3.4vw, 48px);
+  --max: 1440px;
+  --section: clamp(96px, 13vw, 200px);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --radius-s: 10px;
+  --radius-m: 18px;
+  --radius-l: 28px;
+}
+
+/* -------------------------------------------------------------------- base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--fs-body);
+  font-variation-settings: 'wdth' 100;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure,
+blockquote {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+::selection {
+  background: var(--marigold);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--marigold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 1000;
+  padding: 10px 16px;
+  background: var(--marigold);
+  color: var(--ink);
+  border-radius: 999px;
+  font-weight: 600;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ------------------------------------------------------------------ layout */
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section);
+}
+
+/* --------------------------------------------------------------- type kit */
+.t-mega,
+.t-h1,
+.t-h2 {
+  font-weight: 760;
+  font-variation-settings: 'wdth' 118;
+  letter-spacing: -0.035em;
+  line-height: 0.94;
+  text-wrap: balance;
+}
+
+.t-mega {
+  font-size: var(--fs-mega);
+  font-weight: 820;
+  font-variation-settings: 'wdth' 125;
+  letter-spacing: -0.045em;
+  line-height: 0.86;
+}
+
+.t-h1 {
+  font-size: var(--fs-h1);
+}
+
+.t-h2 {
+  font-size: var(--fs-h2);
+}
+
+.t-h3 {
+  font-size: var(--fs-h3);
+  font-weight: 640;
+  font-variation-settings: 'wdth' 108;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.t-lead {
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  max-width: 34em;
+}
+
+.t-muted {
+  color: var(--muted);
+}
+
+.t-small {
+  font-size: var(--fs-small);
+}
+
+/* small index labels — sentence case, used only where they carry information */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--fs-small);
+  font-weight: 560;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+
+.kicker::before {
+  content: '';
+  width: 22px;
+  height: 2px;
+  background: currentColor;
+}
+
+/* line masks for headline reveals */
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.line-mask > span {
+  display: block;
+}
+
+/* --------------------------------------------------------------- buttons */
+.btn {
+  --btn-bg: var(--ink);
+  --btn-fg: var(--paper);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 52px;
+  padding: 0 8px 0 24px;
+  border-radius: 999px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-size: 0.98rem;
+  font-weight: 600;
+  white-space: nowrap;
+  isolation: isolate;
+  overflow: hidden;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn__icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--btn-fg);
+  color: var(--btn-bg);
+  transition: transform 0.5s var(--ease-out);
+}
+
+.btn:hover .btn__icon {
+  transform: rotate(-45deg);
+}
+
+.btn--plain {
+  padding: 0 24px;
+}
+
+.btn--light {
+  --btn-bg: var(--white);
+  --btn-fg: var(--ink);
+}
+
+.btn--marigold {
+  --btn-bg: var(--marigold);
+  --btn-fg: var(--ink);
+}
+
+.btn--cobalt {
+  --btn-bg: var(--cobalt);
+  --btn-fg: var(--white);
+}
+
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-fg: currentColor;
+  box-shadow: inset 0 0 0 1.5px currentColor;
+}
+
+.btn--ghost .btn__icon {
+  background: currentColor;
+}
+
+.btn--ghost .btn__icon svg {
+  color: var(--paper);
+}
+
+.btn--small {
+  height: 42px;
+  padding: 0 6px 0 18px;
+  font-size: 0.9rem;
+}
+
+.btn--small .btn__icon {
+  width: 30px;
+  height: 30px;
+}
+
+/* label roll — the text slides up and a copy slides in */
+.roll {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1.2;
+}
+
+.roll__a,
+.roll__b {
+  display: block;
+  transition: transform 0.55s var(--ease-out);
+}
+
+.roll__b {
+  position: absolute;
+  inset: 0;
+  transform: translateY(105%);
+}
+
+a:hover > .roll .roll__a,
+button:hover > .roll .roll__a,
+a:focus-visible > .roll .roll__a,
+button:focus-visible > .roll .roll__a {
+  transform: translateY(-105%);
+}
+
+a:hover > .roll .roll__b,
+button:hover > .roll .roll__b,
+a:focus-visible > .roll .roll__b,
+button:focus-visible > .roll .roll__b {
+  transform: none;
+}
+
+/* underline link */
+.u-link {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1.5px no-repeat;
+  transition: background-size 0.5s var(--ease-out);
+}
+
+.u-link:hover,
+.u-link:focus-visible {
+  background-size: 100% 1.5px;
+}
+
+/* ------------------------------------------------------ route curtain */
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: var(--cobalt);
+  pointer-events: none;
+  transform: translateY(-100%);
+}
+
+.curtain.is-playing {
+  animation: curtain-out 0.9s var(--ease-in-out) forwards;
+}
+
+@keyframes curtain-out {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .curtain {
+    display: none;
+  }
+}

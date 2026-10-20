@@ -1,0 +1,76 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: clamp(120px, 16vh, 180px);
+  background:
+    radial-gradient(120% 70% at 50% 120%, #4157ff 0%, transparent 60%),
+    var(--cobalt);
+  color: var(--white);
+  text-align: center;
+}
+
+.hero__title {
+  font-weight: inherit;
+}
+
+.hero__pre {
+  font-size: clamp(1.25rem, 2.6vw, 2.4rem);
+  font-weight: 500;
+  font-variation-settings: 'wdth' 100;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.15em;
+}
+
+.hero .t-mega {
+  font-size: min(9.4vw, 11.5rem);
+  white-space: nowrap;
+}
+
+.hero__sub {
+  max-width: 30em;
+  margin: clamp(22px, 2.6vw, 34px) auto 0;
+  font-size: var(--fs-lead);
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 30px;
+  color: var(--white);
+}
+
+.hero__actions .btn--ghost .btn__icon svg {
+  color: var(--cobalt);
+}
+
+.hero .arc {
+  margin-top: clamp(48px, 7vw, 96px);
+}
+
+@media (max-width: 640px) {
+  .hero .t-mega {
+    white-space: normal;
+    font-size: 13.4vw;
+    line-height: 0.92;
+  }
+  .hero__actions .btn {
+    flex: 1 1 100%;
+    justify-content: space-between;
+  }
+}
+
+/* held back until the preloader lifts */
+.hero.is-intro .hero__title .line-mask > span {
+  transform: translateY(108%);
+}
+
+.hero.is-intro .hero__sub,
+.hero.is-intro .hero__actions,
+.hero.is-intro .arc__track {
+  opacity: 0;
+}

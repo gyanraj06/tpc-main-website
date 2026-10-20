@@ -1,0 +1,93 @@
+.payouts {
+  background: var(--paper-2);
+}
+
+.payouts__head {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: end;
+  margin-bottom: clamp(48px, 6vw, 88px);
+}
+
+/* one long ticket, torn into three stubs */
+.ledger {
+  --notch: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-radius: var(--radius-l);
+  background: var(--white);
+  counter-reset: step;
+}
+
+.ledger__step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 300px;
+  padding: clamp(28px, 3vw, 44px);
+}
+
+.ledger__step + .ledger__step {
+  border-left: 2px dashed rgba(11, 13, 36, 0.16);
+}
+
+/* punched holes at each tear line */
+.ledger__step + .ledger__step::before,
+.ledger__step + .ledger__step::after {
+  content: '';
+  position: absolute;
+  left: calc(var(--notch) * -1 - 1px);
+  width: calc(var(--notch) * 2);
+  height: calc(var(--notch) * 2);
+  border-radius: 50%;
+  background: var(--paper-2);
+}
+
+.ledger__step + .ledger__step::before {
+  top: calc(var(--notch) * -1);
+}
+
+.ledger__step + .ledger__step::after {
+  bottom: calc(var(--notch) * -1);
+}
+
+.ledger__no {
+  margin-bottom: auto;
+  font-size: clamp(3rem, 5vw, 4.8rem);
+  font-weight: 800;
+  font-variation-settings: 'wdth' 125;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--cobalt);
+}
+
+@media (max-width: 860px) {
+  .payouts__head {
+    grid-template-columns: 1fr;
+  }
+  .ledger {
+    grid-template-columns: 1fr;
+  }
+  .ledger__step {
+    min-height: 0;
+  }
+  .ledger__step .ledger__no {
+    margin-bottom: 18px;
+  }
+  .ledger__step + .ledger__step {
+    border-left: 0;
+    border-top: 2px dashed rgba(11, 13, 36, 0.16);
+  }
+  .ledger__step + .ledger__step::before {
+    top: calc(var(--notch) * -1 - 1px);
+    left: calc(var(--notch) * -1);
+  }
+  .ledger__step + .ledger__step::after {
+    top: calc(var(--notch) * -1 - 1px);
+    bottom: auto;
+    left: auto;
+    right: calc(var(--notch) * -1);
+  }
+}

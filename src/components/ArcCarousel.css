@@ -1,0 +1,41 @@
+.arc {
+  --card-w: clamp(190px, 19vw, 290px);
+  position: relative;
+  height: var(--arc-h, calc(var(--card-w) * 1.8));
+  margin-top: clamp(40px, 6vw, 80px);
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.arc.is-dragging {
+  cursor: grabbing;
+}
+
+.arc__card {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--card-w);
+  transform-origin: 50% var(--arc-r, 1200px);
+  will-change: transform, opacity;
+}
+
+.arc__track {
+  position: absolute;
+  inset: 0;
+}
+
+/* paper horizon: concentric with the ticket path, so tickets glide along its rim */
+.arc__horizon {
+  position: absolute;
+  top: var(--arc-top, 100%);
+  left: 50%;
+  width: calc(var(--arc-horizon, 1000px) * 2);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--paper);
+  transform: translateX(-50%);
+  pointer-events: none;
+}

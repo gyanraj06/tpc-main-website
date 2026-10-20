@@ -1,67 +1,39 @@
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
-import Header from './components/Header'
-import LegacyHeroSection from './components/LegacyHeroSection'
-import HeroSection from './components/HeroSection'
-import FeaturesSection from './components/FeaturesSection'
+import { lazy, Suspense } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Preloader from './components/Preloader';
+import RouteEffects from './components/RouteEffects';
+import Home from './pages/Home';
 
-import FAQSection from './components/FAQSection'
+const Products = lazy(() => import('./pages/Products'));
+const BookDemo = lazy(() => import('./pages/BookDemo'));
+const Legal = lazy(() => import('./pages/Legal'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
-import NewAppSection from './components/NewAppSection'
-import Footer from './components/Footer'
-import LegalNotice from './pages/LegalNotice'
-import PrivacyPolicy from './pages/PrivacyPolicy'
-import TermsAndConditions from './pages/TermsAndConditions'
-import './App.css'
-import Watermark from './components/Watermark'
-import BookDemo from './pages/BookDemo'
-import CustomCursor from './components/CustomCursor'
-import ProductPage from './pages/ProductPage'
-
-function App() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const handleScrollToContact = () => {
-    navigate('/book-demo');
-  }
-
-  const handleNavigateToHome = () => {
-    if (location.pathname === '/') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      navigate('/');
-      window.scrollTo(0, 0);
-    }
-  }
-
-  // Main homepage component
-  const HomePage = () => (
-    <>
-      <main>
-        <HeroSection />
-        <LegacyHeroSection />
-        <FAQSection />
-        <FeaturesSection />
-        <NewAppSection />
-      </main>
-    </>
-  )
-
+export default function App() {
   return (
-    <div className="App min-h-screen">
-      <CustomCursor />
-      <Header onNavigateToDemo={handleScrollToContact} onNavigateToHome={handleNavigateToHome} />
-      <Watermark />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/legal-notice" element={<LegalNotice />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-        <Route path="/book-demo" element={<BookDemo />} />
-        <Route path="/products" element={<ProductPage />} />
-      </Routes>
+    <>
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
+      <Preloader />
+      <Header />
+      <RouteEffects />
+      <main id="main">
+        <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/book-demo" element={<BookDemo />} />
+            <Route path="/legal-notice" element={<Legal doc="legal-notice" />} />
+            <Route path="/privacy-policy" element={<Legal doc="privacy-policy" />} />
+            <Route path="/terms-and-conditions" element={<Legal doc="terms-and-conditions" />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </main>
       <Footer />
-    </div>
-  )
+    </>
+  );
 }
-
-export default App

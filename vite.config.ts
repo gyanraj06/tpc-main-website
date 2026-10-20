@@ -1,9 +1,13 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    allowedHosts: ["efd47124b454.ngrok-free.app"],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: { motion: ['gsap', 'lenis'], react: ['react', 'react-dom', 'react-router-dom'] },
+      },
+    },
   },
 });

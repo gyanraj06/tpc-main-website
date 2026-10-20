@@ -1,0 +1,140 @@
+.pillars {
+  --p: 0;
+  position: relative;
+  background: var(--paper);
+}
+
+@media (min-width: 900px) {
+  .pillars {
+    height: 360vh;
+  }
+  .pillars__sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.pillars__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(40px, 6vw, 110px);
+  align-items: center;
+}
+
+.pillars__lead {
+  max-width: 28em;
+  margin-top: 22px;
+  font-size: var(--fs-lead);
+}
+
+.pillars__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.pillars__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 46px;
+  padding: 0 18px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px var(--line);
+  font-weight: 560;
+  color: var(--muted);
+  transition:
+    background-color 0.4s,
+    color 0.4s,
+    box-shadow 0.4s;
+}
+
+.pillars__tab:hover {
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+.pillars__tab[aria-selected='true'] {
+  background: var(--ink);
+  color: var(--white);
+  box-shadow: none;
+}
+
+.pillars__panel {
+  min-height: 150px;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.pillars__panel > * {
+  animation: pillar-in 0.7s var(--ease-out) both;
+}
+
+.pillars__panel p {
+  max-width: 30em;
+  margin-top: 12px;
+  animation-delay: 0.06s;
+}
+
+@keyframes pillar-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+.pillars__frame {
+  position: relative;
+  aspect-ratio: 522 / 389;
+  overflow: hidden;
+  border-radius: var(--radius-l);
+  background: var(--ink);
+}
+
+.pillars__frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: inset(100% 0 0 0);
+  transform: scale(1.08);
+  transition:
+    clip-path 0.9s var(--ease-in-out),
+    transform 1.2s var(--ease-out);
+}
+
+.pillars__frame img.is-active {
+  z-index: 1;
+  clip-path: inset(0);
+  transform: none;
+}
+
+.pillars__progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  height: 4px;
+  width: 100%;
+  background: var(--marigold);
+  transform: scaleX(var(--p));
+  transform-origin: left;
+}
+
+@media (max-width: 899px) {
+  .pillars {
+    padding-block: var(--section);
+  }
+  .pillars__grid {
+    grid-template-columns: 1fr;
+  }
+  .pillars__progress {
+    display: none;
+  }
+}

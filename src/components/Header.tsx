@@ -1,668 +1,196 @@
-import { useState, useEffect, useRef } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import logoImage from '../assets/LogoImage.jpg';
-import logoWritten from '../assets/LogoWritten.jpg';
-import {
-  CalendarCheck,
-  ArrowsClockwise,
-  SquaresFour,
-  Users,
-  Article,
-  Ticket,
-  ChartBar,
-  ChatCircleDots,
-  ShareNetwork,
-  Globe,
-  Handshake,
-  BookOpen,
-  Newspaper,
-  ChartLineUp,
-  Headset,
-  Question,
-  GitCommit,
-  Info,
-  UsersThree,
-  Briefcase,
-  CurrencyDollar,
-  UsersFour,
-  Confetti,
-  MapPin,
-  MusicNotes,
-  Bank,
-  Airplane,
-  Megaphone
-} from '@phosphor-icons/react';
-import StaggerText from './StaggerText';
+import { useEffect, useRef, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { ArrowUpRight, CaretDown, List, X } from '@phosphor-icons/react';
+import { NAV, type NavItem } from '../data/nav';
+import { SmartLink, Roll, Logo, ButtonLink } from './ui';
+import { useLenis } from '../lib/smooth-scroll';
+import './Header.css';
 
-interface HeaderProps {
-  onNavigateToDemo: () => void;
-  onNavigateToHome: () => void;
+function MenuItem({ item, onPick }: { item: NavItem; onPick: () => void }) {
+  const Icon = item.icon;
+  const body = (
+    <>
+      <span className="mi__icon" aria-hidden="true">
+        <Icon size={18} />
+      </span>
+      <span className="mi__text">
+        <span className="mi__label">
+          {item.label}
+          {!item.to && <span className="mi__soon">Soon</span>}
+        </span>
+        <span className="mi__desc">{item.description}</span>
+      </span>
+    </>
+  );
+  if (!item.to) {
+    return (
+      <span className="mi mi--off" aria-disabled="true">
+        {body}
+      </span>
+    );
+  }
+  return (
+    <SmartLink to={item.to} className="mi" onClick={onPick}>
+      {body}
+    </SmartLink>
+  );
 }
 
-const Header = ({ onNavigateToDemo, onNavigateToHome }: HeaderProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const navbarRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
+export default function Header() {
+  const [open, setOpen] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileGroup, setMobileGroup] = useState<string | null>('product');
+  const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
   const location = useLocation();
+  const lenis = useLenis();
 
-  // Navigation data
-  const navLinks = [
-    { id: 'products', label: 'Product' },
-    { id: 'solutions', label: 'Solutions' },
-    { id: 'resources', label: 'Resources' },
-    { id: 'company', label: 'Company' },
-  ];
-
-  // Product dropdown menu data
-  const productMenuData = [
-    {
-      category: 'Core Experience and Ops',
-      items: [
-        { label: 'Easy Experience Setup', description: 'Quick Event Builder', icon: CalendarCheck, onClick: () => scrollToSection('core-ops') },
-        { label: 'Recurring Events', description: 'Automated Event Series', icon: ArrowsClockwise, onClick: () => scrollToSection('core-ops') },
-        { label: 'Vendor Dashboard Panel', description: 'Central Vendor Hub', icon: SquaresFour, onClick: () => scrollToSection('core-ops') },
-        { label: 'Attendee Tracking and Insights', description: 'Live Attendee Data', icon: Users, onClick: () => scrollToSection('core-ops') },
-        { label: 'Custom Registration Form', description: 'Build Custom Forms', icon: Article, onClick: () => scrollToSection('core-ops') },
-      ]
-    },
-    {
-      category: 'Operations and Management',
-      items: [
-        { label: 'Smart Ticketing and Payments', description: 'Easy Ticket Sales', icon: Ticket, onClick: () => scrollToSection('operations-analytics') },
-        { label: 'Reporting and Analytics', description: 'Simple Event Reports', icon: ChartBar, onClick: () => scrollToSection('operations-analytics') },
-        { label: 'Auto Communication System', description: 'Automatic Email Alerts', icon: ChatCircleDots, onClick: () => scrollToSection('operations-analytics') },
-      ]
-    },
-    {
-      category: 'Marketing and Growth',
-      items: [
-        { label: 'Social Media Management', description: 'Schedule Social Posts', icon: ShareNetwork, onClick: () => scrollToSection('marketing-growth') },
-        { label: 'Website Builders and Microsites', description: 'Create Event Websites', icon: Globe, onClick: () => scrollToSection('marketing-growth') },
-      ]
-    },
-    {
-      category: 'Vendor and Brand',
-      items: [
-        { label: 'Sponsor and Brand Management', description: 'Manage Event Sponsors', icon: Handshake, onClick: () => scrollToSection('vendor-brand') },
-      ]
-    }
-  ];
-
-  // Resources dropdown menu data
-  const resourcesMenuData = [
-    {
-      category: 'Learn and Grow',
-      items: [
-        { label: 'Case Studies', description: 'See customer success stories', icon: BookOpen, onClick: () => scrollToSection('resources') },
-        { label: 'Blogs', description: 'Read tips and insights', icon: Newspaper, onClick: () => scrollToSection('resources') },
-        { label: 'Comparison', description: 'See how we stack up', icon: ChartLineUp, onClick: () => scrollToSection('resources') },
-      ]
-    },
-    {
-      category: 'Support and Community',
-      items: [
-        { label: 'Support', description: 'Get help from our team', icon: Headset, onClick: () => scrollToSection('resources') },
-        { label: 'FAQs', description: 'Find answers fast', icon: Question, onClick: () => scrollToSection('resources') },
-        { label: 'Changelogs', description: 'See what\'s new', icon: GitCommit, onClick: () => scrollToSection('resources') },
-      ]
-    }
-  ];
-
-  // Company dropdown menu data
-  const companyMenuData = [
-    { label: 'About Us', description: 'Learn our mission', icon: Info, onClick: () => scrollToSection('company') },
-    { label: 'Career', description: 'Join our growing team', icon: Briefcase, onClick: () => scrollToSection('company') },
-    { label: 'Partner with Us', description: 'Grow your business with us', icon: UsersFour, onClick: () => scrollToSection('company') },
-    { label: 'Our Team', description: 'Meet the people behind it', icon: UsersThree, onClick: () => scrollToSection('company') },
-    { label: 'Pricing', description: 'Find the right plan', icon: CurrencyDollar, onClick: () => scrollToSection('company') },
-  ];
-
-  // Solutions dropdown menu data
-  const solutionsMenuData = [
-    {
-      label: 'Event & Experience Organisers',
-      description: 'Create. Manage. Grow easily.',
-      icon: Confetti,
-      onClick: () => scrollToSection('solutions')
-    },
-    {
-      label: 'Tour & Activity Providers',
-      description: 'Automate bookings. Reach more.',
-      icon: MapPin,
-      onClick: () => scrollToSection('solutions')
-    },
-    {
-      label: 'Venues & Experience Spaces',
-      description: 'Showcase and manage smartly.',
-      icon: SquaresFour,
-      onClick: () => scrollToSection('solutions')
-    },
-    {
-      label: 'Entertainment & Cultural Hosts',
-      description: 'Launch shows. Track impact.',
-      icon: MusicNotes,
-      onClick: () => scrollToSection('solutions')
-    },
-    {
-      label: 'Institutions & Cultural Houses',
-      description: 'Digitize programs. Engage audiences.',
-      icon: Bank,
-      onClick: () => scrollToSection('solutions')
-    },
-    {
-      label: 'Travel Agencies & Production Houses',
-      description: 'Collaborate. Streamline trips.',
-      icon: Airplane,
-      onClick: () => scrollToSection('solutions')
-    },
-    {
-      label: 'Brands & Sponsorship Partners',
-      description: 'Connect. Promote. Measure impact.',
-      icon: Megaphone,
-      onClick: () => scrollToSection('solutions')
-    },
-  ];
-
-  const scrollToSection = (sectionId: string) => {
-    const productSections = ['core-ops', 'recurring-events', 'smart-dashboard', 'registration', 'products', 'operations-analytics', 'marketing-growth', 'vendor-brand'];
-    const isProductSection = productSections.includes(sectionId);
-
-    const performScroll = () => {
-      if (sectionId === 'products') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return;
-      }
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    };
-
-    if (isProductSection) {
-      if (location.pathname !== '/products') {
-        if (sectionId === 'products') {
-          navigate('/products');
-        } else {
-          navigate('/products', { state: { scrollTo: sectionId } });
-        }
-      } else {
-        performScroll();
-      }
-    } else {
-      if (location.pathname !== '/') {
-        navigate('/');
-        setTimeout(performScroll, 500);
-      } else {
-        performScroll();
-      }
-    }
-  };
-
+  // close everything on navigation
   useEffect(() => {
-    if (!isOpen) return;
+    setOpen(null);
+    setMobileOpen(false);
+  }, [location.pathname, location.hash, location.key]);
 
-    const closeMenu = (e: MouseEvent) => {
-      if (!(e.target as HTMLElement).closest('nav')) {
-        setIsOpen(false);
+  // hide on scroll down, reveal on scroll up
+  useEffect(() => {
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 24);
+      if (Math.abs(y - last) < 6) return;
+      setHidden(y > last && y > 240);
+      last = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Escape closes menus; mobile overlay locks the page scroll
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOpen(null);
+        setMobileOpen(false);
       }
     };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
-    document.addEventListener('click', closeMenu);
-    return () => document.removeEventListener('click', closeMenu);
-  }, [isOpen]);
+  const wasOpen = useRef(false);
+  useEffect(() => {
+    if (mobileOpen) {
+      lenis?.stop();
+      document.documentElement.style.overflow = 'hidden';
+    } else if (wasOpen.current) {
+      // only release what we locked — the preloader may be holding the scroll too
+      lenis?.start();
+      document.documentElement.style.overflow = '';
+    }
+    wasOpen.current = mobileOpen;
+  }, [mobileOpen, lenis]);
 
-  const glassClasses = 'bg-gradient-to-br from-black via-gray-900 to-gray-800';
+  const active = NAV.find((m) => m.id === open);
 
   return (
-    <nav className="font-nav fixed top-0 z-50 w-full lg:py-4 lg:px-4">
-      {activeDropdown && (
-        <div
-          className="fixed inset-0 bg-white/30 backdrop-blur-sm transition-all duration-300 z-40"
-          onClick={() => setActiveDropdown(null)}
-        />
-      )}
-
-      <div
-        ref={navbarRef}
-        className={`mx-auto w-fit rounded-full px-8 py-3 ${glassClasses} shadow-[0_4px_25px_rgba(0,0,0,0.25)] hidden lg:block relative z-50`}
-        onMouseLeave={() => setActiveDropdown(null)}
+    <>
+      <div className={`nav-scrim ${open ? 'is-on' : ''}`} onClick={() => setOpen(null)} aria-hidden="true" />
+      <header
+        ref={navRef}
+        className={`nav ${hidden && !open && !mobileOpen ? 'is-hidden' : ''} ${scrolled ? 'is-scrolled' : ''}`}
+        onMouseLeave={() => setOpen(null)}
+        onBlur={(e) => {
+          if (!navRef.current?.contains(e.relatedTarget as Node)) setOpen(null);
+        }}
       >
-        <div className="flex items-center gap-12">
-          <button onClick={onNavigateToHome} className="flex items-center">
-            <div
-              className="h-6 w-6 bg-contain bg-no-repeat"
-              style={{ backgroundImage: `url(${logoImage})` }}
-            ></div>
-            <div
-              className="-ml-1 h-6 w-24 bg-contain bg-no-repeat"
-              style={{ backgroundImage: `url(${logoWritten})` }}
-            ></div>
-          </button>
+        <div className="nav__bar">
+          <Link to="/" className="nav__home" aria-label="Trippechalo home">
+            <Logo />
+          </Link>
 
-          <div className="flex items-center gap-8">
-            {navLinks.map(({ id, label }) => (
-              <div
-                key={id}
-                className="relative"
-                onMouseEnter={() => setActiveDropdown(id)}
+          <nav className="nav__links" aria-label="Main">
+            {NAV.map((menu) => (
+              <button
+                key={menu.id}
+                type="button"
+                className={`nav__trigger ${open === menu.id ? 'is-open' : ''}`}
+                aria-expanded={open === menu.id}
+                aria-controls="nav-panel"
+                onMouseEnter={() => setOpen(menu.id)}
+                onClick={() => setOpen((cur) => (cur === menu.id ? null : menu.id))}
               >
-                <button
-                  onClick={() => scrollToSection(id)}
-                  className="font-nav text-base text-white/90 transition-colors duration-200 hover:text-white font-normal focus:outline-none py-2 group"
-                >
-                  <StaggerText text={label} />
-                </button>
-              </div>
+                <Roll>{menu.label}</Roll>
+                <CaretDown size={12} weight="bold" aria-hidden="true" />
+              </button>
             ))}
-          </div>
+          </nav>
+
+          <ButtonLink to="/book-demo" variant="light" small className="nav__cta">
+            Book a demo
+          </ButtonLink>
 
           <button
-            onClick={onNavigateToDemo}
-            className="font-button bg-white hover:bg-gray-100 text-black font-medium px-5 py-2 text-sm rounded-full transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg group"
+            type="button"
+            className="nav__burger"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setMobileOpen((v) => !v)}
           >
-            <StaggerText text="Contact us" />
-            <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5">
-              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fillRule="evenodd"
-                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
+            <span>{mobileOpen ? 'Close' : 'Menu'}</span>
+            <span className="nav__burger-icon" aria-hidden="true">
+              {mobileOpen ? <X size={16} weight="bold" /> : <List size={16} weight="bold" />}
+            </span>
           </button>
         </div>
 
-        {activeDropdown && (
-          <div className="absolute top-full left-0 right-0 h-6 z-50" />
-        )}
-
-        {activeDropdown && (
-          <div
-            className={`absolute top-full left-0 right-0 pt-6 z-50 ${activeDropdown
-              ? 'opacity-100 translate-y-0 visible'
-              : 'opacity-0 -translate-y-2 invisible pointer-events-none'
-              }`}
-            onMouseEnter={() => setActiveDropdown(activeDropdown)}
-            onMouseLeave={() => setActiveDropdown(null)}
-          >
-            <div className={`${glassClasses} rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-300 ease-out`}>
-              {activeDropdown === 'products' ? (
-                <div className="p-5">
-                  <div className="flex gap-x-6">
-                    <div className="flex-1 space-y-4">
-                      <div>
-                        <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
-                          {productMenuData[0].category}
-                        </h3>
-                        <div className="space-y-0.5">
-                          {productMenuData[0].items.map((item, itemIndex) => {
-                            const Icon = item.icon;
-                            return (
-                              <button
-                                key={itemIndex}
-                                onClick={() => {
-                                  item.onClick();
-                                  setActiveDropdown(null);
-                                }}
-                                className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
-                              >
-                                <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                                  <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
-                                    {item.label}
-                                  </p>
-                                  <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
-                                    {item.description}
-                                  </p>
-                                </div>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-
-                      <div>
-                        <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
-                          {productMenuData[2].category}
-                        </h3>
-                        <div className="space-y-0.5">
-                          {productMenuData[2].items.map((item, itemIndex) => {
-                            const Icon = item.icon;
-                            return (
-                              <button
-                                key={itemIndex}
-                                onClick={() => {
-                                  item.onClick();
-                                  setActiveDropdown(null);
-                                }}
-                                className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
-                              >
-                                <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                                  <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
-                                    {item.label}
-                                  </p>
-                                  <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
-                                    {item.description}
-                                  </p>
-                                </div>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex-1 space-y-4">
-                      <div>
-                        <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
-                          {productMenuData[1].category}
-                        </h3>
-                        <div className="space-y-0.5">
-                          {productMenuData[1].items.map((item, itemIndex) => {
-                            const Icon = item.icon;
-                            return (
-                              <button
-                                key={itemIndex}
-                                onClick={() => {
-                                  item.onClick();
-                                  setActiveDropdown(null);
-                                }}
-                                className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
-                              >
-                                <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                                  <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
-                                    {item.label}
-                                  </p>
-                                  <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
-                                    {item.description}
-                                  </p>
-                                </div>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-
-                      <div>
-                        <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
-                          {productMenuData[3].category}
-                        </h3>
-                        <div className="space-y-0.5">
-                          {productMenuData[3].items.map((item, itemIndex) => {
-                            const Icon = item.icon;
-                            return (
-                              <button
-                                key={itemIndex}
-                                onClick={() => {
-                                  item.onClick();
-                                  setActiveDropdown(null);
-                                }}
-                                className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
-                              >
-                                <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                                  <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
-                                    {item.label}
-                                  </p>
-                                  <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
-                                    {item.description}
-                                  </p>
-                                </div>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    </div>
+        <div id="nav-panel" className={`nav__panel ${active ? 'is-open' : ''}`} data-lenis-prevent>
+          {active && (
+            <div className="nav__panel-inner" key={active.id}>
+              {active.groups.map((group) => (
+                <div key={group.title} className={`nav__group ${group.items.length > 4 ? 'is-wide' : ''}`}>
+                  <p className="nav__group-title">{group.title}</p>
+                  <div className="nav__group-items">
+                    {group.items.map((item) => (
+                      <MenuItem key={item.label} item={item} onPick={() => setOpen(null)} />
+                    ))}
                   </div>
                 </div>
-              ) : activeDropdown === 'resources' ? (
-                <div className="p-5">
-                  <div className="flex gap-x-6">
-                    <div className="flex-1">
-                      <div>
-                        <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
-                          {resourcesMenuData[0].category}
-                        </h3>
-                        <div className="space-y-0.5">
-                          {resourcesMenuData[0].items.map((item, itemIndex) => {
-                            const Icon = item.icon;
-                            return (
-                              <button
-                                key={itemIndex}
-                                onClick={() => {
-                                  item.onClick();
-                                  setActiveDropdown(null);
-                                }}
-                                className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
-                              >
-                                <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                                  <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
-                                    {item.label}
-                                  </p>
-                                  <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
-                                    {item.description}
-                                  </p>
-                                </div>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex-1">
-                      <div>
-                        <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
-                          {resourcesMenuData[1].category}
-                        </h3>
-                        <div className="space-y-0.5">
-                          {resourcesMenuData[1].items.map((item, itemIndex) => {
-                            const Icon = item.icon;
-                            return (
-                              <button
-                                key={itemIndex}
-                                onClick={() => {
-                                  item.onClick();
-                                  setActiveDropdown(null);
-                                }}
-                                className="w-full flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
-                              >
-                                <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                                  <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
-                                    {item.label}
-                                  </p>
-                                  <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
-                                    {item.description}
-                                  </p>
-                                </div>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ) : activeDropdown === 'company' ? (
-                <div className="p-5">
-                  <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
-                    Company
-                  </h3>
-                  <div className="grid grid-cols-2 gap-x-6 gap-y-0.5 max-w-2xl">
-                    {companyMenuData.map((item, itemIndex) => {
-                      const Icon = item.icon;
-                      return (
-                        <button
-                          key={itemIndex}
-                          onClick={() => {
-                            item.onClick();
-                            setActiveDropdown(null);
-                          }}
-                          className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
-                        >
-                          <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                            <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
-                              {item.label}
-                            </p>
-                            <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
-                              {item.description}
-                            </p>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              ) : activeDropdown === 'solutions' ? (
-                <div className="p-5">
-                  <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2">
-                    Solutions
-                  </h3>
-                  <div className="grid grid-cols-2 gap-x-6 gap-y-0.5 max-w-3xl">
-                    {solutionsMenuData.map((item, itemIndex) => {
-                      const Icon = item.icon;
-                      return (
-                        <button
-                          key={itemIndex}
-                          onClick={() => {
-                            item.onClick();
-                            setActiveDropdown(null);
-                          }}
-                          className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/10 transition-all duration-200 group text-left"
-                        >
-                          <div className="flex-shrink-0 w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all duration-200">
-                            <Icon className="w-4.5 h-4.5 text-white/90" weight="regular" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-white/90 text-sm font-normal group-hover:text-white transition-colors duration-200 leading-tight">
-                              {item.label}
-                            </p>
-                            <p className="text-white/50 text-xs mt-0.5 group-hover:text-white/70 transition-colors duration-200 leading-tight">
-                              {item.description}
-                            </p>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              ) : null}
-            </div>
-          </div>
-        )}
-      </div>
-
-      <div className="lg:hidden py-4 px-4 flex justify-center">
-        <div className={`${glassClasses} rounded-full px-6 py-3 shadow-[0_4px_25px_rgba(0,0,0,0.25)] w-fit`}>
-          <div className="flex items-center gap-10">
-            <button onClick={onNavigateToHome} className="flex items-center">
-              <div
-                className="h-6 w-6 bg-contain bg-no-repeat"
-                style={{ backgroundImage: `url(${logoImage})` }}
-              ></div>
-              <div
-                className="-ml-1 h-6 w-24 bg-contain bg-no-repeat"
-                style={{ backgroundImage: `url(${logoWritten})` }}
-              ></div>
-            </button>
-
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="font-button bg-white hover:bg-gray-100 text-black font-medium px-5 py-2 text-sm rounded-full transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg group"
-              aria-label="Toggle menu"
-              aria-expanded={isOpen}
-            >
-              Menu
-              <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-105">
-                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="lg:hidden relative">
-        <div
-          className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-96 max-w-[calc(100vw-1rem)] ${glassClasses} rounded-2xl shadow-xl transition-all duration-500 ease-out z-[60] ${isOpen
-            ? 'opacity-100 translate-y-2 visible scale-100'
-            : 'opacity-0 -translate-y-6 invisible scale-95'
-            }`}
-        >
-          <div className="p-6">
-            <nav className="space-y-4 mb-6">
-              {navLinks.map(({ id, label }) => (
-                <button
-                  key={id}
-                  onClick={() => {
-                    scrollToSection(id);
-                    setIsOpen(false);
-                  }}
-                  className="font-nav block text-base text-white/90 transition-colors hover:text-white py-2 font-normal tracking-wide w-full text-center focus:outline-none group"
-                >
-                  <StaggerText text={label} />
-                </button>
               ))}
-            </nav>
-
-            <button
-              onClick={() => {
-                onNavigateToDemo();
-                setIsOpen(false);
-              }}
-              className="font-button flex items-center justify-center gap-2 w-full bg-white hover:bg-gray-100 text-black font-medium px-6 py-3 rounded-full transition-all duration-200 group"
-            >
-              <StaggerText text="Contact us" />
-              <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5">
-                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-            </button>
-          </div>
+            </div>
+          )}
         </div>
+      </header>
 
-        {isOpen && (
-          <div
-            className={`fixed inset-0 bg-black/30 z-[50] transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'
-              }`}
-            onClick={() => setIsOpen(false)}
-          />
-        )}
+      <div id="mobile-menu" className={`mnav ${mobileOpen ? 'is-open' : ''}`} data-lenis-prevent aria-hidden={!mobileOpen}>
+        <div className="mnav__inner">
+          {NAV.map((menu) => (
+            <div key={menu.id} className={`mnav__menu ${mobileGroup === menu.id ? 'is-open' : ''}`}>
+              <button
+                type="button"
+                className="mnav__trigger"
+                aria-expanded={mobileGroup === menu.id}
+                tabIndex={mobileOpen ? 0 : -1}
+                onClick={() => setMobileGroup((g) => (g === menu.id ? null : menu.id))}
+              >
+                {menu.label}
+                <CaretDown size={20} weight="bold" aria-hidden="true" />
+              </button>
+              <div className="mnav__items">
+                <div>
+                  {menu.groups.flatMap((g) => g.items).map((item) => (
+                    <MenuItem key={item.label} item={item} onPick={() => setMobileOpen(false)} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+          <Link to="/book-demo" className="mnav__cta" tabIndex={mobileOpen ? 0 : -1}>
+            Book a demo
+            <ArrowUpRight size={22} weight="bold" aria-hidden="true" />
+          </Link>
+        </div>
       </div>
-    </nav>
+    </>
   );
-};
-
-export default Header;
+}

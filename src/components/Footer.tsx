@@ -1,154 +1,117 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, type FormEvent } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, CircleNotch, InstagramLogo, LinkedinLogo, XLogo } from '@phosphor-icons/react';
+import { LINKS } from '../lib/links';
+import { sendNewsletterSignup } from '../lib/email';
+import { Logo, Roll } from './ui';
+import './Footer.css';
 
-const Footer = () => {
-  const [email, setEmail] = useState("");
+type Status = 'idle' | 'sending' | 'done' | 'error';
 
-  const handleSubscribe = (e: React.FormEvent) => {
+export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<Status>('idle');
+
+  const onSubscribe = async (e: FormEvent) => {
     e.preventDefault();
-    console.log("Newsletter subscription:", email);
+    setStatus('sending');
+    try {
+      await sendNewsletterSignup(email);
+      setStatus('done');
+      setEmail('');
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
-    <footer className="bg-[#F4F2EE] py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative z-50">
-      <div className="max-w-6xl mx-auto">
-        {/* Main Footer Content */}
-        <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 items-start mb-12 sm:mb-16">
-          {/* Left Side - Newsletter */}
-          <div className="w-full">
-            <h4 className="font-heading text-xl sm:text-2xl font-normal text-gray-900 mb-6 sm:mb-8">
-              Sign up for our newsletter
-            </h4>
-
-            <form
-              onSubmit={handleSubscribe}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4"
-            >
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="name@email.com"
-                className="flex-1 px-4 py-3 bg-white/50 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:bg-white/80 transition-all duration-200 font-body text-sm sm:text-base"
-              />
-              <button
-                type="submit"
-                className="bg-black text-white px-6 sm:px-8 py-3 rounded-full font-medium hover:bg-gray-800 transition-all duration-200 font-body text-sm sm:text-base"
-              >
-                Subscribe
-              </button>
-            </form>
+    <footer className="footer">
+      <div className="wrap">
+        <div className="footer__top">
+          <div className="footer__cta">
+            <p className="footer__ask">Have an experience to launch?</p>
+            <a href={`mailto:${LINKS.email}`} className="footer__mail">
+              {LINKS.email}
+            </a>
           </div>
+
+          <form className="footer__news" onSubmit={onSubscribe}>
+            <label htmlFor="news-email" className="footer__news-label">
+              Get product updates in your inbox
+            </label>
+            <div className="footer__field">
+              <input
+                id="news-email"
+                type="email"
+                required
+                autoComplete="email"
+                placeholder="name@email.com"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (status !== 'sending') setStatus('idle');
+                }}
+              />
+              <button type="submit" disabled={status === 'sending'} aria-label="Subscribe">
+                {status === 'sending' ? (
+                  <CircleNotch size={18} className="spin" />
+                ) : (
+                  <ArrowRight size={18} weight="bold" />
+                )}
+              </button>
+            </div>
+            <p className="footer__news-status" role="status">
+              {status === 'done' && "You're subscribed. Watch for updates from contact@trippechalo.in."}
+              {status === 'error' && 'That didn’t go through. Check your connection and try again.'}
+            </p>
+          </form>
         </div>
 
-        {/* Bottom Section */}
-        <div
-          className="border-t border-gray-300 pt-6 sm:pt-8"
-        >
-          <div className="flex flex-col lg:flex-row mb-12 justify-between items-start lg:items-center gap-6 sm:gap-8">
-            {/* Left - Social & Email */}
-            <div className="w-full lg:w-auto">
-              {/* Social Icons */}
-              <div className="flex items-center gap-4 mb-4 sm:mb-6">
-                <a
-                  href="https://x.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-8 h-8 flex items-center justify-center text-gray-900 hover:text-blue-600 transition-colors duration-200"
-                >
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                  </svg>
-                </a>
-                <a
-                  href="https://www.instagram.com/Trippechalo.in/?utm_source=qr#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-8 h-8 flex items-center justify-center text-gray-900 hover:text-blue-600 transition-colors duration-200"
-                >
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                  </svg>
-                </a>
-                <a
-                  href="https://www.linkedin.com/company/mounterra-innovations/posts/?feedView=all"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-8 h-8 flex items-center justify-center text-gray-900 hover:text-blue-600 transition-colors duration-200"
-                >
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                  </svg>
-                </a>
-              </div>
-
-              {/* Large Email - Responsive sizing */}
-              <h1 className="font-heading text-lg sm:text-3xl md:text-4xl lg:text-5xl font-normal text-gray-900 break-all">
-                <a
-                  href="mailto:contact@trippechalo.in"
-                  className="hover:text-blue-600 transition-colors duration-200"
-                >
-                  contact@trippechalo.in
-                </a>
-              </h1>
-            </div>
-
-            {/* Right - Copyright (can be added later if needed) */}
-            <div className="lg:text-right"></div>
+        <div className="footer__grid">
+          <div className="footer__brand">
+            <Logo />
+            <p>India’s AI-powered Experience OS. Built by Mounterra Innovations.</p>
           </div>
 
-          {/* Legal */}
-          <div className="border-t border-black/20 pt-8">
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6">
-              {/* Legal Links */}
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-center sm:text-left">
-                <Link
-                  to="/legal-notice"
-                  className="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200 font-body"
-                >
-                  Legal Notice
-                </Link>
-                <Link
-                  to="/privacy-policy"
-                  className="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200 font-body"
-                >
-                  Privacy Policy
-                </Link>
-                <Link
-                  to="/terms-and-conditions"
-                  className="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200 font-body"
-                >
-                  Terms & Conditions
-                </Link>
-              </div>
-
-              {/* Copyright */}
-              <div className="text-center sm:text-right">
-                <p className="text-sm text-gray-600 font-body">
-                  © {new Date().getFullYear()} Mounterra. All rights reserved.
-                </p>
-              </div>
+          <nav aria-label="Footer" className="footer__cols">
+            <div>
+              <p className="footer__col-title">Platform</p>
+              <Link to="/products" className="footer__link"><Roll>Product</Roll></Link>
+              <Link to="/#solutions" className="footer__link"><Roll>Solutions</Roll></Link>
+              <Link to="/#ops-app" className="footer__link"><Roll>TPC Ops app</Roll></Link>
+              <a href={LINKS.vendorPortal} target="_blank" rel="noopener noreferrer" className="footer__link"><Roll>Vendor portal</Roll></a>
             </div>
+            <div>
+              <p className="footer__col-title">Company</p>
+              <Link to="/#about" className="footer__link"><Roll>About</Roll></Link>
+              <Link to="/book-demo" className="footer__link"><Roll>Book a demo</Roll></Link>
+              <a href={`mailto:${LINKS.email}`} className="footer__link"><Roll>Support</Roll></a>
+            </div>
+            <div>
+              <p className="footer__col-title">Legal</p>
+              <Link to="/legal-notice" className="footer__link"><Roll>Legal notice</Roll></Link>
+              <Link to="/privacy-policy" className="footer__link"><Roll>Privacy policy</Roll></Link>
+              <Link to="/terms-and-conditions" className="footer__link"><Roll>Terms & conditions</Roll></Link>
+            </div>
+          </nav>
+        </div>
+
+        <div className="footer__base">
+          <p>© {new Date().getFullYear()} Mounterra. All rights reserved.</p>
+          <div className="footer__social">
+            <a href={LINKS.x} target="_blank" rel="noopener noreferrer" aria-label="Trippechalo on X">
+              <XLogo size={18} />
+            </a>
+            <a href={LINKS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Trippechalo on Instagram">
+              <InstagramLogo size={20} />
+            </a>
+            <a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer" aria-label="Mounterra Innovations on LinkedIn">
+              <LinkedinLogo size={20} />
+            </a>
           </div>
         </div>
       </div>
+      <p className="footer__deva" aria-hidden="true">ट्रिप पे चलो</p>
     </footer>
   );
-};
-
-export default Footer;
+}

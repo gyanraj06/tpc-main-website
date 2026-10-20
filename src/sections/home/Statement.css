@@ -1,0 +1,13 @@
+.statement {
+  background: var(--cobalt);
+  color: var(--white);
+}
+
+.statement__text {
+  font-size: clamp(2.3rem, 6.4vw, 6.6rem);
+  font-weight: 780;
+  font-variation-settings: 'wdth' 118;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+  text-wrap: balance;
+}

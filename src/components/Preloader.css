@@ -1,0 +1,56 @@
+.pre {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  background: var(--cobalt);
+  color: var(--white);
+  clip-path: inset(0);
+}
+
+.pre__word {
+  display: flex;
+  gap: 0.22em;
+  overflow: hidden;
+  font-family: var(--font-deva);
+  font-size: clamp(3.6rem, 13vw, 11rem);
+  font-weight: 800;
+  font-variation-settings: 'wdth' 125;
+  line-height: 1.25;
+  padding-block: 0.2em;
+}
+
+.pre__word > span {
+  display: inline-block;
+}
+
+.pre__foot {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: var(--fs-small);
+  font-weight: 560;
+}
+
+.pre__bar {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.pre__bar > span {
+  display: block;
+  height: 100%;
+  background: var(--white);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.pre__count {
+  font-variant-numeric: tabular-nums;
+}

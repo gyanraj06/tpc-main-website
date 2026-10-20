@@ -1,4 +1,4 @@
-.vercel
 node_modules
-*.md
-seo-audit-checklist.yml
+dist
+.vercel
+*.local

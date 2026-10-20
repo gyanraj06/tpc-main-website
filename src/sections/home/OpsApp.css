@@ -1,0 +1,88 @@
+.ops {
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--section);
+  background:
+    radial-gradient(60% 80% at 80% 10%, rgba(255, 194, 26, 0.18), transparent 60%),
+    radial-gradient(70% 90% at 10% 100%, #3e55ff, transparent 60%),
+    var(--cobalt-deep);
+  color: var(--white);
+}
+
+.ops__grid {
+  display: grid;
+  grid-template-columns: 1fr auto 0.8fr;
+  gap: clamp(32px, 4vw, 72px);
+  align-items: end;
+}
+
+.ops__copy {
+  align-self: center;
+  padding-bottom: var(--section);
+}
+
+.ops__kicker {
+  margin-bottom: 22px;
+  color: var(--marigold);
+}
+
+.ops__lead {
+  margin-top: 24px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.ops__phone {
+  width: clamp(240px, 24vw, 340px);
+  margin-bottom: calc(clamp(240px, 24vw, 340px) * -0.7);
+  filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.45));
+}
+
+.ops__get {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: var(--section);
+}
+
+.ops__qr {
+  padding: 12px;
+  border-radius: 20px;
+  background: var(--white);
+  transition: transform 0.6s var(--ease-out);
+}
+
+.ops__qr:hover {
+  transform: rotate(-3deg) scale(1.03);
+}
+
+.ops__qr img {
+  width: 148px;
+  height: 148px;
+  image-rendering: pixelated;
+  /* source QR is white-on-transparent; flip it to dark modules for reliable scanning */
+  filter: invert(1);
+}
+
+.ops__get p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--fs-small);
+}
+
+@media (max-width: 960px) {
+  .ops__grid {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .ops__copy,
+  .ops__get {
+    padding-bottom: 0;
+  }
+  .ops__phone {
+    order: 3;
+    justify-self: center;
+    margin-top: 24px;
+    margin-bottom: -40%;
+  }
+}
